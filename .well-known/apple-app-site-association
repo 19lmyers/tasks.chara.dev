@@ -1,0 +1,15 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "6448924682.dev.chara.tasks.ios"],
+             "components": [
+               {
+                  "/": "/*",
+                  "comment": "Match all paths"
+               }
+             ]
+           }
+       ]
+   }
+}

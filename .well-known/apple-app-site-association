@@ -2,11 +2,22 @@
   "applinks": {
       "details": [
            {
-             "appIDs": [ "6448924682.dev.chara.tasks.ios"],
+             "appIDs": [ "N2WQ73MLWJ.dev.chara.tasks.ios" ],
              "components": [
                {
-                  "/": "/*",
-                  "comment": "Match all paths"
+                  "/": "/reset",
+                  "?": { "token": "*" },
+                  "comment": "Reset password screen"
+               },
+               {
+                  "/": "/list",
+                  "?": { "id": "*" },
+                  "comment": "List details screen"
+               },
+               {
+                  "/": "/task",
+                  "?": { "id": "*" },
+                  "comment": "Task details screen"
                }
              ]
            }

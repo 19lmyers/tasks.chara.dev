@@ -33,6 +33,14 @@ globalStyle('*,*:before,*:after', {
 });
 
 globalStyle('body', {
+	display: 'flex',
+	flexFlow: 'column',
+	height: '100svh',
+	margin: 0,
+	padding: 0
+});
+
+globalStyle('#base', {
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.background,
@@ -45,7 +53,9 @@ globalStyle('body', {
 	},
 	fontFamily: themeContract.typography.body.family,
 	fontWeight: themeContract.typography.body.weight,
-	lineHeight: 1.5
+	lineHeight: 1.5,
+	padding: 16,
+	flexGrow: 1
 });
 
 globalStyle('::selection', {

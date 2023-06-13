@@ -3,6 +3,6 @@
 	import "$lib/styles.css";
 </script>
 
-<body class={baseTheme}>
+<div id="base" class={baseTheme}>
 <slot />
-</body>
+</div>

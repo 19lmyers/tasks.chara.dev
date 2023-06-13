@@ -1,24 +1,24 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "dev.chara.tasks.android",
-    "sha256_cert_fingerprints":
-    [
-      "DF:06:D6:36:D1:53:B4:5B:27:70:23:BC:39:8B:0B:A6:D1:CB:83:35:38:6D:A8:DF:09:F2:8D:3F:59:31:02:9F",
-      "1E:61:F2:72:05:B0:2B:C5:87:8C:06:54:E3:1B:49:69:DB:71:9A:23:9E:B4:E3:02:30:29:54:F4:83:16:51:71"
-    ]
-  }
-},
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "dev.chara.tasks.android.dev",
-      "sha256_cert_fingerprints":
-      [
-        "DF:06:D6:36:D1:53:B4:5B:27:70:23:BC:39:8B:0B:A6:D1:CB:83:35:38:6D:A8:DF:09:F2:8D:3F:59:31:02:9F",
-        "1E:61:F2:72:05:B0:2B:C5:87:8C:06:54:E3:1B:49:69:DB:71:9A:23:9E:B4:E3:02:30:29:54:F4:83:16:51:71"
-      ]
-    }
-  }]
+[
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "dev.chara.tasks.android",
+			"sha256_cert_fingerprints": [
+				"DF:06:D6:36:D1:53:B4:5B:27:70:23:BC:39:8B:0B:A6:D1:CB:83:35:38:6D:A8:DF:09:F2:8D:3F:59:31:02:9F",
+				"1E:61:F2:72:05:B0:2B:C5:87:8C:06:54:E3:1B:49:69:DB:71:9A:23:9E:B4:E3:02:30:29:54:F4:83:16:51:71"
+			]
+		}
+	},
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "dev.chara.tasks.android.dev",
+			"sha256_cert_fingerprints": [
+				"DF:06:D6:36:D1:53:B4:5B:27:70:23:BC:39:8B:0B:A6:D1:CB:83:35:38:6D:A8:DF:09:F2:8D:3F:59:31:02:9F",
+				"1E:61:F2:72:05:B0:2B:C5:87:8C:06:54:E3:1B:49:69:DB:71:9A:23:9E:B4:E3:02:30:29:54:F4:83:16:51:71"
+			]
+		}
+	}
+]

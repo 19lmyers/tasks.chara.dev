@@ -1,12 +1,12 @@
 {
-  "keys": [
-    {
-      "kty": "EC",
-      "use": "sig",
-      "crv": "P-256",
-      "kid": "Lj3gTPZ-odqKNx56sNzFAlP3Pbc6YPTx5dPGsCIAGBE",
-      "x": "mOEwnPJxmDXAQ3wEQCYuVSO6kduu3NkAjz8TmycEk7g",
-      "y": "9ySIZVHjU5u-nBf49OvqrnpITazuGUUF_aV5DKeP-Yw"
-    }
-  ]
+	"keys": [
+		{
+			"kty": "EC",
+			"use": "sig",
+			"crv": "P-256",
+			"kid": "Lj3gTPZ-odqKNx56sNzFAlP3Pbc6YPTx5dPGsCIAGBE",
+			"x": "mOEwnPJxmDXAQ3wEQCYuVSO6kduu3NkAjz8TmycEk7g",
+			"y": "9ySIZVHjU5u-nBf49OvqrnpITazuGUUF_aV5DKeP-Yw"
+		}
+	]
 }

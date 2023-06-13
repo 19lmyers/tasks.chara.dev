@@ -25,40 +25,9 @@
 import type { Theme } from '@importantimport/material-color-utilities';
 import {
 	argbFromHex,
-	argbFromRgb,
 	hexFromArgb,
-	QuantizerCelebi,
-	Score,
 	themeFromSourceColor
 } from '@importantimport/material-color-utilities';
-
-// Modified from material-color-utilities
-async function sourceColorFromImage(imageData: ArrayBuffer) {
-	const rgba = new Uint8ClampedArray(imageData);
-	const pixels = [];
-
-	for (let i = 0; i < rgba.length; i += 4) {
-		const r = rgba[i];
-		const g = rgba[i + 1];
-		const b = rgba[i + 2];
-		const a = rgba[i + 3];
-		if (a < 255) {
-			continue;
-		}
-		const argb = argbFromRgb(r, g, b);
-		pixels.push(argb);
-	}
-
-	const result = QuantizerCelebi.quantize(pixels, 128);
-	const ranked = Score.score(result);
-	return ranked[0]; // top
-}
-
-export async function themeTokensFromImage(imageData: ArrayBuffer) {
-	const sourceColor = await sourceColorFromImage(imageData);
-	const theme = themeFromSourceColor(sourceColor);
-	return createThemeTokens(theme);
-}
 
 export function themeTokensFromHex(hexColor: string) {
 	const theme = themeFromSourceColor(argbFromHex(hexColor));

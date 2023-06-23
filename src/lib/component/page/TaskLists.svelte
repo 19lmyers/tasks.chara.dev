@@ -52,7 +52,7 @@
 <Button onClick={logout}>Sign out</Button>
 <main class={main}>
 	{#if $taskLists.status === 'loading'}
-		<progress class={progress}></progress>
+		<progress class={progress} />
 	{:else if $taskLists.status === 'error'}
 		<span>Error: {$taskLists.error.message}</span>
 	{:else}

@@ -67,7 +67,7 @@
 		<p>{taskList.description}</p>
 	{/if}
 	{#if $tasks.status === 'loading'}
-		<progress class={progress}></progress>
+		<progress class={progress} />
 	{:else if $tasks.status === 'error'}
 		<span>Error: {$tasks.error.message}</span>
 	{:else}

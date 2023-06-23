@@ -23,8 +23,87 @@
  */
 
 import { createThemeContract } from '@vanilla-extract/css';
-import { themeTokensFromHex } from './tokens';
 
-const tokens = themeTokensFromHex('#6750A4');
+const tokens = {
+	colorSchemes: {
+		light: {
+			primary: '',
+			onPrimary: '',
+			primaryContainer: '',
+			onPrimaryContainer: '',
+			secondary: '',
+			onSecondary: '',
+			secondaryContainer: '',
+			onSecondaryContainer: '',
+			tertiary: '',
+			onTertiary: '',
+			tertiaryContainer: '',
+			onTertiaryContainer: '',
+			error: '',
+			onError: '',
+			errorContainer: '',
+			onErrorContainer: '',
+			background: '',
+			onBackground: '',
+			surface: '',
+			onSurface: '',
+			surfaceVariant: '',
+			onSurfaceVariant: '',
+			outline: '',
+			outlineVariant: '',
+			shadow: '',
+			scrim: '',
+			inverseSurface: '',
+			inverseOnSurface: '',
+			inversePrimary: ''
+		},
+		dark: {
+			primary: '',
+			onPrimary: '',
+			primaryContainer: '',
+			onPrimaryContainer: '',
+			secondary: '',
+			onSecondary: '',
+			secondaryContainer: '',
+			onSecondaryContainer: '',
+			tertiary: '',
+			onTertiary: '',
+			tertiaryContainer: '',
+			onTertiaryContainer: '',
+			error: '',
+			onError: '',
+			errorContainer: '',
+			onErrorContainer: '',
+			background: '',
+			onBackground: '',
+			surface: '',
+			onSurface: '',
+			surfaceVariant: '',
+			onSurfaceVariant: '',
+			outline: '',
+			outlineVariant: '',
+			shadow: '',
+			scrim: '',
+			inverseSurface: '',
+			inverseOnSurface: '',
+			inversePrimary: ''
+		}
+	},
+	shapes: {
+		// TODO implement shape theming?
+	},
+	typography: {
+		heading: { family: '', weight: '', letterSpacing: '' },
+		body: { family: '', weight: '' }
+	},
+	elevation: {
+		level0: '',
+		level1: '',
+		level2: '',
+		level3: '',
+		level4: '',
+		level5: ''
+	}
+};
 
 export const themeContract = createThemeContract(tokens);

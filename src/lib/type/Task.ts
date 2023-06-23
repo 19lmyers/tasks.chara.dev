@@ -22,10 +22,20 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+export interface Task {
+	id: string;
+	listId: string;
 
-export { baseTheme } from './base.css';
+	label: string;
+	isCompleted: boolean;
+	isStarred: boolean;
 
-export { themeFromListColor } from './colors';
+	details?: string;
+	reminderDate?: Date;
+	dueDate?: Date;
 
-export { dynamicColorTheme } from './dynamic';
+	dateCreated: Date;
+	lastModified: Date;
+
+	ordinal: number;
+}

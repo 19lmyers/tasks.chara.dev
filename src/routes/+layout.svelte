@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { baseTheme } from "$lib/theme";
-	import "$lib/styles.css";
+	import { QueryClientProvider } from '@tanstack/svelte-query';
+	import type { PageData } from './$types';
+
+	import { baseTheme } from '$lib/theme';
+
+	import '$lib/styles.css';
+	export let data: PageData;
 </script>
 
 <div id="base" class={baseTheme}>
-<slot />
+	<QueryClientProvider client={data.queryClient}>
+		<slot />
+	</QueryClientProvider>
 </div>

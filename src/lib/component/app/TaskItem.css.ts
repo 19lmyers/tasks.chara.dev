@@ -22,10 +22,46 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { style } from '@vanilla-extract/css';
 
-export { baseTheme } from './base.css';
+import { themeContract } from '$lib/theme';
 
-export { themeFromListColor } from './colors';
+export const taskItem = style({
+	display: 'flex',
+	borderRadius: '1.5rem',
+	marginTop: '4px',
+	marginBottom: '4px',
+	padding: '8px',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surfaceVariant,
+			color: themeContract.colorSchemes.light.onSurfaceVariant
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
+			color: themeContract.colorSchemes.dark.onSurfaceVariant
+		}
+	}
+});
 
-export { dynamicColorTheme } from './dynamic';
+export const checkbox = style({
+	marginRight: '8px',
+	width: '1.5em',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			accentColor: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			accentColor: themeContract.colorSchemes.dark.primary
+		}
+	}
+});
+
+export const label = style({
+	fontSize: '1rem'
+});
+
+export const details = style({
+	fontSize: '0.8rem',
+	opacity: '85%'
+});

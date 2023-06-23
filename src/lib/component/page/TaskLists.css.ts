@@ -22,10 +22,28 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { style } from '@vanilla-extract/css';
+import { themeContract } from '$lib/theme';
 
-export { baseTheme } from './base.css';
+export const header = style({
+	padding: 16
+});
 
-export { themeFromListColor } from './colors';
+export const main = style({
+	display: 'flex',
+	flexWrap: 'wrap',
+	alignItems: 'stretch',
+	padding: 16,
+	gap: '32px'
+});
 
-export { dynamicColorTheme } from './dynamic';
+export const progress = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			accentColor: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			accentColor: themeContract.colorSchemes.dark.primary
+		}
+	}
+});

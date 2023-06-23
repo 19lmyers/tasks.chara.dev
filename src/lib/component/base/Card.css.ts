@@ -22,10 +22,30 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { style } from '@vanilla-extract/css';
+import { themeContract } from '$lib/theme';
 
-export { baseTheme } from './base.css';
+export const card = style({
+	padding: '16px',
+	borderRadius: '1.5em',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surface,
+			color: themeContract.colorSchemes.light.onSurface
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
+			color: themeContract.colorSchemes.dark.onSurfaceVariant
+		}
+	}
+});
 
-export { themeFromListColor } from './colors';
+export const cardContent = style({
+	// see CenterLayout.css.ts for overrides
+});
 
-export { dynamicColorTheme } from './dynamic';
+export const actions = style({
+	marginTop: '0.75rem',
+	display: 'flex',
+	justifyContent: 'space-between'
+});

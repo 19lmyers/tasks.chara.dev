@@ -22,9 +22,20 @@
  * SOFTWARE.
  */
 
-import { globalStyle } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from './theme';
+
+export const error = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			color: themeContract.colorSchemes.light.error
+		},
+		'(prefers-color-scheme: dark)': {
+			color: themeContract.colorSchemes.dark.error
+		}
+	}
+});
 
 globalStyle('*,*:before,*:after', {
 	boxSizing: 'border-box',
@@ -54,7 +65,6 @@ globalStyle('#base', {
 	fontFamily: themeContract.typography.body.family,
 	fontWeight: themeContract.typography.body.weight,
 	lineHeight: 1.5,
-	padding: 16,
 	flexGrow: 1
 });
 
@@ -80,4 +90,12 @@ globalStyle('ul', {
 	listStylePosition: 'inside',
 	padding: 0,
 	margin: 0
+});
+
+globalStyle('form label', {
+	display: 'block'
+});
+
+globalStyle('.material-symbols-outlined', {
+	fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"
 });

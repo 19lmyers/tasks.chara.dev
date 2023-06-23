@@ -22,10 +22,36 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { ListColor } from '$lib/type';
 
-export { baseTheme } from './base.css';
+import {
+	baseTheme,
+	blueTheme,
+	greenTheme,
+	orangeTheme,
+	pinkTheme,
+	purpleTheme,
+	redTheme,
+	yellowTheme
+} from './base.css';
 
-export { themeFromListColor } from './colors';
-
-export { dynamicColorTheme } from './dynamic';
+export function themeFromListColor(color?: ListColor) {
+	switch (color) {
+		case ListColor.RED:
+			return redTheme;
+		case ListColor.ORANGE:
+			return orangeTheme;
+		case ListColor.YELLOW:
+			return yellowTheme;
+		case ListColor.GREEN:
+			return greenTheme;
+		case ListColor.BLUE:
+			return blueTheme;
+		case ListColor.PURPLE:
+			return purpleTheme;
+		case ListColor.PINK:
+			return pinkTheme;
+		default:
+			return baseTheme;
+	}
+}

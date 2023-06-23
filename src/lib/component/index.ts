@@ -22,10 +22,21 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+// Types
+export * from './base/types';
 
-export { baseTheme } from './base.css';
+// Base
+export { default as Button } from './base/Button.svelte';
+export { default as Card } from './base/Card.svelte';
+export { default as Dialog } from './base/Dialog.svelte';
+export { default as Icon } from './base/Icon.svelte';
 
-export { themeFromListColor } from './colors';
+// App
+export { default as TaskItem } from './app/TaskItem.svelte';
+export { default as TaskListItem } from './app/TaskListItem.svelte';
 
-export { dynamicColorTheme } from './dynamic';
+// Layout
+export { default as CenterLayout } from './layout/CenterLayout.svelte';
+
+// Page
+export { default as TaskLists } from './page/TaskLists.svelte';

@@ -22,10 +22,21 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { style } from '@vanilla-extract/css';
 
-export { baseTheme } from './base.css';
+import { themeContract } from '$lib/theme';
 
-export { themeFromListColor } from './colors';
-
-export { dynamicColorTheme } from './dynamic';
+export const dialogClass = style({
+	border: 'none',
+	borderRadius: '1.5em',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surface,
+			color: themeContract.colorSchemes.light.onSurface
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
+			color: themeContract.colorSchemes.dark.onSurfaceVariant
+		}
+	}
+});

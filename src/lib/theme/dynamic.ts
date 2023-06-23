@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
-export { themeContract } from './contract.css';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-export { baseTheme } from './base.css';
+import { themeTokensFromHex } from './tokens';
+import { themeContract } from './contract.css';
 
-export { themeFromListColor } from './colors';
-
-export { dynamicColorTheme } from './dynamic';
+export function dynamicColorTheme(hexColor: string) {
+	const tokens = themeTokensFromHex(hexColor);
+	return assignInlineVars(themeContract, tokens).toString();
+}

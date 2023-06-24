@@ -23,27 +23,84 @@
   -->
 
 <script lang="ts">
-	import { AuthManager } from '$lib/auth';
-	import { Button, ButtonStyle, Card, CenterLayout } from '$lib/component';
+	import { isAxiosError } from 'axios';
 
-	import { error } from '$lib/styles.css';
+	import { api } from '$lib/api';
+	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 
-	const authManager = new AuthManager();
+	import { error, navHeader } from '$lib/styles.css';
+	import { auth, isAuthenticated, profile } from '$lib/stores';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+
+	let email: string | null = null;
+	let displayName: string | null = null;
+	let password: string | null = null;
+
+	let isPending = false;
+
+	let errorMessage: string | null = null;
+
+	async function signup() {
+		if (email && displayName && password) {
+			errorMessage = null;
+			isPending = true;
+
+			try {
+				const result = await api().createUser(email, displayName, password);
+				if (result) {
+					const tokens = await api().authenticateUser(email, password);
+					auth.set(tokens);
+
+					if (tokens) {
+						const userProfile = await api().getUserProfile();
+						profile.set(userProfile);
+
+						isPending = false;
+
+						await goto('/');
+					}
+				}
+			} catch (error) {
+				if (isAxiosError(error) && error.response) {
+					errorMessage = error.response.data;
+				} else if (error instanceof Error) {
+					errorMessage = error.message;
+				}
+
+				password = '';
+
+				isPending = false;
+			}
+		}
+	}
+
+	onMount(async () => {
+		if (get(isAuthenticated)) {
+			await goto('/');
+		}
+	});
 </script>
 
 <CenterLayout>
-	<form on:submit|preventDefault={() => authManager.signup()}>
+	<form on:submit|preventDefault={signup}>
 		<Card>
 			<svelte:fragment slot="content">
-				<h2>Sign up</h2>
+				<h1 class={navHeader}>
+					<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
+						<Icon>arrow_back</Icon>
+					</Button>
+					<span>Sign up</span>
+				</h1>
 				<label>
 					Email
 					<input
 						name="email"
 						type="email"
-						bind:value={authManager.email}
+						bind:value={email}
 						autocomplete="email"
-						disabled={authManager.isPending}
+						disabled={isPending}
 						required
 					/>
 				</label>
@@ -52,9 +109,9 @@
 					<input
 						name="display-name"
 						type="text"
-						bind:value={authManager.displayName}
+						bind:value={displayName}
 						autocomplete="name"
-						disabled={authManager.isPending}
+						disabled={isPending}
 						required
 					/>
 				</label>
@@ -63,21 +120,19 @@
 					<input
 						name="password"
 						type="password"
-						bind:value={authManager.password}
+						bind:value={password}
 						autocomplete="new-password"
-						disabled={authManager.isPending}
+						disabled={isPending}
 						required
 					/>
 				</label>
-				{#if authManager.errorMessage}
-					<p class={error}>{authManager.errorMessage}</p>
+				{#if errorMessage}
+					<p class={error}>{errorMessage}</p>
 				{/if}
 			</svelte:fragment>
 			<svelte:fragment slot="actions">
-				<Button style={ButtonStyle.Text} href="../" disabled={authManager.isPending}>Cancel</Button>
-				<Button style={ButtonStyle.Tonal} type="submit" disabled={authManager.isPending}
-					>Sign up</Button
-				>
+				<span />
+				<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Sign up</Button>
 			</svelte:fragment>
 		</Card>
 	</form>

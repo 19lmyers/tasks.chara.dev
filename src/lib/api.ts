@@ -43,6 +43,7 @@ export const api = () => ({
 		const response = await apiClient.get('/profile');
 		return (await response.data) as Profile;
 	},
+
 	createUser: async (email: string, displayName: string, password: string) => {
 		const response = await apiClient.post('/auth/register', {
 			email: email,
@@ -62,6 +63,19 @@ export const api = () => ({
 		const response = await refreshClient.post('/auth/refresh', refreshToken);
 		return (await response.data) as TokenPair;
 	},
+	// TODO change password
+	requestPasswordResetEmail: async (email: string) => {
+		const response = await apiClient.post('/auth/forgot', email);
+		return response.status === HttpStatusCode.Accepted;
+	},
+	resetPassword: async (resetToken: string, newPassword: string) => {
+		const response = await apiClient.post('/auth/reset', {
+			resetToken: resetToken,
+			newPassword: newPassword
+		});
+		return response.status === HttpStatusCode.Ok;
+	},
+
 	getLists: async () => {
 		const response = await apiClient.get('/lists');
 		return (await response.data) as TaskList[];

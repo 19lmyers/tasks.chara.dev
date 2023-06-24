@@ -23,52 +23,54 @@
   -->
 
 <script lang="ts">
-	import { isAxiosError } from 'axios';
-	import { goto } from '$app/navigation';
-
-	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
-	import { auth, isAuthenticated, profile } from '$lib/stores';
-
-	import { error, navHeader } from '$lib/styles.css';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
-	let email: string | null = null;
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+
+	import { isAxiosError } from 'axios';
+
+	import { api } from '$lib/api';
+	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
+
+	import { error, navHeader } from '$lib/styles.css';
+	import { isAuthenticated } from '$lib/stores';
+
+	const resetToken = $page.url.searchParams.get('token');
+
 	let password: string | null = null;
 
 	let isPending = false;
+	let isSuccess = false;
 
 	let errorMessage: string | null = null;
 
-	async function login() {
-		if (email && password) {
-			errorMessage = null;
-			isPending = true;
+	async function forgot() {
+		if (resetToken) {
+			if (password) {
+				isPending = true;
 
-			try {
-				const tokens = await api().authenticateUser(email, password);
-				auth.set(tokens);
+				try {
+					const result = await api().resetPassword(resetToken, password);
+					if (result) {
+						isSuccess = true;
+						isPending = false;
+					}
+				} catch (error) {
+					if (isAxiosError(error) && error.response) {
+						errorMessage = error.response.data;
+					} else if (error instanceof Error) {
+						errorMessage = error.message;
+					}
 
-				if (tokens) {
-					const userProfile = await api().getUserProfile();
-					profile.set(userProfile);
+					password = '';
 
 					isPending = false;
-
-					await goto('/');
 				}
-			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
-					errorMessage = error.message;
-				}
-
-				password = '';
-
-				isPending = false;
 			}
+		} else {
+			errorMessage = 'Invalid reset token';
 		}
 	}
 
@@ -79,27 +81,31 @@
 	});
 </script>
 
+{#if isSuccess}
+	<Dialog>
+		<Card>
+			<svelte:fragment slot="content">
+				<h1>Password reset</h1>
+				<p>You may now sign in.</p>
+			</svelte:fragment>
+			<svelte:fragment slot="actions">
+				<span />
+				<Button style={ButtonStyle.Text} onClick={() => goto('/')}>OK</Button>
+			</svelte:fragment>
+		</Card>
+	</Dialog>
+{/if}
+
 <CenterLayout>
-	<form on:submit|preventDefault={login}>
+	<form on:submit|preventDefault={forgot}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1 class={navHeader}>
 					<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
 						<Icon>arrow_back</Icon>
 					</Button>
-					<span>Sign in</span>
+					<span>Reset password</span>
 				</h1>
-				<label>
-					Email
-					<input
-						name="email"
-						type="email"
-						bind:value={email}
-						autocomplete="email"
-						disabled={isPending}
-						required
-					/>
-				</label>
 				<label>
 					Password
 					<input
@@ -116,10 +122,8 @@
 				{/if}
 			</svelte:fragment>
 			<svelte:fragment slot="actions">
-				<Button style={ButtonStyle.Text} href="./forgot" disabled={isPending}>
-					Forgot password?
-				</Button>
-				<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Sign in</Button>
+				<span />
+				<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Reset</Button>
 			</svelte:fragment>
 		</Card>
 	</form>

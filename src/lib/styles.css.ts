@@ -37,6 +37,38 @@ export const error = style({
 	}
 });
 
+export const main = style({
+	display: 'flex',
+	flexWrap: 'wrap',
+	alignItems: 'stretch',
+	padding: 16,
+	gap: '32px'
+});
+
+export const navHeader = style({
+	display: 'flex',
+	alignItems: 'center',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			color: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			color: themeContract.colorSchemes.dark.primary
+		}
+	}
+});
+
+export const progress = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			accentColor: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			accentColor: themeContract.colorSchemes.dark.primary
+		}
+	}
+});
+
 globalStyle('*,*:before,*:after', {
 	boxSizing: 'border-box',
 	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',

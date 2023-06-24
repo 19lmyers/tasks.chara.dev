@@ -22,19 +22,28 @@
  * SOFTWARE.
  */
 
-// Types
-export * from './base/types';
+import { style } from '@vanilla-extract/css';
 
-// Base
-export { default as Button } from './base/Button.svelte';
-export { default as Card } from './base/Card.svelte';
-export { default as Dialog } from './base/Dialog.svelte';
-export { default as Icon } from './base/Icon.svelte';
+export const header = style({
+	padding: 16,
+	display: 'flex',
+	justifyContent: 'space-between',
+	alignItems: 'center'
+});
 
-// App
-export { default as Header } from './app/Header.svelte';
-export { default as TaskItem } from './app/TaskItem.svelte';
-export { default as TaskListItem } from './app/TaskListItem.svelte';
-
-// Layout
-export { default as CenterLayout } from './layout/CenterLayout.svelte';
+export const profilePhoto = style({
+	width: 48,
+	height: 48,
+	borderRadius: '1.5rem',
+	selectors: {
+		'&:hover:not(:disabled)': {
+			borderRadius: '0.75rem'
+		},
+		'&:focus:not(:disabled)': {
+			borderRadius: '0.75rem'
+		},
+		'&:active:not(:disabled)': {
+			borderRadius: '0.75rem'
+		}
+	}
+});

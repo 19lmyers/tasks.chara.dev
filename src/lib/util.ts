@@ -22,28 +22,37 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
-import { themeContract } from '$lib/theme';
+import { get } from 'svelte/store';
+import md5Hex from 'md5-hex';
 
-export const header = style({
-	padding: 16
-});
+import { profile } from '$lib/stores';
 
-export const main = style({
-	display: 'flex',
-	flexWrap: 'wrap',
-	alignItems: 'stretch',
-	padding: 16,
-	gap: '32px'
-});
-
-export const progress = style({
-	'@media': {
-		'(prefers-color-scheme: light)': {
-			accentColor: themeContract.colorSchemes.light.primary
-		},
-		'(prefers-color-scheme: dark)': {
-			accentColor: themeContract.colorSchemes.dark.primary
-		}
+export function getDisplayName() {
+	const userProfile = get(profile);
+	if (userProfile) {
+		return userProfile.displayName;
+	} else {
+		return 'User';
 	}
-});
+}
+
+export function getProfilePhoto() {
+	const userProfile = get(profile);
+
+	if (userProfile) {
+		if (userProfile.profilePhotoUri) {
+			return userProfile.profilePhotoUri;
+		} else {
+			return getGravatarUrl(userProfile.email);
+		}
+	} else {
+		return getGravatarUrl('');
+	}
+}
+
+function getGravatarUrl(email: string): string {
+	const trimmed = email.trim().toLowerCase();
+	const hash = md5Hex(trimmed);
+
+	return `https://www.gravatar.com/avatar/${hash}.png?d=identicon`;
+}

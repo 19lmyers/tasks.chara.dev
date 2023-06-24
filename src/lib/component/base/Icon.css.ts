@@ -22,19 +22,8 @@
  * SOFTWARE.
  */
 
-// Types
-export * from './base/types';
+import { style } from '@vanilla-extract/css';
 
-// Base
-export { default as Button } from './base/Button.svelte';
-export { default as Card } from './base/Card.svelte';
-export { default as Dialog } from './base/Dialog.svelte';
-export { default as Icon } from './base/Icon.svelte';
-
-// App
-export { default as Header } from './app/Header.svelte';
-export { default as TaskItem } from './app/TaskItem.svelte';
-export { default as TaskListItem } from './app/TaskListItem.svelte';
-
-// Layout
-export { default as CenterLayout } from './layout/CenterLayout.svelte';
+export const icon = style({
+	// Stub marker class
+});

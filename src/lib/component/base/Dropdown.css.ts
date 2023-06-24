@@ -23,62 +23,58 @@
  */
 
 import { globalStyle, style } from '@vanilla-extract/css';
+import { icon } from '$lib/component/base/Icon.css';
+import { button } from '$lib/component/base/Button.css';
 import { themeContract } from '$lib/theme';
 
-import { card, cardContent } from '../base/Card.css';
+export const dropdown = style({
+	display: 'inline-block'
+});
 
-export const container = style({
-	width: '100%',
-	height: '100%',
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
-	justifyContent: 'center',
+export const label = style({
+	background: 'none',
+	color: 'inherit',
+	border: 'none',
+	padding: 0,
+	font: 'inherit',
+	cursor: 'pointer',
+	outline: 'inherit'
+});
+
+export const content = style({
+	position: 'absolute',
+	right: 16,
+	zIndex: 1,
+	boxShadow: themeContract.elevation.level1,
+	borderRadius: '0.5em',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.primary,
-			color: themeContract.colorSchemes.light.onPrimary
+			backgroundColor: themeContract.colorSchemes.light.surface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surface,
-			color: themeContract.colorSchemes.dark.onSurface
+			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant
 		}
 	}
 });
 
-export const content = style({
-	width: '90%',
-	height: '90%',
-	margin: 'auto',
-	borderRadius: '1.5em',
+globalStyle(`${content} ul`, {
+	listStyleType: 'none',
+	padding: '4px'
+});
+
+globalStyle(`${content} ${button}`, {
+	width: 'calc(100% - 6px)',
+	margin: 4,
 	'@media': {
-		'(min-width: 680px)': {
-			width: '50%',
-			maxWidth: '400px',
-			height: '60%'
-		},
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
 			color: themeContract.colorSchemes.dark.onSurfaceVariant
 		}
 	}
 });
 
-globalStyle(`${content} ${card}`, {
-	display: 'flex',
-	flexDirection: 'column',
-	height: '100%',
-	boxShadow: themeContract.elevation.level1
-});
-
-globalStyle(`${content} form`, {
-	height: '100%'
-});
-
-globalStyle(`${content} ${cardContent}`, {
-	flex: 1
+globalStyle(`${content} ${button} ${icon}`, {
+	paddingRight: 8
 });

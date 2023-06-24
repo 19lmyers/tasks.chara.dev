@@ -23,9 +23,18 @@
   -->
 
 <script lang="ts">
-	import { icon } from './Icon.css';
+	import { label, content, dropdown } from './Dropdown.css';
+
+	let open = false;
 </script>
 
-<span class="{icon} material-symbols-outlined">
-	<slot />
-</span>
+<div class={dropdown}>
+	<button on:click={() => (open = !open)} class={label}>
+		<slot name="label" />
+	</button>
+	{#if open}
+		<div class={content}>
+			<slot name="content" />
+		</div>
+	{/if}
+</div>

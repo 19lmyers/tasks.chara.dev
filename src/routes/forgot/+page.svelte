@@ -25,38 +25,31 @@
 <script lang="ts">
 	import { isAxiosError } from 'axios';
 	import { goto } from '$app/navigation';
-
-	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
-	import { auth, isAuthenticated, profile } from '$lib/stores';
-
-	import { error, navHeader } from '$lib/styles.css';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
+	import { api } from '$lib/api';
+	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
+
+	import { error, navHeader } from '$lib/styles.css';
+	import { isAuthenticated } from '$lib/stores';
+
 	let email: string | null = null;
-	let password: string | null = null;
 
 	let isPending = false;
+	let isSuccess = false;
 
 	let errorMessage: string | null = null;
 
-	async function login() {
-		if (email && password) {
-			errorMessage = null;
+	async function forgot() {
+		if (email) {
 			isPending = true;
 
 			try {
-				const tokens = await api().authenticateUser(email, password);
-				auth.set(tokens);
-
-				if (tokens) {
-					const userProfile = await api().getUserProfile();
-					profile.set(userProfile);
-
+				const result = await api().requestPasswordResetEmail(email);
+				if (result) {
+					isSuccess = true;
 					isPending = false;
-
-					await goto('/');
 				}
 			} catch (error) {
 				if (isAxiosError(error) && error.response) {
@@ -65,7 +58,7 @@
 					errorMessage = error.message;
 				}
 
-				password = '';
+				email = '';
 
 				isPending = false;
 			}
@@ -79,15 +72,30 @@
 	});
 </script>
 
+{#if isSuccess}
+	<Dialog>
+		<Card>
+			<svelte:fragment slot="content">
+				<h1>Password reset email sent</h1>
+				<p>An email with a password reset link should be arriving shortly.</p>
+			</svelte:fragment>
+			<svelte:fragment slot="actions">
+				<span />
+				<Button style={ButtonStyle.Text} onClick={() => history.back()}>OK</Button>
+			</svelte:fragment>
+		</Card>
+	</Dialog>
+{/if}
+
 <CenterLayout>
-	<form on:submit|preventDefault={login}>
+	<form on:submit|preventDefault={forgot}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1 class={navHeader}>
 					<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
 						<Icon>arrow_back</Icon>
 					</Button>
-					<span>Sign in</span>
+					<span>Forgot password?</span>
 				</h1>
 				<label>
 					Email
@@ -100,26 +108,13 @@
 						required
 					/>
 				</label>
-				<label>
-					Password
-					<input
-						name="password"
-						type="password"
-						bind:value={password}
-						autocomplete="new-password"
-						disabled={isPending}
-						required
-					/>
-				</label>
 				{#if errorMessage}
 					<p class={error}>{errorMessage}</p>
 				{/if}
 			</svelte:fragment>
 			<svelte:fragment slot="actions">
-				<Button style={ButtonStyle.Text} href="./forgot" disabled={isPending}>
-					Forgot password?
-				</Button>
-				<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Sign in</Button>
+				<span />
+				<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Confirm</Button>
 			</svelte:fragment>
 		</Card>
 	</form>

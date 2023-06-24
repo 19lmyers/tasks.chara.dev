@@ -24,7 +24,7 @@
 
 <script lang="ts">
 	import { ButtonStyle } from './types';
-	import { elevated, filled, outlined, text, tonal } from './Button.css';
+	import { elevated, filled, icon, outlined, text, tonal } from './Button.css';
 
 	export let style: ButtonStyle = ButtonStyle.Filled;
 
@@ -45,6 +45,8 @@
 		className = tonal;
 	} else if (style === ButtonStyle.Text) {
 		className = text;
+	} else if (style === ButtonStyle.Icon) {
+		className = icon;
 	} else {
 		className = elevated;
 	}

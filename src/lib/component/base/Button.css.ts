@@ -25,9 +25,10 @@
 import { style } from '@vanilla-extract/css';
 import { themeContract } from '$lib/theme';
 
-const button = style({
+export const button = style({
 	appearance: 'none',
 	alignItems: 'center',
+	alignContent: 'space-between',
 	backgroundColor: 'inherit',
 	border: 'none',
 	borderRadius: '20px',
@@ -38,7 +39,6 @@ const button = style({
 	fontSize: '.875rem',
 	gap: '0.5rem',
 	height: '40px',
-	letterSpacing: themeContract.typography.heading.letterSpacing,
 	lineHeight: '1',
 	margin: '0.25rem',
 	overflow: 'hidden',
@@ -221,7 +221,7 @@ export const text = style([
 			'(prefers-color-scheme: light)': {
 				color: themeContract.colorSchemes.light.primary,
 				':hover': {
-					color: themeContract.colorSchemes.light.primary
+					color: themeContract.colorSchemes.light.secondary
 				},
 				'::before': {
 					backgroundColor: themeContract.colorSchemes.light.primary
@@ -230,7 +230,36 @@ export const text = style([
 			'(prefers-color-scheme: dark)': {
 				color: themeContract.colorSchemes.dark.primary,
 				':hover': {
-					color: themeContract.colorSchemes.light.primary
+					color: themeContract.colorSchemes.dark.secondary
+				},
+				'::before': {
+					backgroundColor: themeContract.colorSchemes.light.primary
+				}
+			}
+		}
+	}
+]);
+
+export const icon = style([
+	button,
+	{
+		display: 'inline',
+		alignSelf: 'center',
+		padding: '0.5rem',
+		'@media': {
+			'(prefers-color-scheme: light)': {
+				color: themeContract.colorSchemes.light.primary,
+				':hover': {
+					color: themeContract.colorSchemes.light.secondary
+				},
+				'::before': {
+					backgroundColor: themeContract.colorSchemes.light.primary
+				}
+			},
+			'(prefers-color-scheme: dark)': {
+				color: themeContract.colorSchemes.dark.primary,
+				':hover': {
+					color: themeContract.colorSchemes.dark.secondary
 				},
 				'::before': {
 					backgroundColor: themeContract.colorSchemes.light.primary

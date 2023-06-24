@@ -1276,6 +1276,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"blueimp-md5@npm:^2.18.0":
+  version: 2.19.0
+  resolution: "blueimp-md5@npm:2.19.0"
+  checksum: 28095dcbd2c67152a2938006e8d7c74c3406ba6556071298f872505432feb2c13241b0476644160ee0a5220383ba94cb8ccdac0053b51f68d168728f9c382530
+  languageName: node
+  linkType: hard
+
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
   resolution: "brace-expansion@npm:1.1.11"
@@ -2734,6 +2741,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"md5-hex@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "md5-hex@npm:4.0.0"
+  dependencies:
+    blueimp-md5: ^2.18.0
+  checksum: e1c48ea8f2bab0f83ea909f8dc5602f9ecb8c2f8bf2bb43019f48e7468f94e2631d888aa427c3cffb0e8c59fb286abea6ba1bb0cb6436406622d2974bda5ec33
+  languageName: node
+  linkType: hard
+
 "media-query-parser@npm:^2.0.2":
   version: 2.0.2
   resolution: "media-query-parser@npm:2.0.2"
@@ -3800,6 +3816,7 @@ __metadata:
     eslint: ^8.28.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-svelte: ^2.26.0
+    md5-hex: ^4.0.0
     prettier: ^2.8.0
     prettier-plugin-svelte: ^2.8.1
     svelte: ^3.54.0

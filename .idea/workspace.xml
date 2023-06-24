@@ -4,22 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Initial work on SvelteKit CSR tasks app">
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Add warning to home page">
+      <change afterPath="$PROJECT_DIR$/.yarn/cache/blueimp-md5-npm-2.19.0-0a19585c8c-28095dcbd2.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.yarn/cache/md5-hex-npm-4.0.0-5e6b14b5ed-e1c48ea8f2.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/component/app/Header.css.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/component/app/Header.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/component/base/Dropdown.css.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/component/base/Dropdown.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/component/base/Icon.css.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/+error.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/forgot/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/reset/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/install-state.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskItem.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Button.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Button.css.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/base/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Card.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Card.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/page/TaskLists.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/page/TaskLists.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/page/TaskLists.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/page/TaskLists.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/styles.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/styles.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/theme/tokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/tokens.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/register/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/register/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/noscript.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/noscript.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,45 +71,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.3.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.3.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/src/lib/component/base&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "javascript.nodejs.core.library.configured.version": "20.3.0",
+    "javascript.nodejs.core.library.typings.version": "20.3.0",
+    "last_opened_file_path": "/Users/lmyers/WebstormProjects/tasks.chara.dev/src/routes/reset",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/prettier",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes/reset" />
       <recent name="$PROJECT_DIR$/src/lib/component/base" />
       <recent name="$PROJECT_DIR$/src/lib/component/app" />
       <recent name="$PROJECT_DIR$/src/lib/component" />
       <recent name="$PROJECT_DIR$/src/lib/theme" />
-      <recent name="$PROJECT_DIR$/src/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/component/base" />
       <recent name="$PROJECT_DIR$/src/lib/component/layout" />
+      <recent name="$PROJECT_DIR$/src/routes" />
+      <recent name="$PROJECT_DIR$/src/routes/login" />
       <recent name="$PROJECT_DIR$/src/lib/component/page" />
-      <recent name="$PROJECT_DIR$/src/lib" />
-      <recent name="$PROJECT_DIR$/src/lib/type" />
     </key>
   </component>
   <component name="RunManager">
@@ -132,7 +152,8 @@
       <workItem from="1687379176105" duration="7990000" />
       <workItem from="1687472941437" duration="9591000" />
       <workItem from="1687547766123" duration="15542000" />
-      <workItem from="1687563814059" duration="373000" />
+      <workItem from="1687563814059" duration="782000" />
+      <workItem from="1687638859001" duration="12008000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -191,7 +212,31 @@
       <option name="project" value="LOCAL" />
       <updated>1687563903213</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Initial work on SvelteKit CSR tasks app">
+      <option name="closed" value="true" />
+      <created>1687564330604</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687564330604</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Initial work on SvelteKit CSR tasks app">
+      <option name="closed" value="true" />
+      <created>1687564424426</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687564424426</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add warning to home page">
+      <option name="closed" value="true" />
+      <created>1687564538229</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1687564538229</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +264,7 @@
     <MESSAGE value="Fix the styling issues" />
     <MESSAGE value="Refine base theme" />
     <MESSAGE value="Initial work on SvelteKit CSR tasks app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial work on SvelteKit CSR tasks app" />
+    <MESSAGE value="Add warning to home page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add warning to home page" />
   </component>
 </project>

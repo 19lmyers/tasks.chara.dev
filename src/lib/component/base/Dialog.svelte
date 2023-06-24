@@ -23,11 +23,11 @@
   -->
 
 <script lang="ts">
-	import { dialogClass } from './Dialog.css';
-
-	export let dialog;
+	import { dialog, scrim } from './Dialog.css';
 </script>
 
-<dialog class={dialogClass} bind:this={dialog} on:close>
-	<slot />
-</dialog>
+<div class={scrim}>
+	<div class={dialog}>
+		<slot />
+	</div>
+</div>

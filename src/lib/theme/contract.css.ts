@@ -93,7 +93,7 @@ const tokens = {
 		// TODO implement shape theming?
 	},
 	typography: {
-		heading: { family: '', weight: '', letterSpacing: '' },
+		heading: { family: '', weight: '' },
 		body: { family: '', weight: '' }
 	},
 	elevation: {

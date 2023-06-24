@@ -27,5 +27,6 @@ export enum ButtonStyle {
 	Filled,
 	Tonal,
 	Outlined,
-	Text
+	Text,
+	Icon
 }

@@ -32,7 +32,6 @@ export const taskListItem = style({
 });
 
 export const header = style({
-	marginTop: '16px',
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center'

@@ -23,9 +23,42 @@
   -->
 
 <script lang="ts">
-	import { icon } from './Icon.css';
+	import { Button, ButtonStyle, Icon } from '$lib/component';
+	import { auth, profile } from '$lib/stores';
+	import { getDisplayName, getProfilePhoto } from '$lib/util';
+
+	import { header, profilePhoto } from './Header.css';
+	import Dropdown from '$lib/component/base/Dropdown.svelte';
+
+	function logout() {
+		profile.set(null);
+		auth.set(null);
+	}
 </script>
 
-<span class="{icon} material-symbols-outlined">
-	<slot />
-</span>
+<header class={header}>
+	<h1>Tasks</h1>
+	<Dropdown>
+		<img slot="label" src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
+		<ul slot="content">
+			<li>
+				<Button href="./profile" style={ButtonStyle.Text}>
+					<Icon>person</Icon>
+					<p>Edit profile</p>
+				</Button>
+			</li>
+			<li>
+				<Button href="./settings" style={ButtonStyle.Text}>
+					<Icon>settings</Icon>
+					<p>Settings</p>
+				</Button>
+			</li>
+			<li>
+				<Button onClick={logout} style={ButtonStyle.Text}>
+					<Icon>logout</Icon>
+					<p>Sign out</p>
+				</Button>
+			</li>
+		</ul>
+	</Dropdown>
+</header>

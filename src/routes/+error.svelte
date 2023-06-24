@@ -23,41 +23,21 @@
   -->
 
 <script lang="ts">
-	import { createQuery } from '@tanstack/svelte-query';
+	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 
-	import { api } from '$lib/api';
-	import { Button, TaskListItem } from '$lib/component';
-	import { auth, profile } from '$lib/stores';
-	import type { TaskList } from '$lib/type';
-
-	import { progress, main, header } from './TaskLists.css';
-
-	const taskLists = createQuery<TaskList[], Error>({
-		queryKey: ['lists'],
-		queryFn: async () => api().getLists()
-	});
-
-	function logout() {
-		profile.set(null);
-		auth.set(null);
-	}
+	import { navHeader } from '$lib/styles.css';
 </script>
 
-<header class={header}>
-	<h1>Tasks</h1>
-	{#if $profile}
-		<h2>Welcome, {$profile.displayName}</h2>
-	{/if}
-</header>
-<Button onClick={logout}>Sign out</Button>
-<main class={main}>
-	{#if $taskLists.status === 'loading'}
-		<progress class={progress} />
-	{:else if $taskLists.status === 'error'}
-		<span>Error: {$taskLists.error.message}</span>
-	{:else}
-		{#each $taskLists.data as taskList}
-			<TaskListItem {taskList} />
-		{/each}
-	{/if}
-</main>
+<CenterLayout>
+	<Card>
+		<svelte:fragment slot="content">
+			<h1 class={navHeader}>
+				<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
+					<Icon>arrow_back</Icon>
+				</Button>
+				<span>Not Found</span>
+			</h1>
+			<p>We couldn't find what you're looking for.</p>
+		</svelte:fragment>
+	</Card>
+</CenterLayout>

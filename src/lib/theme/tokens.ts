@@ -104,7 +104,7 @@ function createThemeTokens(theme: Theme) {
 			// TODO implement shape theming?
 		},
 		typography: {
-			heading: { family: "'Source Code Pro', monospace", weight: '700', letterSpacing: '-0.025em' },
+			heading: { family: 'Lato, sans-serif', weight: '600' },
 			body: { family: 'Lato, sans-serif', weight: '400' }
 		},
 		elevation: {

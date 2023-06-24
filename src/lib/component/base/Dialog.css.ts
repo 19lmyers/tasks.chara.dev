@@ -26,9 +26,44 @@ import { style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
 
-export const dialogClass = style({
-	border: 'none',
+export const scrim = style({
+	position: 'absolute',
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	justifyContent: 'center',
+	':before': {
+		content: '',
+		opacity: '16%',
+		position: 'absolute',
+		width: '100%',
+		height: '100%',
+		top: 0,
+		left: 0,
+		zIndex: 5
+	},
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			':before': {
+				backgroundColor: themeContract.colorSchemes.light.scrim
+			}
+		},
+		'(prefers-color-scheme: dark)': {
+			':before': {
+				backgroundColor: themeContract.colorSchemes.dark.scrim
+			}
+		}
+	}
+});
+
+export const dialog = style({
+	margin: 'auto',
+	zIndex: 10,
 	borderRadius: '1.5em',
+	opacity: '100%',
+	boxShadow: themeContract.elevation.level2,
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.surface,

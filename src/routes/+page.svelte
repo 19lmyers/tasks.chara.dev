@@ -1,13 +1,21 @@
 <script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
+	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, EditListDialog, Header, TaskListItem } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		Card,
+		CenterLayout,
+		EditListDialog,
+		Header,
+		TaskListItem
+	} from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader, progress } from '$lib/styles.css';
-	import { clone } from 'lodash/lang';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
@@ -22,7 +30,7 @@
 </svelte:head>
 
 {#if $isAuthenticated}
-	<EditListDialog bind:taskList={listToEdit}/>
+	<EditListDialog bind:taskList={listToEdit} />
 
 	<Header />
 	<main class={main}>
@@ -32,7 +40,12 @@
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
 			{#each $taskLists.data as taskList}
-				<TaskListItem {taskList} onEditClicked='{() => listToEdit = clone(taskList)}'/>
+				<TaskListItem
+					{taskList}
+					onEditClicked={() => {
+						listToEdit = clone(taskList);
+					}}
+				/>
 			{/each}
 		{/if}
 	</main>

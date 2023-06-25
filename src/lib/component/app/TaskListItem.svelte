@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -34,7 +34,7 @@
 
 	export let taskList: TaskList;
 
-	export let onEditClicked: (() => null) | null = null;
+	export let onEditClicked: (() => void) | null = null;
 
 	let showCompletedTasks = false;
 
@@ -59,7 +59,7 @@
 	});
 </script>
 
-<section class='{taskListItem} {themeFromListColor(taskList.color)}'>
+<section class="{taskListItem} {themeFromListColor(taskList.color)}">
 	<div class={header}>
 		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
 			<Icon>checklist</Icon>

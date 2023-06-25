@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { dialog, scrim } from './Dialog.css';
 
 	export let className: string | null = null;
@@ -30,11 +30,11 @@
 
 <div class={scrim}>
 	{#if className}
-		<div class='{dialog} {className}'>
+		<div class="{dialog} {className}">
 			<slot />
 		</div>
-	{:else }
-		<div class='{dialog}'>
+	{:else}
+		<div class={dialog}>
 			<slot />
 		</div>
 	{/if}

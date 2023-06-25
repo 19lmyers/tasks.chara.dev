@@ -34,6 +34,8 @@
 
 	export let taskList: TaskList;
 
+	export let onEditClicked: (() => null) | null = null;
+
 	let showCompletedTasks = false;
 
 	function toggleShowCompleted() {
@@ -59,7 +61,7 @@
 
 <section class='{taskListItem} {themeFromListColor(taskList.color)}'>
 	<div class={header}>
-		<Button style={ButtonStyle.Icon}>
+		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
 			<Icon>checklist</Icon>
 		</Button>
 		<div>

@@ -22,12 +22,20 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
+<script lang='ts'>
 	import { dialog, scrim } from './Dialog.css';
+
+	export let className: string | null = null;
 </script>
 
 <div class={scrim}>
-	<div class={dialog}>
-		<slot />
-	</div>
+	{#if className}
+		<div class='{dialog} {className}'>
+			<slot />
+		</div>
+	{:else }
+		<div class='{dialog}'>
+			<slot />
+		</div>
+	{/if}
 </div>

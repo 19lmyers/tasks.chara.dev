@@ -31,7 +31,7 @@ export const button = style({
 	alignContent: 'space-between',
 	backgroundColor: 'inherit',
 	border: 'none',
-	borderRadius: '20px',
+	borderRadius: '1.5rem',
 	cursor: 'pointer',
 	display: 'flex',
 	fontFamily: themeContract.typography.heading.family,
@@ -67,9 +67,6 @@ export const button = style({
 		borderRadius: '1.5rem'
 	},
 	selectors: {
-		'&:hover:not(:disabled)': {
-			borderRadius: '0.75rem'
-		},
 		'&:hover:not(:disabled)::before': {
 			content: '',
 			opacity: '8%'

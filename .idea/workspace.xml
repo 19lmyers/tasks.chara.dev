@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Implement profile menu, more auth routes">
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Improve task list items (fix cache bug)">
+      <change afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/install-state.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/base/Button.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Button.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Icon.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Icon.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +130,7 @@
       <workItem from="1687472941437" duration="9591000" />
       <workItem from="1687547766123" duration="15542000" />
       <workItem from="1687563814059" duration="782000" />
-      <workItem from="1687638859001" duration="13981000" />
+      <workItem from="1687638859001" duration="16914000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -222,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687651200676</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Improve task list items (fix cache bug)">
+      <option name="closed" value="true" />
+      <created>1687652890712</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687652890712</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +269,7 @@
     <MESSAGE value="Initial work on SvelteKit CSR tasks app" />
     <MESSAGE value="Add warning to home page" />
     <MESSAGE value="Implement profile menu, more auth routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement profile menu, more auth routes" />
+    <MESSAGE value="Improve task list items (fix cache bug)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve task list items (fix cache bug)" />
   </component>
 </project>

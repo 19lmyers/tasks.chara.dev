@@ -63,6 +63,7 @@ export const dialog = style({
 	zIndex: 10,
 	borderRadius: '1.5em',
 	opacity: '100%',
+	maxWidth: 500,
 	boxShadow: themeContract.elevation.level2,
 	'@media': {
 		'(prefers-color-scheme: light)': {

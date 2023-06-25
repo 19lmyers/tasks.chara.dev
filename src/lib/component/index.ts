@@ -31,10 +31,13 @@ export { default as Card } from './base/Card.svelte';
 export { default as Dialog } from './base/Dialog.svelte';
 export { default as Icon } from './base/Icon.svelte';
 
+// Layout
+export { default as CenterLayout } from './layout/CenterLayout.svelte';
+
 // App
 export { default as Header } from './app/Header.svelte';
 export { default as TaskItem } from './app/TaskItem.svelte';
 export { default as TaskListItem } from './app/TaskListItem.svelte';
 
-// Layout
-export { default as CenterLayout } from './layout/CenterLayout.svelte';
+// Dialog
+export { default as EditListDialog } from './dialog/EditListDialog.svelte';

@@ -2,16 +2,19 @@
 	import { createQuery } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Header, TaskListItem } from '$lib/component';
+	import { Button, ButtonStyle, Card, CenterLayout, EditListDialog, Header, TaskListItem } from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader, progress } from '$lib/styles.css';
+	import { clone } from 'lodash/lang';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
 		queryFn: async () => api().getLists()
 	});
+
+	let listToEdit: TaskList | null = null;
 </script>
 
 <svelte:head>
@@ -19,6 +22,8 @@
 </svelte:head>
 
 {#if $isAuthenticated}
+	<EditListDialog bind:taskList={listToEdit}/>
+
 	<Header />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}
@@ -27,7 +32,7 @@
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
 			{#each $taskLists.data as taskList}
-				<TaskListItem {taskList} />
+				<TaskListItem {taskList} onEditClicked='{() => listToEdit = clone(taskList)}'/>
 			{/each}
 		{/if}
 	</main>

@@ -80,6 +80,13 @@ export const api = () => ({
 		const response = await apiClient.get('/lists');
 		return (await response.data) as TaskList[];
 	},
+	// TODO create list
+	updateList: async (taskList: TaskList) => {
+		const response = await apiClient.put(`/lists/${taskList.id}`, taskList);
+		return response.status == HttpStatusCode.Ok;
+	},
+	// TODO delete list
+
 	getTasks: async (listId: string) => {
 		const response = await apiClient.get(`/lists/${listId}/tasks`);
 		return (await response.data) as Task[];

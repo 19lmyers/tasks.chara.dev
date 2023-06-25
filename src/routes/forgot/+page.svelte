@@ -97,6 +97,9 @@
 					</Button>
 					<span>Forgot password?</span>
 				</h1>
+				{#if isPending}
+					<progress />
+				{/if}
 				<label>
 					Email
 					<input

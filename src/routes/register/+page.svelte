@@ -93,6 +93,9 @@
 					</Button>
 					<span>Sign up</span>
 				</h1>
+				{#if isPending}
+					<progress />
+				{/if}
 				<label>
 					Email
 					<input

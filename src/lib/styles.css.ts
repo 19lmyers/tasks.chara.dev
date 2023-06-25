@@ -58,7 +58,10 @@ export const navHeader = style({
 	}
 });
 
-export const progress = style({
+globalStyle('*,*:before,*:after', {
+	boxSizing: 'border-box',
+	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+	transitionDuration: '0.25s',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			accentColor: themeContract.colorSchemes.light.primary
@@ -67,12 +70,6 @@ export const progress = style({
 			accentColor: themeContract.colorSchemes.dark.primary
 		}
 	}
-});
-
-globalStyle('*,*:before,*:after', {
-	boxSizing: 'border-box',
-	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-	transitionDuration: '0.25s'
 });
 
 globalStyle('body', {

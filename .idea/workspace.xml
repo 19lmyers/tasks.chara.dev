@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="First pass at edit list dialog">
-      <change afterPath="$PROJECT_DIR$/.yarn/cache/@types-lodash-npm-4.14.195-a2a8254638-39b75ca635.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/install-state.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" afterDir="false" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Fix svelte check">
       <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/forgot/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/forgot/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/register/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/register/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/reset/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/reset/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +123,7 @@
       <workItem from="1687472941437" duration="9591000" />
       <workItem from="1687547766123" duration="15542000" />
       <workItem from="1687563814059" duration="782000" />
-      <workItem from="1687638859001" duration="17304000" />
+      <workItem from="1687638859001" duration="17604000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -241,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687655944383</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Fix svelte check">
+      <option name="closed" value="true" />
+      <created>1687656383649</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1687656383649</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,6 +280,7 @@
     <MESSAGE value="Implement profile menu, more auth routes" />
     <MESSAGE value="Improve task list items (fix cache bug)" />
     <MESSAGE value="First pass at edit list dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="First pass at edit list dialog" />
+    <MESSAGE value="Fix svelte check" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix svelte check" />
   </component>
 </project>

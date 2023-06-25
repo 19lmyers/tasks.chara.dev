@@ -15,7 +15,7 @@
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
-	import { error, main, navHeader, progress } from '$lib/styles.css';
+	import { error, main, navHeader } from '$lib/styles.css';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
@@ -35,7 +35,7 @@
 	<Header />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}
-			<progress class={progress} />
+			<progress />
 		{:else if $taskLists.status === 'error'}
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}

@@ -25,14 +25,14 @@
 <script lang="ts">
 	import { isAxiosError } from 'axios';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
 
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 	import { auth, isAuthenticated, profile } from '$lib/stores';
 
 	import { error, navHeader } from '$lib/styles.css';
-	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 
 	let email: string | null = null;
 	let password: string | null = null;
@@ -89,6 +89,9 @@
 					</Button>
 					<span>Sign in</span>
 				</h1>
+				{#if isPending}
+					<progress />
+				{/if}
 				<label>
 					Email
 					<input

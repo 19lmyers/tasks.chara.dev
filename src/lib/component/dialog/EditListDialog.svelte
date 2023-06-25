@@ -99,6 +99,9 @@
 			<Card>
 				<svelte:fragment slot="content">
 					<h1>Edit list</h1>
+					{#if isPending}
+						<progress />
+					{/if}
 					<label>
 						Title
 						<input

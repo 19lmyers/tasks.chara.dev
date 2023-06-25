@@ -106,6 +106,9 @@
 					</Button>
 					<span>Reset password</span>
 				</h1>
+				{#if isPending}
+					<progress />
+				{/if}
 				<label>
 					Password
 					<input

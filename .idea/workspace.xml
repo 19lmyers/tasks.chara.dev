@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Improve task list card display">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/styles.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/styles.css.ts" afterDir="false" />
-    </list>
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Less bold colors for login screens" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +118,7 @@
       <workItem from="1687547766123" duration="15542000" />
       <workItem from="1687563814059" duration="782000" />
       <workItem from="1687638859001" duration="17855000" />
-      <workItem from="1687656802479" duration="314000" />
+      <workItem from="1687656802479" duration="510000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -261,7 +257,23 @@
       <option name="project" value="LOCAL" />
       <updated>1687656697891</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Improve task list card display">
+      <option name="closed" value="true" />
+      <created>1687657118471</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1687657118471</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Less bold colors for login screens">
+      <option name="closed" value="true" />
+      <created>1687657301476</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1687657301476</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +310,7 @@
     <MESSAGE value="Fix svelte check" />
     <MESSAGE value="Improve progress display, styling" />
     <MESSAGE value="Improve task list card display" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve task list card display" />
+    <MESSAGE value="Less bold colors for login screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="Less bold colors for login screens" />
   </component>
 </project>

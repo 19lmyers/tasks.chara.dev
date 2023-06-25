@@ -22,19 +22,27 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { themeContract } from '$lib/theme';
+import { icon } from '$lib/component/base/Icon.css';
 
 export const taskListItem = style({
-	width: 'min-content',
+	width: 'fit-content',
 	minWidth: '200px',
-	maxWidth: '600px'
+	maxWidth: '400px'
 });
 
 export const header = style({
 	display: 'flex',
 	justifyContent: 'space-between',
-	alignItems: 'center'
+	alignItems: 'center',
+	textOverflow: 'ellipsis',
+	overflowWrap: 'anywhere'
+});
+
+export const description = style({
+	overflowWrap: 'anywhere',
+	whiteSpace: 'pre-wrap'
 });
 
 export const progress = style({
@@ -63,6 +71,7 @@ export const divider = style({
 	padding: '12px',
 	borderRadius: '1.5em',
 	display: 'flex',
+	alignItems: 'center',
 	justifyContent: 'space-between',
 
 	'@media': {
@@ -77,4 +86,8 @@ export const divider = style({
 			}
 		}
 	}
+});
+
+globalStyle(`${divider} ${icon}`, {
+	padding: 0
 });

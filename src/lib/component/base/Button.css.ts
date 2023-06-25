@@ -41,7 +41,6 @@ export const button = style({
 	height: '40px',
 	lineHeight: '1',
 	margin: '0.25rem',
-	overflow: 'hidden',
 	padding: '0.5rem 1rem',
 	position: 'relative',
 	textDecoration: 'inherit',
@@ -64,7 +63,8 @@ export const button = style({
 		zIndex: 0,
 		transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
 		transitionDuration: '0.25s',
-		pointerEvents: 'none'
+		pointerEvents: 'none',
+		borderRadius: '1.5rem'
 	},
 	selectors: {
 		'&:hover:not(:disabled)': {
@@ -243,8 +243,6 @@ export const text = style([
 export const icon = style([
 	button,
 	{
-		display: 'inline',
-		alignSelf: 'center',
 		padding: '0.5rem',
 		'@media': {
 			'(prefers-color-scheme: light)': {

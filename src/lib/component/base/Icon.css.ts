@@ -22,8 +22,13 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
+import { button } from '$lib/component/base/Button.css';
 
 export const icon = style({
-	// Stub marker class
+	padding: '0.5rem'
+});
+
+globalStyle(`${button} ${icon}`, {
+	padding: 0
 });

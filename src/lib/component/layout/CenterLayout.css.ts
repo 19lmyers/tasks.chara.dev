@@ -36,8 +36,8 @@ export const container = style({
 	justifyContent: 'center',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.primary,
-			color: themeContract.colorSchemes.light.onPrimary
+			backgroundColor: themeContract.colorSchemes.light.surfaceVariant,
+			color: themeContract.colorSchemes.light.surfaceVariant
 		},
 		'(prefers-color-scheme: dark)': {
 			backgroundColor: themeContract.colorSchemes.dark.surface,

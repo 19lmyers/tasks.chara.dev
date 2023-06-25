@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Improve progress display, styling" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Improve task list card display">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/styles.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/styles.css.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,6 +122,7 @@
       <workItem from="1687547766123" duration="15542000" />
       <workItem from="1687563814059" duration="782000" />
       <workItem from="1687638859001" duration="17855000" />
+      <workItem from="1687656802479" duration="314000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -292,6 +297,7 @@
     <MESSAGE value="First pass at edit list dialog" />
     <MESSAGE value="Fix svelte check" />
     <MESSAGE value="Improve progress display, styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve progress display, styling" />
+    <MESSAGE value="Improve task list card display" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve task list card display" />
   </component>
 </project>

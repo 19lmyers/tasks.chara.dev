@@ -42,7 +42,7 @@ export const main = style({
 	flexWrap: 'wrap',
 	alignItems: 'stretch',
 	padding: 16,
-	gap: '32px'
+	gap: 24
 });
 
 export const navHeader = style({

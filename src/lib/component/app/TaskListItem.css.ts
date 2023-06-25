@@ -29,7 +29,19 @@ import { icon } from '$lib/component/base/Icon.css';
 export const taskListItem = style({
 	width: 'fit-content',
 	minWidth: '200px',
-	maxWidth: '400px'
+	maxWidth: '400px',
+	padding: 16,
+	height: 'min-content',
+	borderRadius: '1.5em',
+	boxShadow: themeContract.elevation.level1,
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surface
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surface
+		}
+	}
 });
 
 export const header = style({

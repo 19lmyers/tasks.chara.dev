@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Fix svelte check">
-      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/forgot/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/forgot/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/register/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/register/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/reset/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/reset/+page.svelte" afterDir="false" />
-    </list>
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Improve progress display, styling" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,31 +35,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "20.3.0",
-    "javascript.nodejs.core.library.typings.version": "20.3.0",
-    "last_opened_file_path": "/Users/lmyers/WebstormProjects/tasks.chara.dev/src/routes/reset",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.3.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.3.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/src/routes/reset&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/routes/reset" />
@@ -123,7 +117,7 @@
       <workItem from="1687472941437" duration="9591000" />
       <workItem from="1687547766123" duration="15542000" />
       <workItem from="1687563814059" duration="782000" />
-      <workItem from="1687638859001" duration="17604000" />
+      <workItem from="1687638859001" duration="17855000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -246,7 +240,23 @@
       <option name="project" value="LOCAL" />
       <updated>1687656383649</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Improve progress display, styling">
+      <option name="closed" value="true" />
+      <created>1687656675719</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1687656675719</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Improve progress display, styling">
+      <option name="closed" value="true" />
+      <created>1687656697891</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1687656697891</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,6 +291,7 @@
     <MESSAGE value="Improve task list items (fix cache bug)" />
     <MESSAGE value="First pass at edit list dialog" />
     <MESSAGE value="Fix svelte check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix svelte check" />
+    <MESSAGE value="Improve progress display, styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve progress display, styling" />
   </component>
 </project>

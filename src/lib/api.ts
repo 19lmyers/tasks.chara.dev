@@ -31,11 +31,13 @@ import { auth, profile } from '$lib/stores';
 const endpointUrl = 'https://tasks-api.chara.dev';
 
 const apiClient = axios.create({
-	baseURL: endpointUrl
+	baseURL: endpointUrl,
+	timeout: 5000
 });
 
 const refreshClient = axios.create({
-	baseURL: endpointUrl
+	baseURL: endpointUrl,
+	timeout: 5000
 });
 
 export const api = () => ({
@@ -78,6 +80,7 @@ export const api = () => ({
 
 	getLists: async () => {
 		const response = await apiClient.get('/lists');
+		console.log(response.data);
 		return (await response.data) as TaskList[];
 	},
 	// TODO create list

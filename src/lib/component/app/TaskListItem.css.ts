@@ -100,6 +100,11 @@ export const divider = style({
 	}
 });
 
+export const sort = style({
+	display: 'flex',
+	justifyContent: 'space-between'
+});
+
 globalStyle(`${divider} ${icon}`, {
 	padding: 0
 });

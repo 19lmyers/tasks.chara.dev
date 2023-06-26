@@ -22,123 +22,129 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
-	import { isAxiosError } from 'axios';
-	import { useQueryClient } from '@tanstack/svelte-query';
+<script lang='ts'>
+	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
-	import { Button, ButtonStyle, Card, Dialog } from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 	import type { TaskList } from '$lib/type';
 	import { api } from '$lib/api';
 	import { themeFromListColor } from '$lib/theme';
+	import { ListColor, ListIcon } from '$lib/type';
 
-	const queryClient = useQueryClient();
+	import { header, listIcon } from './EditListDialog.css';
+	import { iconFromListIcon } from '$lib/util';
 
 	export let taskList: TaskList | null = null;
-
-	let isPending = false;
-
-	let errorMessage: string | null = null;
 
 	function cancel() {
 		taskList = null;
 	}
 
-	async function save() {
+	const queryClient = useQueryClient()
+
+	const updateList = createMutation({
+		mutationFn: async (taskList: TaskList) => await api().updateList(taskList),
+		onSuccess: () => {
+			queryClient.invalidateQueries(['lists'])
+			queryClient.invalidateQueries(['tasks', taskList?.id])
+			taskList = null
+		}
+	});
+
+	function save() {
 		if (taskList) {
-			try {
-				isPending = true;
+			taskList.lastModified = new Date();
 
-				const result = await api().updateList(taskList);
-				if (result) {
-					queryClient.setQueryData(['lists'], (cachedLists: TaskList[] | undefined) => {
-						if (cachedLists) {
-							return cachedLists.map((cachedList: TaskList) => {
-								if (cachedList.id === taskList?.id) {
-									return taskList;
-								} else {
-									return cachedList;
-								}
-							});
-						}
-					});
-
-					isPending = false;
-					taskList = null;
-				}
-			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
-					errorMessage = error.message;
-				}
-
-				isPending = false;
-			}
+			$updateList.mutate(taskList);
 		}
 	}
 </script>
 
-{#if errorMessage}
-	<Dialog>
+{#if $updateList.error}
+	<Dialog dismiss={$updateList.reset}>
 		<Card>
-			<svelte:fragment slot="content">
+			<svelte:fragment slot='content'>
 				<h1>An error occurred</h1>
-				<p>{errorMessage}</p>
+				<p>{$updateList.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot="actions">
+			<svelte:fragment slot='actions'>
 				<span />
-				<Button style={ButtonStyle.Text} onClick={() => (errorMessage = null)}>OK</Button>
+				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
 			</svelte:fragment>
 		</Card>
 	</Dialog>
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)}>
+	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => taskList = null}>
 		<form on:submit|preventDefault={save}>
 			<Card>
-				<svelte:fragment slot="content">
-					<h1>Edit list</h1>
-					{#if isPending}
+				<svelte:fragment slot='content'>
+					<h1 class={header}>
+						<Icon className={listIcon}>{iconFromListIcon(taskList.icon)}</Icon>
+						Edit list
+					</h1>
+					{#if $updateList.isLoading}
 						<progress />
 					{/if}
 					<label>
 						Title
 						<input
-							name="title"
-							type="text"
+							name='title'
+							type='text'
 							bind:value={taskList.title}
-							disabled={isPending}
+							disabled={$updateList.isLoading}
 							required
 						/>
 					</label>
-					<!-- TODO icon, color -->
+					<label>
+						Icon
+						<select name='icon' bind:value={taskList.icon}>
+							<option value={null}>Default</option>
+							{#each Object.keys(ListIcon) as icon}
+								<option value={icon}>
+									{ListIcon[icon]}
+								</option>
+							{/each}
+						</select>
+					</label>
+					<label>
+						Color
+						<select name='color' bind:value={taskList.color}>
+							<option value={null}>Default</option>
+							{#each Object.keys(ListColor) as color}
+								<option value={color}>
+									{ListColor[color]}
+								</option>
+							{/each}
+						</select>
+					</label>
 					<label>
 						Description
-						<textarea name="description" bind:value={taskList.description} disabled={isPending} />
+						<textarea name='description' bind:value={taskList.description} disabled={$updateList.isLoading} />
 					</label>
 					<label>
 						Pin to dashboard
 						<input
-							name="pin-to-dashboard"
-							type="checkbox"
+							name='pin-to-dashboard'
+							type='checkbox'
 							bind:checked={taskList.isPinned}
-							disabled={isPending}
+							disabled={$updateList.isLoading}
 						/>
 					</label>
 					<label>
 						Show list numbers
 						<input
-							name="show-list-numbers"
-							type="checkbox"
+							name='show-list-numbers'
+							type='checkbox'
 							bind:checked={taskList.showIndexNumbers}
-							disabled={isPending}
+							disabled={$updateList.isLoading}
 						/>
 					</label>
 				</svelte:fragment>
-				<svelte:fragment slot="actions">
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={isPending}>Cancel</Button>
-					<Button style={ButtonStyle.Tonal} type="submit" disabled={isPending}>Save</Button>
+				<svelte:fragment slot='actions'>
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isLoading}>Cancel</Button>
+					<Button style={ButtonStyle.Tonal} type='submit' disabled={$updateList.isLoading}>Save</Button>
 				</svelte:fragment>
 			</Card>
 		</form>

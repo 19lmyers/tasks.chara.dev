@@ -25,9 +25,9 @@
 <script lang="ts">
 	import { Button, ButtonStyle, Icon } from '$lib/component';
 	import { auth, profile } from '$lib/stores';
-	import { getDisplayName, getProfilePhoto } from '$lib/util';
+	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 
-	import { header, profilePhoto } from './Header.css';
+	import { header, profileButton, profilePhoto } from './Header.css';
 	import Dropdown from '$lib/component/base/Dropdown.svelte';
 
 	function logout() {
@@ -39,7 +39,9 @@
 <header class={header}>
 	<h1>Tasks</h1>
 	<Dropdown>
-		<img slot="label" src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
+		<button slot='label' class={profileButton}>
+			<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
+		</button>
 		<ul slot="content">
 			<li>
 				<Button href="./profile" style={ButtonStyle.Text}>

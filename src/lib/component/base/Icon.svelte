@@ -22,10 +22,18 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
+<script lang='ts'>
 	import { icon } from './Icon.css';
+
+	export let className: string | null = null;
 </script>
 
-<span class="{icon} material-symbols-outlined">
+{#if className}
+	<span class='{icon} {className} material-symbols-outlined'>
 	<slot />
 </span>
+{:else}
+<span class='{icon} material-symbols-outlined'>
+	<slot />
+</span>
+{/if}

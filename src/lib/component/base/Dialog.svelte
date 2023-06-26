@@ -25,16 +25,18 @@
 <script lang="ts">
 	import { dialog, scrim } from './Dialog.css';
 
+	export let dismiss: (() => void) | null = null;
+
 	export let className: string | null = null;
 </script>
 
-<div class={scrim}>
+<div class={scrim} on:click|self={dismiss}>
 	{#if className}
-		<div class="{dialog} {className}">
+		<div class="{dialog} {className}" on:click={null}>
 			<slot />
 		</div>
 	{:else}
-		<div class={dialog}>
+		<div class={dialog} on:click={null}>
 			<slot />
 		</div>
 	{/if}

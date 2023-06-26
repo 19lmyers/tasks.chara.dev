@@ -22,19 +22,30 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
-	import { createQuery } from '@tanstack/svelte-query';
+<script lang='ts'>
+	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Icon, TaskItem } from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog, Icon, TaskItem } from '$lib/component';
 	import type { Task, TaskList } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
 
-	import { bullet, header, divider, taskListItem, progress, description } from './TaskListItem.css';
+	import { bullet, header, divider, taskListItem, progress, description, sort } from './TaskListItem.css';
+	import {
+		iconFromListIcon,
+		iconFromSortDirection,
+		iconFromSortType,
+		labelFromSortDirection,
+		labelFromSortType,
+		sortTasks
+	} from '$lib/util';
+
+	import { SortDirection, SortType } from '$lib/type';
 
 	export let taskList: TaskList;
 
 	export let onEditClicked: (() => void) | null = null;
+	export let onSortClicked: (() => void) | null = null;
 
 	let showCompletedTasks = false;
 
@@ -52,17 +63,50 @@
 		queryFn: async () => {
 			const tasks = await api().getTasks(taskList.id);
 			return {
-				current: tasks.filter((task) => !task.isCompleted),
-				completed: tasks.filter((task) => task.isCompleted)
+				current: sortTasks(tasks.filter((task) => !task.isCompleted),
+					taskList.sortType,
+					taskList.sortDirection),
+				completed: sortTasks(tasks.filter((task) => task.isCompleted),
+					taskList.sortType,
+					taskList.sortDirection)
 			};
 		}
 	});
+
+	async function toggleSortDirection() {
+		if (taskList.sortDirection != SortDirection.DESCENDING) {
+			taskList.sortDirection = SortDirection.DESCENDING;
+		} else {
+			taskList.sortDirection = SortDirection.ASCENDING;
+		}
+		taskList.lastModified = new Date();
+
+		$updateList.mutate(taskList);
+	}
+
+	const queryClient = useQueryClient();
+
+	const updateList = createMutation({
+		mutationFn: async (taskList: TaskList) => await api().updateList(taskList),
+		onSuccess: () => {
+			queryClient.invalidateQueries(['lists']);
+			queryClient.invalidateQueries(['tasks', taskList?.id]);
+		},
+		onError: (error: Error) => {
+			if (taskList.sortDirection != SortDirection.DESCENDING) {
+				taskList.sortDirection = SortDirection.DESCENDING;
+			} else {
+				taskList.sortDirection = SortDirection.ASCENDING;
+			}
+		}
+	});
+
 </script>
 
-<section class="{taskListItem} {themeFromListColor(taskList.color)}">
+<section class='{taskListItem} {themeFromListColor(taskList.color)}'>
 	<div class={header}>
 		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
-			<Icon>checklist</Icon>
+			<Icon>{iconFromListIcon(taskList.icon)}</Icon>
 		</Button>
 		<div>
 			<h2>{taskList.title}</h2>
@@ -100,5 +144,17 @@
 				{/if}
 			{/if}
 		</ul>
+		<div class='{sort}'>
+			<Button style='{ButtonStyle.Text}' onClick={onSortClicked}>
+				<Icon>{iconFromSortType(taskList.sortType)}</Icon>
+				{labelFromSortType(taskList.sortType)}
+			</Button>
+			{#if taskList.sortType !== SortType.ORDINAL}
+				<Button style='{ButtonStyle.Text}' onClick={toggleSortDirection} disabled={$updateList.isLoading}>
+					<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
+					{labelFromSortDirection(taskList.sortDirection)}
+				</Button>
+			{/if}
+		</div>
 	{/if}
 </section>

@@ -35,7 +35,7 @@ import {
 	yellowTheme
 } from './base.css';
 
-export function themeFromListColor(color?: ListColor) {
+export function themeFromListColor(color: ListColor) {
 	switch (color) {
 		case ListColor.RED:
 			return redTheme;

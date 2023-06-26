@@ -22,34 +22,27 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
+import { SortDirection, SortType } from '$lib/type';
 
-export const header = style({
-	padding: 16,
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center'
-});
-
-export const profileButton = style({
-	backgroundColor: 'inherit',
-	border: 'none',
-	cursor: 'pointer'
-});
-
-export const profilePhoto = style({
-	width: 48,
-	height: 48,
-	borderRadius: '1.5rem',
-	selectors: {
-		'&:hover:not(:disabled)': {
-			borderRadius: '0.75rem'
-		},
-		'&:focus:not(:disabled)': {
-			borderRadius: '0.75rem'
-		},
-		'&:active:not(:disabled)': {
-			borderRadius: '0.75rem'
-		}
+export function labelFromSortType(type: SortType) {
+	switch (type) {
+		case SortType.LABEL:
+			return 'Label';
+		case SortType.DATE_CREATED:
+			return 'Date created';
+		case SortType.UPCOMING:
+			return 'Upcoming';
+		case SortType.STARRED:
+			return 'Starred recently';
+		default:
+			return 'My order';
 	}
-});
+}
+
+export function labelFromSortDirection(direction: SortDirection) {
+	if (direction === SortDirection.DESCENDING) {
+		return 'DESC';
+	} else {
+		return 'ASC';
+	}
+}

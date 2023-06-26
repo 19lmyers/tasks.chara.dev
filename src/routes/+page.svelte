@@ -1,21 +1,14 @@
-<script lang="ts">
+<script lang='ts'>
 	import { createQuery } from '@tanstack/svelte-query';
 	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
-	import {
-		Button,
-		ButtonStyle,
-		Card,
-		CenterLayout,
-		EditListDialog,
-		Header,
-		TaskListItem
-	} from '$lib/component';
+	import { Button, ButtonStyle, Card, CenterLayout, EditListDialog, Header, TaskListItem } from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader } from '$lib/styles.css';
+	import SortModeDialog from '$lib/component/dialog/SortModeDialog.svelte';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
@@ -23,6 +16,7 @@
 	});
 
 	let listToEdit: TaskList | null = null;
+	let listToSort: TaskList | null = null;
 </script>
 
 <svelte:head>
@@ -31,6 +25,7 @@
 
 {#if $isAuthenticated}
 	<EditListDialog bind:taskList={listToEdit} />
+	<SortModeDialog bind:taskList={listToSort} />
 
 	<Header />
 	<main class={main}>
@@ -45,6 +40,9 @@
 					onEditClicked={() => {
 						listToEdit = clone(taskList);
 					}}
+					onSortClicked={() => {
+						listToSort = clone(taskList);
+					}}
 				/>
 			{/each}
 		{/if}
@@ -52,16 +50,16 @@
 {:else}
 	<CenterLayout>
 		<Card>
-			<svelte:fragment slot="content">
+			<svelte:fragment slot='content'>
 				<h1 class={navHeader}>Welcome to Tasks</h1>
 				<p>TODO onboarding goes here</p>
 				<p class={error}>
 					NOTE: Tasks for web is currently in alpha. Expect major changes in this space.
 				</p>
 			</svelte:fragment>
-			<svelte:fragment slot="actions">
-				<Button style={ButtonStyle.Text} href="./login">Sign in</Button>
-				<Button style={ButtonStyle.Tonal} href="./register">Sign up</Button>
+			<svelte:fragment slot='actions'>
+				<Button style={ButtonStyle.Text} href='./login'>Sign in</Button>
+				<Button style={ButtonStyle.Tonal} href='./register'>Sign up</Button>
 			</svelte:fragment>
 		</Card>
 	</CenterLayout>

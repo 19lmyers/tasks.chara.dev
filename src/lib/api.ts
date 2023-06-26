@@ -80,7 +80,6 @@ export const api = () => ({
 
 	getLists: async () => {
 		const response = await apiClient.get('/lists');
-		console.log(response.data);
 		return (await response.data) as TaskList[];
 	},
 	// TODO create list

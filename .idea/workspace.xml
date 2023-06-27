@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Editable tasks (no dialog yet)" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="unused vars">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,6 +125,8 @@
       <workItem from="1687810364093" duration="1121000" />
       <workItem from="1687811496249" duration="10040000" />
       <workItem from="1687882472872" duration="5927000" />
+      <workItem from="1687888481027" duration="127000" />
+      <workItem from="1687898589728" duration="346000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -317,7 +321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687888396308</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="unused vars">
+      <option name="closed" value="true" />
+      <created>1687888539154</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1687888539154</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,6 +372,7 @@
     <MESSAGE value="Remove debug statement" />
     <MESSAGE value="Dialog improvements" />
     <MESSAGE value="Editable tasks (no dialog yet)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Editable tasks (no dialog yet)" />
+    <MESSAGE value="unused vars" />
+    <option name="LAST_COMMIT_MESSAGE" value="unused vars" />
   </component>
 </project>

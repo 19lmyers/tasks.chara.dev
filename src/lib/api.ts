@@ -92,6 +92,10 @@ export const api = () => ({
 	getTasks: async (listId: string) => {
 		const response = await apiClient.get(`/lists/${listId}/tasks`);
 		return (await response.data) as Task[];
+	},
+	updateTask: async (task: Task) => {
+		const response = await apiClient.put(`/lists/${task.listId}/tasks/${task.id}`, task);
+		return response.status == HttpStatusCode.Ok;
 	}
 });
 

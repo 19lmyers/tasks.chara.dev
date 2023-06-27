@@ -21,19 +21,21 @@
   - OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   - SOFTWARE.
   -->
+
 <script lang='ts'>
-	import { clone } from 'lodash';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, Dialog, EditTaskDialog, Icon, IconStyle } from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog } from '$lib/component';
 	import type { Task } from '$lib/type';
 
-	import { checkbox, details, label, spacer, taskItem, text } from './TaskItem.css';
+	export let task: Task | null = null;
 
-	export let task: Task;
+	function cancel() {
+		task = null;
+	}
 
-	const queryClient = useQueryClient();
+	const queryClient = useQueryClient()
 
 	const updateTask = createMutation<string, Error, Task>({
 		mutationFn: async (task: Task) => {
@@ -41,11 +43,20 @@
 			return task.listId;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['tasks', listId]);
+			queryClient.invalidateQueries(['lists'])
+			queryClient.invalidateQueries(['tasks', listId])
 		}
 	});
 
-	let taskToEdit: Task | null = null;
+	function save() {
+		if (task) {
+			task.lastModified = new Date();
+
+			$updateTask.mutate(task);
+
+			task = null;
+		}
+	}
 </script>
 
 {#if $updateTask.error}
@@ -63,39 +74,22 @@
 	</Dialog>
 {/if}
 
-<EditTaskDialog bind:task={taskToEdit} />
+{#if task}
+	<Dialog dismiss={() => task = null}>
+		<form on:submit|preventDefault={save}>
+			<Card>
+				<svelte:fragment slot='content'>
+					<h1>Edit task</h1>
+					{#if $updateTask.isLoading}
+						<progress />
+					{/if}
 
-<li class={taskItem}>
-	<input class={checkbox} type='checkbox' checked={task.isCompleted} on:click={(e) => {
-		let editedTask = clone(task);
-		editedTask.isCompleted = !editedTask.isCompleted;
-		editedTask.lastModified = new Date();
-
-		$updateTask.mutate(editedTask);
-
-		e.preventDefault();
-	}} />
-	<div class={text}>
-		<p class={label}>{task.label}</p>
-		{#if task.details}
-			<p class={details}>{task.details}</p>
-		{/if}
-	</div>
-	<span class={spacer} />
-	<Button style={ButtonStyle.Icon} onClick='{() => {
-		let editedTask = clone(task);
-		editedTask.isStarred = !editedTask.isStarred;
-		editedTask.lastModified = new Date();
-
-		$updateTask.mutate(editedTask);
-	}}'>
-		{#if task.isStarred}
-			<Icon>star</Icon>
-		{:else}
-			<Icon style={IconStyle.Outlined}>star</Icon>
-		{/if}
-	</Button>
-	<!--<Button onClick={() => taskToEdit = clone(task)}>
-		<Icon>edit</Icon>
-	</Button>-->
-</li>
+				</svelte:fragment>
+				<svelte:fragment slot='actions'>
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateTask.isLoading}>Cancel</Button>
+					<Button style={ButtonStyle.Tonal} type='submit' disabled={$updateTask.isLoading}>Save</Button>
+				</svelte:fragment>
+			</Card>
+		</form>
+	</Dialog>
+{/if}

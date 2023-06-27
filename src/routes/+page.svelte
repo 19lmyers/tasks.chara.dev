@@ -14,9 +14,6 @@
 		queryKey: ['lists'],
 		queryFn: async () => api().getLists()
 	});
-
-	let listToEdit: TaskList | null = null;
-	let listToSort: TaskList | null = null;
 </script>
 
 <svelte:head>
@@ -24,9 +21,6 @@
 </svelte:head>
 
 {#if $isAuthenticated}
-	<EditListDialog bind:taskList={listToEdit} />
-	<SortModeDialog bind:taskList={listToSort} />
-
 	<Header />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}
@@ -35,15 +29,7 @@
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
 			{#each $taskLists.data as taskList}
-				<TaskListItem
-					{taskList}
-					onEditClicked={() => {
-						listToEdit = clone(taskList);
-					}}
-					onSortClicked={() => {
-						listToSort = clone(taskList);
-					}}
-				/>
+				<TaskListItem {taskList} />
 			{/each}
 		{/if}
 	</main>

@@ -33,31 +33,30 @@
 	export let href: string | null = null;
 
 	export let disabled = false;
+	export let onClick: ((e: Event) => void) | null = null;
 
-	export let onClick: (() => void) | null = null;
-
-	let className: string;
+	let styleClass: string;
 	if (style === ButtonStyle.Filled) {
-		className = filled;
+		styleClass = filled;
 	} else if (style === ButtonStyle.Outlined) {
-		className = outlined;
+		styleClass = outlined;
 	} else if (style === ButtonStyle.Tonal) {
-		className = tonal;
+		styleClass = tonal;
 	} else if (style === ButtonStyle.Text) {
-		className = text;
+		styleClass = text;
 	} else if (style === ButtonStyle.Icon) {
-		className = icon;
+		styleClass = icon;
 	} else {
-		className = elevated;
+		styleClass = elevated;
 	}
 </script>
 
 {#if href}
-	<a class={className} {href}>
+	<a class={styleClass} {href}>
 		<slot />
 	</a>
 {:else}
-	<button on:click={onClick} {type} class={className} {disabled}>
+	<button on:click={onClick} {type} class={styleClass} {disabled}>
 		<slot />
 	</button>
 {/if}

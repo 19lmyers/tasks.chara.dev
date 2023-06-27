@@ -30,3 +30,8 @@ export enum ButtonStyle {
 	Text,
 	Icon
 }
+
+export enum IconStyle {
+	Filled,
+	Outlined
+}

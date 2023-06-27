@@ -23,17 +23,27 @@
   -->
 
 <script lang='ts'>
-	import { icon } from './Icon.css';
+	import { filled, outlined } from './Icon.css';
+	import { IconStyle } from '$lib/component';
+
+	export let style: IconStyle = IconStyle.Filled;
 
 	export let className: string | null = null;
+
+	let styleClass: string;
+	if (style === IconStyle.Filled) {
+		styleClass = filled;
+	} else {
+		styleClass = outlined;
+	}
 </script>
 
 {#if className}
-	<span class='{icon} {className} material-symbols-outlined'>
+	<span class='{styleClass} {className} material-symbols-outlined'>
 	<slot />
 </span>
 {:else}
-<span class='{icon} material-symbols-outlined'>
+<span class='{styleClass} material-symbols-outlined'>
 	<slot />
 </span>
 {/if}

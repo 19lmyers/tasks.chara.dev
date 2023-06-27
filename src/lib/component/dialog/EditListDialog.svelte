@@ -25,11 +25,11 @@
 <script lang='ts'>
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
-	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
-	import type { TaskList } from '$lib/type';
 	import { api } from '$lib/api';
+	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 	import { themeFromListColor } from '$lib/theme';
 	import { ListColor, ListIcon } from '$lib/type';
+	import type { TaskList } from '$lib/type';
 
 	import { header, listIcon } from './EditListDialog.css';
 	import { iconFromListIcon } from '$lib/util';

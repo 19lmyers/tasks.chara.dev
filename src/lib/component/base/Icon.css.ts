@@ -29,6 +29,20 @@ export const icon = style({
 	padding: '0.5rem'
 });
 
+export const filled = style([
+	icon,
+	{
+		fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"
+	}
+]);
+
+export const outlined = style([
+	icon,
+	{
+		fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48"
+	}
+]);
+
 globalStyle(`${button} ${icon}`, {
 	padding: 0
 });

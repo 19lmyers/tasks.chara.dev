@@ -57,8 +57,18 @@ export const checkbox = style({
 	}
 });
 
+export const text = style({
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center'
+});
+
 export const label = style({
 	fontSize: '1rem'
+});
+
+export const spacer = style({
+	flex: 1
 });
 
 export const details = style({

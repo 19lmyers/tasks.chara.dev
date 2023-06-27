@@ -41,3 +41,5 @@ export { default as TaskListItem } from './app/TaskListItem.svelte';
 
 // Dialog
 export { default as EditListDialog } from './dialog/EditListDialog.svelte';
+export { default as EditTaskDialog } from './dialog/EditTaskDialog.svelte';
+export { default as SortModeDialog } from './dialog/SortModeDialog.svelte';

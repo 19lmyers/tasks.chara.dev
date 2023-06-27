@@ -23,14 +23,14 @@
   -->
 
 <script lang='ts'>
+	import { clone } from 'lodash';
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Icon, TaskItem } from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog, EditListDialog, Icon, SortModeDialog, TaskItem } from '$lib/component';
+	import { SortDirection, SortType } from '$lib/type';
 	import type { Task, TaskList } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
-
-	import { bullet, header, divider, taskListItem, progress, description, sort } from './TaskListItem.css';
 	import {
 		iconFromListIcon,
 		iconFromSortDirection,
@@ -40,12 +40,9 @@
 		sortTasks
 	} from '$lib/util';
 
-	import { SortDirection, SortType } from '$lib/type';
+	import { bullet, header, divider, taskListItem, progress, description, sort } from './TaskListItem.css';
 
 	export let taskList: TaskList;
-
-	export let onEditClicked: (() => void) | null = null;
-	export let onSortClicked: (() => void) | null = null;
 
 	let showCompletedTasks = false;
 
@@ -104,11 +101,31 @@
 		}
 	});
 
+	let listToEdit: TaskList | null = null;
+	let listToSort: TaskList | null = null;
 </script>
+
+<EditListDialog bind:taskList={listToEdit} />
+<SortModeDialog bind:taskList={listToSort} />
+
+{#if $updateList.error}
+	<Dialog dismiss={$updateList.reset}>
+		<Card>
+			<svelte:fragment slot='content'>
+				<h1>An error occurred</h1>
+				<p>{$updateList.error.message}</p>
+			</svelte:fragment>
+			<svelte:fragment slot='actions'>
+				<span />
+				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
+			</svelte:fragment>
+		</Card>
+	</Dialog>
+{/if}
 
 <section class='{taskListItem} {themeFromListColor(taskList.color)}'>
 	<div class={header}>
-		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
+		<Button style={ButtonStyle.Icon} onClick={() => listToEdit = clone(taskList)}>
 			<Icon>{iconFromListIcon(taskList.icon)}</Icon>
 		</Button>
 		<div>
@@ -148,7 +165,7 @@
 			{/if}
 		</ul>
 		<div class='{sort}'>
-			<Button style='{ButtonStyle.Text}' onClick={onSortClicked}>
+			<Button style='{ButtonStyle.Text}' onClick={() => listToSort = clone(taskList)}>
 				<Icon>{iconFromSortType(taskList.sortType)}</Icon>
 				{labelFromSortType(taskList.sortType)}
 			</Button>

@@ -124,7 +124,3 @@ globalStyle('ul', {
 globalStyle('form label', {
 	display: 'block'
 });
-
-globalStyle('.material-symbols-outlined', {
-	fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48"
-});

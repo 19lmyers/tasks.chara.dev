@@ -36,12 +36,14 @@
 
 	export let taskList: TaskList | null = null;
 
-	const updateList = createMutation({
-		mutationFn: async (taskList: TaskList) => await api().updateList(taskList),
-		onSuccess: () => {
+	const updateList = createMutation<string, Error, TaskList>({
+		mutationFn: async (taskList: TaskList) => {
+			await api().updateList(taskList);
+			return taskList.id;
+		},
+		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', taskList?.id]);
-			taskList = null;
+			queryClient.invalidateQueries(['tasks', listId]);
 		}
 	});
 
@@ -51,6 +53,8 @@
 			taskList.lastModified = new Date();
 
 			$updateList.mutate(taskList);
+
+			taskList = null;
 		}
 	}
 </script>
@@ -81,7 +85,7 @@
 					<progress />
 				{/if}
 				<div>
-					{#each Object.keys(SortType) as type}
+					{#each Object.values(SortType) as type}
 						<Button style={ButtonStyle.Text} onClick={() => setSortType(type)} disabled={$updateList.isLoading}>
 							<Icon>{iconFromSortType(type)}</Icon>
 							<span>{labelFromSortType(type)}</span>

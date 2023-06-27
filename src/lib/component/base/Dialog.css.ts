@@ -62,8 +62,10 @@ export const dialog = style({
 	margin: 'auto',
 	zIndex: 10,
 	borderRadius: '1.5em',
+	border: 'none',
 	opacity: '100%',
 	maxWidth: 500,
+	padding: 0,
 	boxShadow: themeContract.elevation.level2,
 	'@media': {
 		'(prefers-color-scheme: light)': {

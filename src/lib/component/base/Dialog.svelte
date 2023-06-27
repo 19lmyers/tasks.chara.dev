@@ -22,22 +22,36 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
+<script lang='ts'>
+	import { onMount } from 'svelte';
+
 	import { dialog, scrim } from './Dialog.css';
 
 	export let dismiss: (() => void) | null = null;
 
+	function onKeyDown(e: KeyboardEvent) {
+		// Only dismiss on ESC key
+		if (e.code == 'Escape') {
+			dismiss?.();
+		}
+	}
+
 	export let className: string | null = null;
+
+	let htmlDialog: HTMLDialogElement;
+
+	onMount(() => {
+		htmlDialog.addEventListener('close', () => dismiss?.());
+		htmlDialog.showModal();
+	});
 </script>
 
-<div class={scrim} on:click|self={dismiss}>
-	{#if className}
-		<div class="{dialog} {className}" on:click={null}>
-			<slot />
-		</div>
-	{:else}
-		<div class={dialog} on:click={null}>
-			<slot />
-		</div>
-	{/if}
-</div>
+{#if className}
+	<dialog class='{dialog} {className}' bind:this={htmlDialog}>
+		<slot />
+	</dialog>
+{:else}
+	<dialog class={dialog} bind:this={htmlDialog}>
+		<slot />
+	</dialog>
+{/if}

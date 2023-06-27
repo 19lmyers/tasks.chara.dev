@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Readme">
-      <change afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.css.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/util/icons.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/util/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/util/sort.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/util/strings.ts" afterDir="false" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Dialog improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/Header.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/Header.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/Header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/theme/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/colors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/profile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +63,7 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
+    "settings.editor.selected.configurable": "Errors",
     "ts.external.directory.path": "/Users/lmyers/WebstormProjects/tasks.chara.dev/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -140,7 +129,8 @@
       <workItem from="1687656802479" duration="510000" />
       <workItem from="1687659069751" duration="360000" />
       <workItem from="1687810364093" duration="1121000" />
-      <workItem from="1687811496249" duration="9929000" />
+      <workItem from="1687811496249" duration="10040000" />
+      <workItem from="1687882472872" duration="2528000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -303,7 +293,23 @@
       <option name="project" value="LOCAL" />
       <updated>1687659226953</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Sort, filter, other improvements">
+      <option name="closed" value="true" />
+      <created>1687822496085</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1687822496085</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Remove debug statement">
+      <option name="closed" value="true" />
+      <created>1687822521014</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1687822521014</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,6 +348,9 @@
     <MESSAGE value="Improve task list card display" />
     <MESSAGE value="Less bold colors for login screens" />
     <MESSAGE value="Readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme" />
+    <MESSAGE value="Sort, filter, other improvements" />
+    <MESSAGE value="Remove debug statement" />
+    <MESSAGE value="Dialog improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dialog improvements" />
   </component>
 </project>

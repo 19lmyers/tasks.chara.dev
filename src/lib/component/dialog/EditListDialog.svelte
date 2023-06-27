@@ -42,12 +42,14 @@
 
 	const queryClient = useQueryClient()
 
-	const updateList = createMutation({
-		mutationFn: async (taskList: TaskList) => await api().updateList(taskList),
-		onSuccess: () => {
+	const updateList = createMutation<string, Error, TaskList>({
+		mutationFn: async (taskList: TaskList) => {
+			await api().updateList(taskList);
+			return taskList.id;
+		},
+		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries(['lists'])
-			queryClient.invalidateQueries(['tasks', taskList?.id])
-			taskList = null
+			queryClient.invalidateQueries(['tasks', listId])
 		}
 	});
 
@@ -56,6 +58,8 @@
 			taskList.lastModified = new Date();
 
 			$updateList.mutate(taskList);
+
+			taskList = null;
 		}
 	}
 </script>
@@ -101,9 +105,9 @@
 						Icon
 						<select name='icon' bind:value={taskList.icon}>
 							<option value={null}>Default</option>
-							{#each Object.keys(ListIcon) as icon}
+							{#each Object.values(ListIcon) as icon}
 								<option value={icon}>
-									{ListIcon[icon]}
+									{icon}
 								</option>
 							{/each}
 						</select>
@@ -112,9 +116,9 @@
 						Color
 						<select name='color' bind:value={taskList.color}>
 							<option value={null}>Default</option>
-							{#each Object.keys(ListColor) as color}
+							{#each Object.values(ListColor) as color}
 								<option value={color}>
-									{ListColor[color]}
+									{color}
 								</option>
 							{/each}
 						</select>

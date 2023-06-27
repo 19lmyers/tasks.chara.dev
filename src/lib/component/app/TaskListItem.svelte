@@ -26,7 +26,7 @@
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, Dialog, Icon, TaskItem } from '$lib/component';
+	import { Button, ButtonStyle, Icon, TaskItem } from '$lib/component';
 	import type { Task, TaskList } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
 
@@ -86,13 +86,16 @@
 
 	const queryClient = useQueryClient();
 
-	const updateList = createMutation({
-		mutationFn: async (taskList: TaskList) => await api().updateList(taskList),
-		onSuccess: () => {
-			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', taskList?.id]);
+	const updateList = createMutation<string, Error, TaskList>({
+		mutationFn: async (taskList: TaskList) => {
+			await api().updateList(taskList);
+			return taskList.id;
 		},
-		onError: (error: Error) => {
+		onSuccess: (listId: string) => {
+			queryClient.invalidateQueries(['lists']);
+			queryClient.invalidateQueries(['tasks', listId]);
+		},
+		onError: () => {
 			if (taskList.sortDirection != SortDirection.DESCENDING) {
 				taskList.sortDirection = SortDirection.DESCENDING;
 			} else {

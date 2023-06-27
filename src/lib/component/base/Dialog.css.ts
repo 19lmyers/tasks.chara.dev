@@ -26,6 +26,7 @@ import { style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
 
+/*
 export const scrim = style({
 	position: 'absolute',
 	width: '100%',
@@ -57,6 +58,7 @@ export const scrim = style({
 		}
 	}
 });
+*/
 
 export const dialog = style({
 	margin: 'auto',

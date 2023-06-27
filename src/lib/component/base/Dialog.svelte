@@ -25,16 +25,9 @@
 <script lang='ts'>
 	import { onMount } from 'svelte';
 
-	import { dialog, scrim } from './Dialog.css';
+	import { dialog } from './Dialog.css';
 
 	export let dismiss: (() => void) | null = null;
-
-	function onKeyDown(e: KeyboardEvent) {
-		// Only dismiss on ESC key
-		if (e.code == 'Escape') {
-			dismiss?.();
-		}
-	}
 
 	export let className: string | null = null;
 

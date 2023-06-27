@@ -1,14 +1,12 @@
 <script lang='ts'>
 	import { createQuery } from '@tanstack/svelte-query';
-	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, EditListDialog, Header, TaskListItem } from '$lib/component';
+	import { Button, ButtonStyle, Card, CenterLayout, Header, TaskListItem } from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader } from '$lib/styles.css';
-	import SortModeDialog from '$lib/component/dialog/SortModeDialog.svelte';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],

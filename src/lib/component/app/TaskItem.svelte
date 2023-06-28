@@ -21,12 +21,20 @@
   - OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   - SOFTWARE.
   -->
-<script lang='ts'>
+<script lang="ts">
 	import { clone } from 'lodash';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, Dialog, EditTaskDialog, Icon, IconStyle } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		Card,
+		Dialog,
+		EditTaskDialog,
+		Icon,
+		IconStyle
+	} from '$lib/component';
 	import type { Task } from '$lib/type';
 
 	import { checkbox, details, label, spacer, taskItem, text } from './TaskItem.css';
@@ -51,11 +59,11 @@
 {#if $updateTask.error}
 	<Dialog dismiss={$updateTask.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateTask.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateTask.reset}>OK</Button>
 			</svelte:fragment>
@@ -66,15 +74,20 @@
 <EditTaskDialog bind:task={taskToEdit} />
 
 <li class={taskItem}>
-	<input class={checkbox} type='checkbox' checked={task.isCompleted} on:click={(e) => {
-		let editedTask = clone(task);
-		editedTask.isCompleted = !editedTask.isCompleted;
-		editedTask.lastModified = new Date();
+	<input
+		class={checkbox}
+		type="checkbox"
+		checked={task.isCompleted}
+		on:click={(e) => {
+			let editedTask = clone(task);
+			editedTask.isCompleted = !editedTask.isCompleted;
+			editedTask.lastModified = new Date();
 
-		$updateTask.mutate(editedTask);
+			$updateTask.mutate(editedTask);
 
-		e.preventDefault();
-	}} />
+			e.preventDefault();
+		}}
+	/>
 	<div class={text}>
 		<p class={label}>{task.label}</p>
 		{#if task.details}
@@ -82,13 +95,16 @@
 		{/if}
 	</div>
 	<span class={spacer} />
-	<Button style={ButtonStyle.Icon} onClick='{() => {
-		let editedTask = clone(task);
-		editedTask.isStarred = !editedTask.isStarred;
-		editedTask.lastModified = new Date();
+	<Button
+		style={ButtonStyle.Icon}
+		onClick={() => {
+			let editedTask = clone(task);
+			editedTask.isStarred = !editedTask.isStarred;
+			editedTask.lastModified = new Date();
 
-		$updateTask.mutate(editedTask);
-	}}'>
+			$updateTask.mutate(editedTask);
+		}}
+	>
 		{#if task.isStarred}
 			<Icon>star</Icon>
 		{:else}

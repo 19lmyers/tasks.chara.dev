@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { filled, outlined } from './Icon.css';
 	import { IconStyle } from '$lib/component';
 
@@ -39,11 +39,11 @@
 </script>
 
 {#if className}
-	<span class='{styleClass} {className} material-symbols-outlined'>
-	<slot />
-</span>
+	<span class="{styleClass} {className} material-symbols-outlined">
+		<slot />
+	</span>
 {:else}
-<span class='{styleClass} material-symbols-outlined'>
-	<slot />
-</span>
+	<span class="{styleClass} material-symbols-outlined">
+		<slot />
+	</span>
 {/if}

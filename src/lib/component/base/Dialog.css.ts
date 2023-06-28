@@ -80,3 +80,5 @@ export const dialog = style({
 		}
 	}
 });
+
+export const content = style({});

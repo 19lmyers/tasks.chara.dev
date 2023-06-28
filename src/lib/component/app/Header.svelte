@@ -39,7 +39,7 @@
 <header class={header}>
 	<h1>Tasks</h1>
 	<Dropdown>
-		<button slot='label' class={profileButton}>
+		<button slot="label" class={profileButton}>
 			<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
 		</button>
 		<ul slot="content">

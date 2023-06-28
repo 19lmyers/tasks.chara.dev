@@ -22,10 +22,10 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
-	import { dialog } from './Dialog.css';
+	import { content, dialog } from './Dialog.css';
 
 	export let dismiss: (() => void) | null = null;
 
@@ -40,11 +40,17 @@
 </script>
 
 {#if className}
-	<dialog class='{dialog} {className}' bind:this={htmlDialog}>
-		<slot />
+	<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+	<dialog class="{dialog} {className}" bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
+		<div class={content}>
+			<slot />
+		</div>
 	</dialog>
 {:else}
-	<dialog class={dialog} bind:this={htmlDialog}>
-		<slot />
+	<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+	<dialog class={dialog} bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
+		<div class={content}>
+			<slot />
+		</div>
 	</dialog>
 {/if}

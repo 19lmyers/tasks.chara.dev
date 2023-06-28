@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -40,7 +40,7 @@
 		taskList = null;
 	}
 
-	const queryClient = useQueryClient()
+	const queryClient = useQueryClient();
 
 	const updateList = createMutation<string, Error, TaskList>({
 		mutationFn: async (taskList: TaskList) => {
@@ -48,8 +48,8 @@
 			return taskList.id;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['lists'])
-			queryClient.invalidateQueries(['tasks', listId])
+			queryClient.invalidateQueries(['lists']);
+			queryClient.invalidateQueries(['tasks', listId]);
 		}
 	});
 
@@ -67,11 +67,11 @@
 {#if $updateList.error}
 	<Dialog dismiss={$updateList.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateList.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
 			</svelte:fragment>
@@ -80,10 +80,10 @@
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => taskList = null}>
+	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => (taskList = null)}>
 		<form on:submit|preventDefault={save}>
 			<Card>
-				<svelte:fragment slot='content'>
+				<svelte:fragment slot="content">
 					<h1 class={header}>
 						<Icon className={listIcon}>{iconFromListIcon(taskList.icon)}</Icon>
 						Edit list
@@ -94,8 +94,8 @@
 					<label>
 						Title
 						<input
-							name='title'
-							type='text'
+							name="title"
+							type="text"
 							bind:value={taskList.title}
 							disabled={$updateList.isLoading}
 							required
@@ -103,7 +103,7 @@
 					</label>
 					<label>
 						Icon
-						<select name='icon' bind:value={taskList.icon}>
+						<select name="icon" bind:value={taskList.icon}>
 							<option value={null}>Default</option>
 							{#each Object.values(ListIcon) as icon}
 								<option value={icon}>
@@ -114,7 +114,7 @@
 					</label>
 					<label>
 						Color
-						<select name='color' bind:value={taskList.color}>
+						<select name="color" bind:value={taskList.color}>
 							<option value={null}>Default</option>
 							{#each Object.values(ListColor) as color}
 								<option value={color}>
@@ -125,13 +125,17 @@
 					</label>
 					<label>
 						Description
-						<textarea name='description' bind:value={taskList.description} disabled={$updateList.isLoading} />
+						<textarea
+							name="description"
+							bind:value={taskList.description}
+							disabled={$updateList.isLoading}
+						/>
 					</label>
 					<label>
 						Pin to dashboard
 						<input
-							name='pin-to-dashboard'
-							type='checkbox'
+							name="pin-to-dashboard"
+							type="checkbox"
 							bind:checked={taskList.isPinned}
 							disabled={$updateList.isLoading}
 						/>
@@ -139,16 +143,20 @@
 					<label>
 						Show list numbers
 						<input
-							name='show-list-numbers'
-							type='checkbox'
+							name="show-list-numbers"
+							type="checkbox"
 							bind:checked={taskList.showIndexNumbers}
 							disabled={$updateList.isLoading}
 						/>
 					</label>
 				</svelte:fragment>
-				<svelte:fragment slot='actions'>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isLoading}>Cancel</Button>
-					<Button style={ButtonStyle.Tonal} type='submit' disabled={$updateList.isLoading}>Save</Button>
+				<svelte:fragment slot="actions">
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isLoading}
+						>Cancel</Button
+					>
+					<Button style={ButtonStyle.Tonal} type="submit" disabled={$updateList.isLoading}
+						>Save</Button
+					>
 				</svelte:fragment>
 			</Card>
 		</form>

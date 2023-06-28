@@ -22,12 +22,21 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { clone } from 'lodash';
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, Dialog, EditListDialog, Icon, SortModeDialog, TaskItem } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		Card,
+		Dialog,
+		EditListDialog,
+		Icon,
+		SortModeDialog,
+		TaskItem
+	} from '$lib/component';
 	import { SortDirection, SortType } from '$lib/type';
 	import type { Task, TaskList } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
@@ -40,7 +49,15 @@
 		sortTasks
 	} from '$lib/util';
 
-	import { bullet, header, divider, taskListItem, progress, description, sort } from './TaskListItem.css';
+	import {
+		bullet,
+		header,
+		divider,
+		taskListItem,
+		progress,
+		description,
+		sort
+	} from './TaskListItem.css';
 
 	export let taskList: TaskList;
 
@@ -60,12 +77,16 @@
 		queryFn: async () => {
 			const tasks = await api().getTasks(taskList.id);
 			return {
-				current: sortTasks(tasks.filter((task) => !task.isCompleted),
+				current: sortTasks(
+					tasks.filter((task) => !task.isCompleted),
 					taskList.sortType,
-					taskList.sortDirection),
-				completed: sortTasks(tasks.filter((task) => task.isCompleted),
+					taskList.sortDirection
+				),
+				completed: sortTasks(
+					tasks.filter((task) => task.isCompleted),
 					taskList.sortType,
-					taskList.sortDirection)
+					taskList.sortDirection
+				)
 			};
 		}
 	});
@@ -111,11 +132,11 @@
 {#if $updateList.error}
 	<Dialog dismiss={$updateList.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateList.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
 			</svelte:fragment>
@@ -123,9 +144,9 @@
 	</Dialog>
 {/if}
 
-<section class='{taskListItem} {themeFromListColor(taskList.color)}'>
+<section class="{taskListItem} {themeFromListColor(taskList.color)}">
 	<div class={header}>
-		<Button style={ButtonStyle.Icon} onClick={() => listToEdit = clone(taskList)}>
+		<Button style={ButtonStyle.Icon} onClick={() => (listToEdit = clone(taskList))}>
 			<Icon>{iconFromListIcon(taskList.icon)}</Icon>
 		</Button>
 		<div>
@@ -164,13 +185,17 @@
 				{/if}
 			{/if}
 		</ul>
-		<div class='{sort}'>
-			<Button style='{ButtonStyle.Text}' onClick={() => listToSort = clone(taskList)}>
+		<div class={sort}>
+			<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
 				<Icon>{iconFromSortType(taskList.sortType)}</Icon>
 				{labelFromSortType(taskList.sortType)}
 			</Button>
 			{#if taskList.sortType !== SortType.ORDINAL}
-				<Button style='{ButtonStyle.Text}' onClick={toggleSortDirection} disabled={$updateList.isLoading}>
+				<Button
+					style={ButtonStyle.Text}
+					onClick={toggleSortDirection}
+					disabled={$updateList.isLoading}
+				>
 					<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
 					{labelFromSortDirection(taskList.sortDirection)}
 				</Button>

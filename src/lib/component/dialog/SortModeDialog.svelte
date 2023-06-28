@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -31,6 +31,8 @@
 	import { SortType } from '$lib/type';
 	import type { TaskList } from '$lib/type';
 	import { iconFromSortType, labelFromSortType } from '$lib/util';
+
+	import { header, listIcon } from './SortModeDialog.css';
 
 	const queryClient = useQueryClient();
 
@@ -62,11 +64,11 @@
 {#if $updateList.error}
 	<Dialog dismiss={$updateList.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateList.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
 			</svelte:fragment>
@@ -75,10 +77,13 @@
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => taskList = null}>
+	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => (taskList = null)}>
 		<Card>
-			<svelte:fragment slot='content'>
-				<h1>
+			<svelte:fragment slot="content">
+				<h1 class={header}>
+					<Button style={ButtonStyle.Icon} onClick={() => (taskList = null)}>
+						<Icon className={listIcon}>close</Icon>
+					</Button>
 					Sort by
 				</h1>
 				{#if $updateList.isLoading}
@@ -86,7 +91,11 @@
 				{/if}
 				<div>
 					{#each Object.values(SortType) as type}
-						<Button style={ButtonStyle.Text} onClick={() => setSortType(type)} disabled={$updateList.isLoading}>
+						<Button
+							style={ButtonStyle.Text}
+							onClick={() => setSortType(type)}
+							disabled={$updateList.isLoading}
+						>
 							<Icon>{iconFromSortType(type)}</Icon>
 							<span>{labelFromSortType(type)}</span>
 						</Button>

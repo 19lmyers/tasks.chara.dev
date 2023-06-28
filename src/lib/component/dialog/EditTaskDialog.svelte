@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -35,7 +35,7 @@
 		task = null;
 	}
 
-	const queryClient = useQueryClient()
+	const queryClient = useQueryClient();
 
 	const updateTask = createMutation<string, Error, Task>({
 		mutationFn: async (task: Task) => {
@@ -43,8 +43,8 @@
 			return task.listId;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['lists'])
-			queryClient.invalidateQueries(['tasks', listId])
+			queryClient.invalidateQueries(['lists']);
+			queryClient.invalidateQueries(['tasks', listId]);
 		}
 	});
 
@@ -62,11 +62,11 @@
 {#if $updateTask.error}
 	<Dialog dismiss={$updateTask.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateTask.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateTask.reset}>OK</Button>
 			</svelte:fragment>
@@ -75,19 +75,22 @@
 {/if}
 
 {#if task}
-	<Dialog dismiss={() => task = null}>
+	<Dialog dismiss={() => (task = null)}>
 		<form on:submit|preventDefault={save}>
 			<Card>
-				<svelte:fragment slot='content'>
+				<svelte:fragment slot="content">
 					<h1>Edit task</h1>
 					{#if $updateTask.isLoading}
 						<progress />
 					{/if}
-
 				</svelte:fragment>
-				<svelte:fragment slot='actions'>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateTask.isLoading}>Cancel</Button>
-					<Button style={ButtonStyle.Tonal} type='submit' disabled={$updateTask.isLoading}>Save</Button>
+				<svelte:fragment slot="actions">
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateTask.isLoading}
+						>Cancel</Button
+					>
+					<Button style={ButtonStyle.Tonal} type="submit" disabled={$updateTask.isLoading}
+						>Save</Button
+					>
 				</svelte:fragment>
 			</Card>
 		</form>

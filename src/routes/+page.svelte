@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -34,16 +34,16 @@
 {:else}
 	<CenterLayout>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1 class={navHeader}>Welcome to Tasks</h1>
 				<p>TODO onboarding goes here</p>
 				<p class={error}>
 					NOTE: Tasks for web is currently in alpha. Expect major changes in this space.
 				</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
-				<Button style={ButtonStyle.Text} href='./login'>Sign in</Button>
-				<Button style={ButtonStyle.Tonal} href='./register'>Sign up</Button>
+			<svelte:fragment slot="actions">
+				<Button style={ButtonStyle.Text} href="./login">Sign in</Button>
+				<Button style={ButtonStyle.Tonal} href="./register">Sign up</Button>
 			</svelte:fragment>
 		</Card>
 	</CenterLayout>

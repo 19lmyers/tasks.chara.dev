@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="run the formatter + other changes">
-      <change afterPath="$PROJECT_DIR$/.yarn/cache/@material-material-color-utilities-npm-0.2.7-01beb17440-445c176464.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.yarn/cache/mcu-extra-npm-0.0.5-80b408f7bd-a025cfdff9.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/cache/@importantimport-material-color-utilities-npm-0.2.2-alpha.0-9ad3860ca7-af5ecc1dda.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/install-state.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskItem.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Card.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Card.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dropdown.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dropdown.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/theme/tokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="whoops, add to devDependencies" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +126,7 @@
       <workItem from="1687888481027" duration="127000" />
       <workItem from="1687898589728" duration="682000" />
       <workItem from="1687899357001" duration="4716000" />
-      <workItem from="1688011495254" duration="1257000" />
+      <workItem from="1688011495254" duration="1498000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -361,7 +345,23 @@
       <option name="project" value="LOCAL" />
       <updated>1687975429968</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Update MCU dependency to mainline; pull in extras for surface container offset colors">
+      <option name="closed" value="true" />
+      <created>1688012858332</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1688012858332</updated>
+    </task>
+    <task id="LOCAL-00031" summary="whoops, add to devDependencies">
+      <option name="closed" value="true" />
+      <created>1688012920870</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1688012920870</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,8 +382,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add .gitignore" />
-    <MESSAGE value="Add apple-app-site-association" />
     <MESSAGE value="Update apple-app-site-association" />
     <MESSAGE value="Migrate to SvelteKit for future use" />
     <MESSAGE value="Almost forgot, move .well-known into static" />
@@ -407,6 +405,8 @@
     <MESSAGE value="unused vars" />
     <MESSAGE value="update to svelte 4" />
     <MESSAGE value="run the formatter + other changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="run the formatter + other changes" />
+    <MESSAGE value="Update MCU dependency to mainline; pull in extras for surface container offset colors" />
+    <MESSAGE value="whoops, add to devDependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="whoops, add to devDependencies" />
   </component>
 </project>

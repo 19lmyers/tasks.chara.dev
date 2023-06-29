@@ -25,7 +25,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
-import { card, cardContent } from '$lib/component/base/Card.css';
+import { card } from '$lib/component/base/Card.css';
 
 export const dialog = style({
 	margin: 'auto',

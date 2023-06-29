@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="dummy commit to trigger actions" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Manually control scrims" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,6 +128,7 @@
       <workItem from="1687899357001" duration="4716000" />
       <workItem from="1688011495254" duration="1498000" />
       <workItem from="1688013003987" duration="856000" />
+      <workItem from="1688013978737" duration="1602000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -370,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688013857081</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Manually control scrims">
+      <option name="closed" value="true" />
+      <created>1688015475961</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1688015475961</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,7 +400,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Migrate to SvelteKit for future use" />
     <MESSAGE value="Almost forgot, move .well-known into static" />
     <MESSAGE value="Work on fixing head issue" />
     <MESSAGE value="Fix the styling issues" />
@@ -416,6 +424,7 @@
     <MESSAGE value="Update MCU dependency to mainline; pull in extras for surface container offset colors" />
     <MESSAGE value="whoops, add to devDependencies" />
     <MESSAGE value="dummy commit to trigger actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="dummy commit to trigger actions" />
+    <MESSAGE value="Manually control scrims" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manually control scrims" />
   </component>
 </project>

@@ -33,13 +33,14 @@ export const taskListItem = style({
 	padding: 16,
 	height: 'min-content',
 	borderRadius: '1.5em',
-	boxShadow: themeContract.elevation.level1,
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
+			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surface
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
+			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
 });

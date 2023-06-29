@@ -30,12 +30,12 @@ export const card = style({
 	borderRadius: '1.5em',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface,
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
-			color: themeContract.colorSchemes.dark.onSurfaceVariant
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
+			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
 });

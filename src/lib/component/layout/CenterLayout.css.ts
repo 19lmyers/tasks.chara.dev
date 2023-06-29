@@ -71,8 +71,7 @@ export const content = style({
 globalStyle(`${content} ${card}`, {
 	display: 'flex',
 	flexDirection: 'column',
-	height: '100%',
-	boxShadow: themeContract.elevation.level1
+	height: '100%'
 });
 
 globalStyle(`${content} form`, {

@@ -44,15 +44,15 @@ export const label = style({
 export const content = style({
 	position: 'absolute',
 	right: 16,
-	zIndex: 1,
+	zIndex: 10,
 	boxShadow: themeContract.elevation.level1,
 	borderRadius: '0.5em',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh
 		}
 	}
 });

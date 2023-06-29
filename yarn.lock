@@ -651,13 +651,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@importantimport/material-color-utilities@npm:^0.2.2-alpha.0":
-  version: 0.2.2-alpha.0
-  resolution: "@importantimport/material-color-utilities@npm:0.2.2-alpha.0"
-  checksum: af5ecc1ddae9d76558539975027198c424d6ec1b11c89bf01b45ef643f85222f60fca6d231770811b63cad319f5eef5e7ef5940d3411216952a716951ab9b096
-  languageName: node
-  linkType: hard
-
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -718,6 +711,13 @@ __metadata:
     "@jridgewell/resolve-uri": 3.1.0
     "@jridgewell/sourcemap-codec": 1.4.14
   checksum: 0572669f855260808c16fe8f78f5f1b4356463b11d3f2c7c0b5580c8ba1cbf4ae53efe9f627595830856e57dbac2325ac17eb0c3dd0ec42102e6f227cc289c02
+  languageName: node
+  linkType: hard
+
+"@material/material-color-utilities@npm:^0.2.7":
+  version: 0.2.7
+  resolution: "@material/material-color-utilities@npm:0.2.7"
+  checksum: 445c17646488a0564b21d2949429c871963158a9636f6f2869ace614c35bbabeb6e68a51770ff7752586ecc928274db3e4345a332c94e3fc296e988b0a24d527
   languageName: node
   linkType: hard
 
@@ -2815,6 +2815,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mcu-extra@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "mcu-extra@npm:0.0.5"
+  peerDependencies:
+    "@material/material-color-utilities": ^0.2.6
+  checksum: a025cfdff9550b4da2c0613b7bdf1012605b97dac59f2a9659c57329d2979169165c83c84fb2a1196ecfcd4aaedde8be95bf7c9331aefe4dadf1f9162c06e45a
+  languageName: node
+  linkType: hard
+
 "md5-hex@npm:^4.0.0":
   version: 4.0.0
   resolution: "md5-hex@npm:4.0.0"
@@ -3941,7 +3950,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tasks.chara.dev@workspace:."
   dependencies:
-    "@importantimport/material-color-utilities": ^0.2.2-alpha.0
+    "@material/material-color-utilities": ^0.2.7
     "@sveltejs/adapter-static": ^2.0.2
     "@sveltejs/kit": ^1.20.4
     "@tanstack/svelte-query": ^4.29.15
@@ -3956,6 +3965,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-svelte: ^2.30.0
     lodash: ^4.17.21
+    mcu-extra: ^0.0.5
     md5-hex: ^4.0.0
     prettier: ^2.8.0
     prettier-plugin-svelte: ^2.10.1

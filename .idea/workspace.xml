@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="update to svelte 4">
-      <change afterPath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.css.ts" afterDir="false" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="run the formatter + other changes">
+      <change afterPath="$PROJECT_DIR$/.yarn/cache/@material-material-color-utilities-npm-0.2.7-01beb17440-445c176464.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.yarn/cache/mcu-extra-npm-0.0.5-80b408f7bd-a025cfdff9.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/Header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/Header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskItem.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.yarn/cache/@importantimport-material-color-utilities-npm-0.2.2-alpha.0-9ad3860ca7-af5ecc1dda.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/install-state.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskItem.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/app/TaskListItem.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Card.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Card.css.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Icon.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.css.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditListDialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/EditTaskDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/EditTaskDialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/dialog/SortModeDialog.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/base/Dropdown.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/base/Dropdown.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/component/layout/CenterLayout.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/contract.css.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/theme/tokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/theme/tokens.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +141,8 @@
       <workItem from="1687882472872" duration="5927000" />
       <workItem from="1687888481027" duration="127000" />
       <workItem from="1687898589728" duration="682000" />
-      <workItem from="1687899357001" duration="4024000" />
+      <workItem from="1687899357001" duration="4716000" />
+      <workItem from="1688011495254" duration="1257000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -351,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687899121579</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="run the formatter + other changes">
+      <option name="closed" value="true" />
+      <created>1687975429968</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1687975429968</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,6 +406,7 @@
     <MESSAGE value="Editable tasks (no dialog yet)" />
     <MESSAGE value="unused vars" />
     <MESSAGE value="update to svelte 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to svelte 4" />
+    <MESSAGE value="run the formatter + other changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="run the formatter + other changes" />
   </component>
 </project>

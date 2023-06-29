@@ -55,7 +55,14 @@ const tokens = {
 			scrim: '',
 			inverseSurface: '',
 			inverseOnSurface: '',
-			inversePrimary: ''
+			inversePrimary: '',
+			surfaceBright: '',
+			surfaceContainer: '',
+			surfaceContainerHigh: '',
+			surfaceContainerHighest: '',
+			surfaceContainerLow: '',
+			surfaceContainerLowest: '',
+			surfaceTint: ''
 		},
 		dark: {
 			primary: '',
@@ -86,7 +93,14 @@ const tokens = {
 			scrim: '',
 			inverseSurface: '',
 			inverseOnSurface: '',
-			inversePrimary: ''
+			inversePrimary: '',
+			surfaceBright: '',
+			surfaceContainer: '',
+			surfaceContainerHigh: '',
+			surfaceContainerHighest: '',
+			surfaceContainerLow: '',
+			surfaceContainerLowest: '',
+			surfaceTint: ''
 		}
 	},
 	shapes: {

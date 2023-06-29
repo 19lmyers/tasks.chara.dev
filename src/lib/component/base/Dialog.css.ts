@@ -71,12 +71,12 @@ export const dialog = style({
 	boxShadow: themeContract.elevation.level2,
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface,
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
-			color: themeContract.colorSchemes.dark.onSurfaceVariant
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
 });

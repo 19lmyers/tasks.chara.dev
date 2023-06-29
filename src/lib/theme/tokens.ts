@@ -22,12 +22,10 @@
  * SOFTWARE.
  */
 
-import type { Theme } from '@importantimport/material-color-utilities';
-import {
-	argbFromHex,
-	hexFromArgb,
-	themeFromSourceColor
-} from '@importantimport/material-color-utilities';
+import { argbFromHex, hexFromArgb } from '@material/material-color-utilities';
+
+import type { Theme } from 'mcu-extra';
+import { themeFromSourceColor } from 'mcu-extra';
 
 export function themeTokensFromHex(hexColor: string) {
 	const theme = themeFromSourceColor(argbFromHex(hexColor));
@@ -66,7 +64,14 @@ function createThemeTokens(theme: Theme) {
 				scrim: hexFromArgb(theme.schemes.light.scrim),
 				inverseSurface: hexFromArgb(theme.schemes.light.inverseSurface),
 				inverseOnSurface: hexFromArgb(theme.schemes.light.inverseOnSurface),
-				inversePrimary: hexFromArgb(theme.schemes.light.inversePrimary)
+				inversePrimary: hexFromArgb(theme.schemes.light.inversePrimary),
+				surfaceBright: hexFromArgb(theme.schemes.light.surfaceBright),
+				surfaceContainer: hexFromArgb(theme.schemes.light.surfaceContainer),
+				surfaceContainerHigh: hexFromArgb(theme.schemes.light.surfaceContainerHigh),
+				surfaceContainerHighest: hexFromArgb(theme.schemes.light.surfaceContainerHighest),
+				surfaceContainerLow: hexFromArgb(theme.schemes.light.surfaceContainerLow),
+				surfaceContainerLowest: hexFromArgb(theme.schemes.light.surfaceContainerLowest),
+				surfaceTint: hexFromArgb(theme.schemes.light.surfaceTint)
 			},
 			dark: {
 				primary: hexFromArgb(theme.schemes.dark.primary),
@@ -97,7 +102,14 @@ function createThemeTokens(theme: Theme) {
 				scrim: hexFromArgb(theme.schemes.dark.scrim),
 				inverseSurface: hexFromArgb(theme.schemes.dark.inverseSurface),
 				inverseOnSurface: hexFromArgb(theme.schemes.dark.inverseOnSurface),
-				inversePrimary: hexFromArgb(theme.schemes.dark.inversePrimary)
+				inversePrimary: hexFromArgb(theme.schemes.dark.inversePrimary),
+				surfaceBright: hexFromArgb(theme.schemes.dark.surfaceBright),
+				surfaceContainer: hexFromArgb(theme.schemes.dark.surfaceContainer),
+				surfaceContainerHigh: hexFromArgb(theme.schemes.dark.surfaceContainerHigh),
+				surfaceContainerHighest: hexFromArgb(theme.schemes.dark.surfaceContainerHighest),
+				surfaceContainerLow: hexFromArgb(theme.schemes.dark.surfaceContainerLow),
+				surfaceContainerLowest: hexFromArgb(theme.schemes.dark.surfaceContainerLowest),
+				surfaceTint: hexFromArgb(theme.schemes.dark.surfaceTint)
 			}
 		},
 		shapes: {

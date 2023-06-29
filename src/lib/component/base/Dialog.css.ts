@@ -22,43 +22,10 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
-
-/*
-export const scrim = style({
-	position: 'absolute',
-	width: '100%',
-	height: '100%',
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
-	justifyContent: 'center',
-	':before': {
-		content: '',
-		opacity: '16%',
-		position: 'absolute',
-		width: '100%',
-		height: '100%',
-		top: 0,
-		left: 0,
-		zIndex: 5
-	},
-	'@media': {
-		'(prefers-color-scheme: light)': {
-			':before': {
-				backgroundColor: themeContract.colorSchemes.light.scrim
-			}
-		},
-		'(prefers-color-scheme: dark)': {
-			':before': {
-				backgroundColor: themeContract.colorSchemes.dark.scrim
-			}
-		}
-	}
-});
-*/
+import { card, cardContent } from '$lib/component/base/Card.css';
 
 export const dialog = style({
 	margin: 'auto',
@@ -72,6 +39,27 @@ export const dialog = style({
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
+			color: themeContract.colorSchemes.light.onSurface,
+			'::backdrop': {
+				background: 'rgba(0, 0, 0, 0.25)'
+			}
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			color: themeContract.colorSchemes.dark.onSurface,
+			'::backdrop': {
+				background: 'rgba(0, 0, 0, 0.25)'
+			}
+		}
+	}
+});
+
+export const content = style({});
+
+globalStyle(`${dialog} ${card}`, {
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
@@ -80,5 +68,3 @@ export const dialog = style({
 		}
 	}
 });
-
-export const content = style({});

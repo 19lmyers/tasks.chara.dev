@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
 	import { MasonryLayout } from 'svelte-masonry-layout';
 
@@ -33,20 +33,21 @@
 </svelte:head>
 
 {#if $isAuthenticated}
-	<EditListDialog mode='create' bind:taskList={listToCreate} />
+	<EditListDialog mode="create" bind:taskList={listToCreate} />
 
-	<Header onCreateClicked={() =>
-		listToCreate = {
-			id: '',
-			title: '',
-			isPinned: false,
-			showIndexNumbers: false,
-			sortType: SortType.ORDINAL,
-			sortDirection: SortDirection.ASCENDING,
-			dateCreated: new Date(),
-			lastModified: new Date()
-		}
-	} />
+	<Header
+		onCreateClicked={() =>
+			(listToCreate = {
+				id: '',
+				title: '',
+				isPinned: false,
+				showIndexNumbers: false,
+				sortType: SortType.ORDINAL,
+				sortDirection: SortDirection.ASCENDING,
+				dateCreated: new Date(),
+				lastModified: new Date()
+			})}
+	/>
 	<MobileBanner />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}
@@ -54,7 +55,7 @@
 		{:else if $taskLists.status === 'error'}
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
-			<MasonryLayout items='{$taskLists.data}'>
+			<MasonryLayout items={$taskLists.data}>
 				{#each $taskLists.data as taskList (taskList.id)}
 					<TaskListItem {taskList} />
 				{/each}
@@ -64,7 +65,7 @@
 {:else}
 	<CenterLayout>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1 class={navHeader}>
 					<Icon>checklist</Icon>
 					Welcome to Tasks
@@ -74,9 +75,9 @@
 					NOTE: Tasks for web is currently in alpha. Expect major changes in this space.
 				</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
-				<Button style={ButtonStyle.Text} href='./login'>Sign in</Button>
-				<Button style={ButtonStyle.Tonal} href='./register'>Sign up</Button>
+			<svelte:fragment slot="actions">
+				<Button style={ButtonStyle.Text} href="./login">Sign in</Button>
+				<Button style={ButtonStyle.Tonal} href="./register">Sign up</Button>
 			</svelte:fragment>
 		</Card>
 	</CenterLayout>

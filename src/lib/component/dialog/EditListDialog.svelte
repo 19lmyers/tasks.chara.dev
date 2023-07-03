@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
@@ -74,11 +74,11 @@
 {#if $updateList.error}
 	<Dialog dismiss={$updateList.reset}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
 				<p>{$updateList.error.message}</p>
 			</svelte:fragment>
-			<svelte:fragment slot='actions'>
+			<svelte:fragment slot="actions">
 				<span />
 				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
 			</svelte:fragment>
@@ -90,7 +90,7 @@
 	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => (taskList = null)}>
 		<form on:submit|preventDefault={save}>
 			<Card>
-				<svelte:fragment slot='content'>
+				<svelte:fragment slot="content">
 					<h1 class={header}>
 						<Icon className={listIcon}>{iconFromListIcon(taskList.icon)}</Icon>
 						{#if mode === 'create'}
@@ -105,8 +105,8 @@
 					<label>
 						Title
 						<input
-							name='title'
-							type='text'
+							name="title"
+							type="text"
 							bind:value={taskList.title}
 							disabled={$updateList.isLoading}
 							required
@@ -114,7 +114,7 @@
 					</label>
 					<label>
 						Icon
-						<select name='icon' bind:value={taskList.icon}>
+						<select name="icon" bind:value={taskList.icon}>
 							<option value={null}>Default</option>
 							{#each Object.values(ListIcon) as icon}
 								<option value={icon}>
@@ -125,7 +125,7 @@
 					</label>
 					<label>
 						Color
-						<select name='color' bind:value={taskList.color}>
+						<select name="color" bind:value={taskList.color}>
 							<option value={null}>Default</option>
 							{#each Object.values(ListColor) as color}
 								<option value={color}>
@@ -137,7 +137,7 @@
 					<label>
 						Description
 						<textarea
-							name='description'
+							name="description"
 							bind:value={taskList.description}
 							disabled={$updateList.isLoading}
 						/>
@@ -145,8 +145,8 @@
 					<label>
 						Pin to dashboard
 						<input
-							name='pin-to-dashboard'
-							type='checkbox'
+							name="pin-to-dashboard"
+							type="checkbox"
 							bind:checked={taskList.isPinned}
 							disabled={$updateList.isLoading}
 						/>
@@ -154,19 +154,24 @@
 					<label>
 						Show list numbers
 						<input
-							name='show-list-numbers'
-							type='checkbox'
+							name="show-list-numbers"
+							type="checkbox"
 							bind:checked={taskList.showIndexNumbers}
 							disabled={$updateList.isLoading}
 						/>
 					</label>
 				</svelte:fragment>
-				<div slot='actions' class={actions}>
+				<div slot="actions" class={actions}>
 					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isLoading}>
 						Cancel
 					</Button>
-					<Button style={ButtonStyle.Tonal} type='submit'
-									disabled={$updateList.isLoading || taskList.title === undefined || taskList.title.trim().length === 0}>
+					<Button
+						style={ButtonStyle.Tonal}
+						type="submit"
+						disabled={$updateList.isLoading ||
+							taskList.title === undefined ||
+							taskList.title.trim().length === 0}
+					>
 						Save
 					</Button>
 				</div>

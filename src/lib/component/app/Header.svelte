@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { Button, ButtonStyle, Dropdown, Icon } from '$lib/component';
 	import { auth, profile } from '$lib/stores';
 	import { getDisplayName, getProfilePhoto } from '$lib/profile';
@@ -43,23 +43,23 @@
 		Tasks
 	</h1>
 	<div class={headerRight}>
-		<Button style='{ButtonStyle.Tonal}' onClick={onCreateClicked}>
+		<Button style={ButtonStyle.Tonal} onClick={onCreateClicked}>
 			<Icon>add</Icon>
 			New list
 		</Button>
 		<Dropdown>
-			<button slot='label' class={profileButton}>
+			<button slot="label" class={profileButton}>
 				<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
 			</button>
-			<ul slot='content'>
+			<ul slot="content">
 				<li>
-					<Button href='./profile' style={ButtonStyle.Text}>
+					<Button href="./profile" style={ButtonStyle.Text}>
 						<Icon>person</Icon>
 						<p>Edit profile</p>
 					</Button>
 				</li>
 				<li>
-					<Button href='./settings' style={ButtonStyle.Text}>
+					<Button href="./settings" style={ButtonStyle.Text}>
 						<Icon>settings</Icon>
 						<p>Settings</p>
 					</Button>

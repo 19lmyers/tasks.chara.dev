@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { Button, ButtonStyle, Card, Icon } from '$lib/component';
 	import { mobileBannerDismissed } from '$lib/stores';
 
@@ -33,21 +33,27 @@
 {#if !$mobileBannerDismissed}
 	<aside class={aside}>
 		<Card>
-			<svelte:fragment slot='content'>
+			<svelte:fragment slot="content">
 				<h2 class={title}>
 					<Icon>download</Icon>
 					Download the app
 				</h2>
 				<p class={description}>Tasks (chara.dev) is also available as an iOS and Android app!</p>
-				<p class={description}>Download the app now to access your tasks offline, receive reminder notifications, and unlock
-					platform-exclusive customization features.</p>
-				<p class='{description} {error}'>NOTE: The mobile apps are currently in private beta. Store submission coming soon!</p>
+				<p class={description}>
+					Download the app now to access your tasks offline, receive reminder notifications, and
+					unlock platform-exclusive customization features.
+				</p>
+				<p class="{description} {error}">
+					NOTE: The mobile apps are currently in private beta. Store submission coming soon!
+				</p>
 			</svelte:fragment>
-			<div class={buttons} slot='actions'>
-				<Button style={ButtonStyle.Text} onClick={() => mobileBannerDismissed.set(true)}>Dismiss</Button>
+			<div class={buttons} slot="actions">
+				<Button style={ButtonStyle.Text} onClick={() => mobileBannerDismissed.set(true)}
+					>Dismiss</Button
+				>
 				<div class={buttonsRight}>
-					<Button style={ButtonStyle.Tonal} href='#'>Download for Android</Button>
-					<Button style={ButtonStyle.Tonal} href='#'>Download for iOS</Button>
+					<Button style={ButtonStyle.Tonal} href="#">Download for Android</Button>
+					<Button style={ButtonStyle.Tonal} href="#">Download for iOS</Button>
 				</div>
 			</div>
 		</Card>

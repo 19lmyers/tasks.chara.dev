@@ -56,7 +56,8 @@
 		taskListItem,
 		progress,
 		description,
-		sort, title
+		sort,
+		title
 	} from './TaskListItem.css';
 
 	export let taskList: TaskList;

@@ -18,10 +18,11 @@
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader } from '$lib/styles.css';
+	import { SortDirection, SortType } from '$lib/type';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
-		queryFn: async () => api().getLists(),
+		queryFn: async () => api().getLists()
 	});
 
 	let listToCreate: TaskList | null = null;
@@ -36,7 +37,14 @@
 
 	<Header onCreateClicked={() =>
 		listToCreate = {
-			id: "new"
+			id: '',
+			title: '',
+			isPinned: false,
+			showIndexNumbers: false,
+			sortType: SortType.ORDINAL,
+			sortDirection: SortDirection.ASCENDING,
+			dateCreated: new Date(),
+			lastModified: new Date()
 		}
 	} />
 	<MobileBanner />

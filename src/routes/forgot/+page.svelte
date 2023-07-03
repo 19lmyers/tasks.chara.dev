@@ -72,6 +72,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Forgot password | Tasks (chara.dev)</title>
+</svelte:head>
+
 {#if isSuccess}
 	<Dialog>
 		<Card>

@@ -81,6 +81,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Reset password | Tasks (chara.dev)</title>
+</svelte:head>
+
 {#if isSuccess}
 	<Dialog>
 		<Card>

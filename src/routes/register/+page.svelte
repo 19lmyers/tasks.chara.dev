@@ -83,6 +83,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Sign up | Tasks (chara.dev)</title>
+</svelte:head>
+
 <CenterLayout>
 	<form on:submit|preventDefault={signup}>
 		<Card>

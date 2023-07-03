@@ -28,6 +28,10 @@
 	import { navHeader } from '$lib/styles.css';
 </script>
 
+<svelte:head>
+	<title>Not Found | Tasks (chara.dev)</title>
+</svelte:head>
+
 <CenterLayout>
 	<Card>
 		<svelte:fragment slot="content">

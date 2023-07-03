@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="Manually control scrims" />
+    <list default="true" id="4cc11b2b-d389-4eb5-b537-2160fedddb64" name="Changes" comment="unused vars">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,6 +131,13 @@
       <workItem from="1688011495254" duration="1498000" />
       <workItem from="1688013003987" duration="856000" />
       <workItem from="1688013978737" duration="1602000" />
+      <workItem from="1688064398825" duration="123000" />
+      <workItem from="1688334631358" duration="604000" />
+      <workItem from="1688335893768" duration="948000" />
+      <workItem from="1688337076642" duration="880000" />
+      <workItem from="1688339498316" duration="3156000" />
+      <workItem from="1688408938293" duration="2000" />
+      <workItem from="1688409678732" duration="3000" />
     </task>
     <task id="LOCAL-00002" summary="Add apple-app-site-association">
       <created>1683581886597</created>
@@ -379,7 +388,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688015475961</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="unused vars">
+      <option name="closed" value="true" />
+      <created>1688064424372</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1688064424372</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,13 +435,13 @@
     <MESSAGE value="Remove debug statement" />
     <MESSAGE value="Dialog improvements" />
     <MESSAGE value="Editable tasks (no dialog yet)" />
-    <MESSAGE value="unused vars" />
     <MESSAGE value="update to svelte 4" />
     <MESSAGE value="run the formatter + other changes" />
     <MESSAGE value="Update MCU dependency to mainline; pull in extras for surface container offset colors" />
     <MESSAGE value="whoops, add to devDependencies" />
     <MESSAGE value="dummy commit to trigger actions" />
     <MESSAGE value="Manually control scrims" />
-    <option name="LAST_COMMIT_MESSAGE" value="Manually control scrims" />
+    <MESSAGE value="unused vars" />
+    <option name="LAST_COMMIT_MESSAGE" value="unused vars" />
   </component>
 </project>

@@ -1,19 +1,30 @@
 <script lang='ts'>
 	import { createQuery } from '@tanstack/svelte-query';
-	import MasonryLayout from 'svelte-masonry-layout';
+	import { MasonryLayout } from 'svelte-masonry-layout';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Header, Icon, TaskListItem } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		Card,
+		CenterLayout,
+		EditListDialog,
+		Header,
+		Icon,
+		MobileBanner,
+		TaskListItem
+	} from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
 	import { error, main, navHeader } from '$lib/styles.css';
-	import MobileBanner from '$lib/component/app/MobileBanner.svelte';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
-		queryFn: async () => api().getLists()
+		queryFn: async () => api().getLists(),
 	});
+
+	let listToCreate: TaskList | null = null;
 </script>
 
 <svelte:head>
@@ -21,7 +32,13 @@
 </svelte:head>
 
 {#if $isAuthenticated}
-	<Header />
+	<EditListDialog mode='create' bind:taskList={listToCreate} />
+
+	<Header onCreateClicked={() =>
+		listToCreate = {
+			id: "new"
+		}
+	} />
 	<MobileBanner />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}
@@ -30,7 +47,7 @@
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
 			<MasonryLayout items='{$taskLists.data}'>
-				{#each $taskLists.data as taskList}
+				{#each $taskLists.data as taskList (taskList.id)}
 					<TaskListItem {taskList} />
 				{/each}
 			</MasonryLayout>

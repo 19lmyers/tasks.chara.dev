@@ -44,7 +44,7 @@
 		},
 		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', listId]);
+			queryClient.invalidateQueries(['tasks', { listId: listId }]);
 		}
 	});
 

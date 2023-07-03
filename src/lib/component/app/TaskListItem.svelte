@@ -61,6 +61,8 @@
 
 	export let taskList: TaskList;
 
+	const queryClient = useQueryClient();
+
 	let showCompletedTasks = false;
 
 	function toggleShowCompleted() {
@@ -73,7 +75,7 @@
 	}
 
 	const tasks = createQuery<TasksResult, Error>({
-		queryKey: ['tasks', taskList.id],
+		queryKey: ['tasks', { listId: taskList.id }],
 		queryFn: async () => {
 			const tasks = await api().getTasks(taskList.id);
 			return {
@@ -102,8 +104,6 @@
 		$updateList.mutate(taskList);
 	}
 
-	const queryClient = useQueryClient();
-
 	const updateList = createMutation<string, Error, TaskList>({
 		mutationFn: async (taskList: TaskList) => {
 			await api().updateList(taskList);
@@ -111,7 +111,7 @@
 		},
 		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', listId]);
+			queryClient.invalidateQueries(['tasks', { listId: listId }]);
 		},
 		onError: () => {
 			if (taskList.sortDirection != SortDirection.DESCENDING) {

@@ -49,7 +49,7 @@
 			return task.listId;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['tasks', listId]);
+			queryClient.invalidateQueries(['tasks', { listId: listId }]);
 		}
 	});
 

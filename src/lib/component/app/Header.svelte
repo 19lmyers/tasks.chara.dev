@@ -29,6 +29,8 @@
 
 	import { header, headerRight, icon, profileButton, profilePhoto } from './Header.css';
 
+	export let onCreateClicked: (() => void) | null = null;
+
 	function logout() {
 		profile.set(null);
 		auth.set(null);
@@ -41,9 +43,9 @@
 		Tasks
 	</h1>
 	<div class={headerRight}>
-		<Button style='{ButtonStyle.Tonal}'>
+		<Button style='{ButtonStyle.Tonal}' onClick={onCreateClicked}>
 			<Icon>add</Icon>
-			Create list
+			New list
 		</Button>
 		<Dropdown>
 			<button slot='label' class={profileButton}>

@@ -37,6 +37,7 @@ export { default as CenterLayout } from './layout/CenterLayout.svelte';
 
 // App
 export { default as Header } from './app/Header.svelte';
+export { default as MobileBanner } from './app/MobileBanner.svelte';
 export { default as TaskItem } from './app/TaskItem.svelte';
 export { default as TaskListItem } from './app/TaskListItem.svelte';
 

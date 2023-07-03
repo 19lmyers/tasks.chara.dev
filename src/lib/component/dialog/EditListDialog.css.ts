@@ -48,3 +48,9 @@ export const listIcon = style({
 		}
 	}
 });
+
+export const actions = style({
+	width: '100%',
+	display: 'flex',
+	justifyContent: 'space-between'
+});

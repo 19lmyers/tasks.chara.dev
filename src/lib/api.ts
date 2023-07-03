@@ -82,7 +82,10 @@ export const api = () => ({
 		const response = await apiClient.get('/lists');
 		return (await response.data) as TaskList[];
 	},
-	// TODO create list
+	createList: async (taskList: TaskList) => {
+		const response = await apiClient.post(`/lists`, taskList);
+		return response.status == HttpStatusCode.Created;
+	},
 	updateList: async (taskList: TaskList) => {
 		const response = await apiClient.put(`/lists/${taskList.id}`, taskList);
 		return response.status == HttpStatusCode.Ok;

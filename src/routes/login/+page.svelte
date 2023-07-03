@@ -80,7 +80,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign in | Tasks (chara.dev)</title>
+	<title>Sign in</title>
 </svelte:head>
 
 <CenterLayout>

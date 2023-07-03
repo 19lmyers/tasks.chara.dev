@@ -29,6 +29,7 @@ export * from './base/types';
 export { default as Button } from './base/Button.svelte';
 export { default as Card } from './base/Card.svelte';
 export { default as Dialog } from './base/Dialog.svelte';
+export { default as Dropdown } from './base/Dropdown.svelte';
 export { default as Icon } from './base/Icon.svelte';
 
 // Layout

@@ -53,6 +53,17 @@ export const header = style({
 	overflowWrap: 'anywhere'
 });
 
+export const title = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			color: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			color: themeContract.colorSchemes.dark.primary
+		}
+	}
+});
+
 export const description = style({
 	overflowWrap: 'anywhere',
 	whiteSpace: 'pre-wrap'

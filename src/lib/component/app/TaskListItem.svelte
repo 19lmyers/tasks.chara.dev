@@ -56,7 +56,7 @@
 		taskListItem,
 		progress,
 		description,
-		sort
+		sort, title
 	} from './TaskListItem.css';
 
 	export let taskList: TaskList;
@@ -150,7 +150,7 @@
 			<Icon>{iconFromListIcon(taskList.icon)}</Icon>
 		</Button>
 		<div>
-			<h2>{taskList.title}</h2>
+			<h2 class={title}>{taskList.title}</h2>
 			{#if taskList.description}
 				<p class={description}>{taskList.description}</p>
 			{/if}

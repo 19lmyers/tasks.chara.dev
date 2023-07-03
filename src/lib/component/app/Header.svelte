@@ -22,13 +22,12 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
-	import { Button, ButtonStyle, Icon } from '$lib/component';
+<script lang='ts'>
+	import { Button, ButtonStyle, Dropdown, Icon } from '$lib/component';
 	import { auth, profile } from '$lib/stores';
 	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 
-	import { header, profileButton, profilePhoto } from './Header.css';
-	import Dropdown from '$lib/component/base/Dropdown.svelte';
+	import { header, icon, profileButton, profilePhoto } from './Header.css';
 
 	function logout() {
 		profile.set(null);
@@ -37,20 +36,23 @@
 </script>
 
 <header class={header}>
-	<h1>Tasks</h1>
+	<h1 class={icon}>
+		<Icon>checklist</Icon>
+		Tasks
+	</h1>
 	<Dropdown>
-		<button slot="label" class={profileButton}>
+		<button slot='label' class={profileButton}>
 			<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
 		</button>
-		<ul slot="content">
+		<ul slot='content'>
 			<li>
-				<Button href="./profile" style={ButtonStyle.Text}>
+				<Button href='./profile' style={ButtonStyle.Text}>
 					<Icon>person</Icon>
 					<p>Edit profile</p>
 				</Button>
 			</li>
 			<li>
-				<Button href="./settings" style={ButtonStyle.Text}>
+				<Button href='./settings' style={ButtonStyle.Text}>
 					<Icon>settings</Icon>
 					<p>Settings</p>
 				</Button>

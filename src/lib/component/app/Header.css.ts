@@ -23,12 +23,24 @@
  */
 
 import { style } from '@vanilla-extract/css';
+import { themeContract } from '$lib/theme';
 
 export const header = style({
 	padding: 16,
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center'
+});
+
+export const icon = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			color: themeContract.colorSchemes.light.primary
+		},
+		'(prefers-color-scheme: dark)': {
+			color: themeContract.colorSchemes.dark.primary
+		}
+	}
 });
 
 export const profileButton = style({

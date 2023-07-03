@@ -73,7 +73,7 @@
 </script>
 
 <svelte:head>
-	<title>Forgot password | Tasks (chara.dev)</title>
+	<title>Forgot password?</title>
 </svelte:head>
 
 {#if isSuccess}

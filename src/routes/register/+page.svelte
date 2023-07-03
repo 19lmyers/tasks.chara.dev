@@ -84,7 +84,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up | Tasks (chara.dev)</title>
+	<title>Sign up</title>
 </svelte:head>
 
 <CenterLayout>

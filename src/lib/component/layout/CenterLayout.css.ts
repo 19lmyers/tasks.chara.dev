@@ -63,7 +63,7 @@ export const content = style({
 		},
 		'(prefers-color-scheme: dark)': {
 			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
-			color: themeContract.colorSchemes.dark.onSurfaceVariant
+			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
 });

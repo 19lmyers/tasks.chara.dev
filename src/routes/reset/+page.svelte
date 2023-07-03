@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>Reset password | Tasks (chara.dev)</title>
+	<title>Reset password</title>
 </svelte:head>
 
 {#if isSuccess}

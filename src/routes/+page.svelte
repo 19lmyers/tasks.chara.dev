@@ -2,7 +2,7 @@
 	import { createQuery } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Header, TaskListItem } from '$lib/component';
+	import { Button, ButtonStyle, Card, CenterLayout, Header, Icon, TaskListItem } from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
@@ -35,7 +35,10 @@
 	<CenterLayout>
 		<Card>
 			<svelte:fragment slot="content">
-				<h1 class={navHeader}>Welcome to Tasks</h1>
+				<h1 class={navHeader}>
+					<Icon>checklist</Icon>
+					Welcome to Tasks
+				</h1>
 				<p>TODO onboarding goes here</p>
 				<p class={error}>
 					NOTE: Tasks for web is currently in alpha. Expect major changes in this space.

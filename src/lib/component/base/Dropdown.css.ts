@@ -70,7 +70,7 @@ globalStyle(`${content} ${button}`, {
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			color: themeContract.colorSchemes.dark.onSurfaceVariant
+			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
 });

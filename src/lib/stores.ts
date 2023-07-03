@@ -8,3 +8,5 @@ export const auth: Writable<TokenPair | null> = persisted('auth', null);
 export const profile: Writable<Profile | null> = persisted('profile', null);
 
 export const isAuthenticated = derived(profile, (profile) => profile != null);
+
+export const mobileBannerDismissed = persisted('mobileBannerDismissed', false);

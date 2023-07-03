@@ -38,11 +38,7 @@ export const error = style({
 });
 
 export const main = style({
-	display: 'flex',
-	flexWrap: 'wrap',
-	alignItems: 'stretch',
-	padding: 16,
-	gap: 24
+	padding: 16
 });
 
 export const navHeader = style({

@@ -25,26 +25,37 @@
 import { style } from '@vanilla-extract/css';
 import { themeContract } from '$lib/theme';
 
-export const card = style({
-	padding: '16px',
-	borderRadius: '1.5em',
+export const aside = style({
+	padding: 16
+});
+
+export const title = style({
+	display: 'flex',
+	alignItems: 'center',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
-			color: themeContract.colorSchemes.light.onSurface
+			color: themeContract.colorSchemes.light.primary
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
-			color: themeContract.colorSchemes.dark.onSurface
+			color: themeContract.colorSchemes.dark.primary
 		}
 	}
 });
 
-export const cardContent = style({
-	// see CenterLayout.css.ts for overrides
+export const description = style({
+	paddingLeft: 12,
+	paddingRight: 12
 });
 
-export const actions = style({
-	marginTop: '0.75rem',
-	display: 'flex'
+export const buttons = style({
+	display: 'flex',
+	justifyContent: 'space-between',
+	width: '100%'
+});
+
+export const buttonsRight = style({
+	display: 'flex',
+	justifyContent: 'flex-end',
+	flexWrap: 'wrap',
+	width: '100%'
 });

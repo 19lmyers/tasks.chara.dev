@@ -27,9 +27,7 @@ import { themeContract } from '$lib/theme';
 import { icon } from '$lib/component/base/Icon.css';
 
 export const taskListItem = style({
-	width: 'fit-content',
-	minWidth: '200px',
-	maxWidth: '400px',
+	width: '100%',
 	padding: 16,
 	height: 'min-content',
 	borderRadius: '1.5em',

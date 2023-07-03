@@ -27,6 +27,7 @@
 	import { mobileBannerDismissed } from '$lib/stores';
 
 	import { aside, buttons, buttonsRight, description, title } from './MobileBanner.css';
+	import { error } from '$lib/styles.css';
 </script>
 
 {#if !$mobileBannerDismissed}
@@ -40,6 +41,7 @@
 				<p class={description}>Tasks (chara.dev) is also available as an iOS and Android app!</p>
 				<p class={description}>Download the app now to access your tasks offline, receive reminder notifications, and unlock
 					platform-exclusive customization features.</p>
+				<p class='{description} {error}'>NOTE: The mobile apps are currently in private beta. Store submission coming soon!</p>
 			</svelte:fragment>
 			<div class={buttons} slot='actions'>
 				<Button style={ButtonStyle.Text} onClick={() => mobileBannerDismissed.set(true)}>Dismiss</Button>

@@ -32,6 +32,14 @@ export const header = style({
 	alignItems: 'center'
 });
 
+export const headerRight = style({
+	display: 'flex',
+	height: '100%',
+	justifyContent: 'flex-end',
+	gap: 8,
+	alignItems: 'center'
+});
+
 export const icon = style({
 	'@media': {
 		'(prefers-color-scheme: light)': {

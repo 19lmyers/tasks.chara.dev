@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-	<title>Not Found | Tasks (chara.dev)</title>
+	<title>Not Found</title>
 </svelte:head>
 
 <CenterLayout>

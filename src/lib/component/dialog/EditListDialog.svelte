@@ -46,7 +46,7 @@
 
 	const updateList = createMutation<void, Error, TaskList>({
 		mutationFn: async (taskList: TaskList) => {
-			if (mode) {
+			if (mode === 'create') {
 				await api().createList(taskList);
 			} else {
 				await api().updateList(taskList);

@@ -59,6 +59,7 @@
 		sort,
 		title
 	} from './TaskListItem.css';
+	import EditTaskDialog from '$lib/component/dialog/EditTaskDialog.svelte';
 
 	export let taskList: TaskList;
 
@@ -125,10 +126,29 @@
 
 	let listToEdit: TaskList | null = null;
 	let listToSort: TaskList | null = null;
+
+	let taskToCreate: Task | null = null;
+	let taskToEdit: Task | null = null;
+
+	function showCreate() {
+		taskToCreate = {
+			id: '',
+			listId: taskList.id,
+			label: '',
+			isCompleted: false,
+			isStarred: false,
+			dateCreated: new Date(),
+			lastModified: new Date(),
+			ordinal: 0
+		};
+	}
 </script>
 
 <EditListDialog bind:taskList={listToEdit} />
 <SortModeDialog bind:taskList={listToSort} />
+
+<EditTaskDialog mode="create" bind:task={taskToCreate} />
+<EditTaskDialog bind:task={taskToEdit} />
 
 {#if $updateList.error}
 	<Dialog dismiss={$updateList.reset}>
@@ -156,7 +176,7 @@
 				<p class={description}>{taskList.description}</p>
 			{/if}
 		</div>
-		<Button style={ButtonStyle.Icon}>
+		<Button style={ButtonStyle.Icon} onClick={showCreate}>
 			<Icon>add</Icon>
 		</Button>
 	</div>
@@ -166,7 +186,7 @@
 		<span>Error: {$tasks.error.message}</span>
 	{:else}
 		<ul class={bullet}>
-			{#each $tasks.data.current as task}
+			{#each $tasks.data.current as task (task.id)}
 				<TaskItem {task} />
 			{/each}
 			{#if $tasks.data.completed.length > 0}
@@ -175,7 +195,7 @@
 						<span>Completed ({$tasks.data.completed.length})</span>
 						<Icon>expand_less</Icon>
 					</button>
-					{#each $tasks.data.completed as task}
+					{#each $tasks.data.completed as task (task.id)}
 						<TaskItem {task} />
 					{/each}
 				{:else}

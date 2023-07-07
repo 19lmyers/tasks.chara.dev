@@ -26,6 +26,19 @@
 	});
 
 	let listToCreate: TaskList | null = null;
+
+	function showCreate() {
+		listToCreate = {
+			id: '',
+			title: '',
+			isPinned: false,
+			showIndexNumbers: false,
+			sortType: SortType.ORDINAL,
+			sortDirection: SortDirection.ASCENDING,
+			dateCreated: new Date(),
+			lastModified: new Date()
+		};
+	}
 </script>
 
 <svelte:head>
@@ -35,19 +48,7 @@
 {#if $isAuthenticated}
 	<EditListDialog mode="create" bind:taskList={listToCreate} />
 
-	<Header
-		onCreateClicked={() =>
-			(listToCreate = {
-				id: '',
-				title: '',
-				isPinned: false,
-				showIndexNumbers: false,
-				sortType: SortType.ORDINAL,
-				sortDirection: SortDirection.ASCENDING,
-				dateCreated: new Date(),
-				lastModified: new Date()
-			})}
-	/>
+	<Header onCreateClicked={showCreate} />
 	<MobileBanner />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}

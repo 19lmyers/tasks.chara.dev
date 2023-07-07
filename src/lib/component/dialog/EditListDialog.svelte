@@ -87,7 +87,7 @@
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => (taskList = null)}>
+	<Dialog className={themeFromListColor(taskList.color)} dismiss={cancel}>
 		<form on:submit|preventDefault={save}>
 			<Card>
 				<svelte:fragment slot="content">

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
 
@@ -74,4 +74,12 @@ export const spacer = style({
 export const details = style({
 	fontSize: '0.8rem',
 	opacity: '85%'
+});
+
+export const edit = style({
+	display: 'none'
+});
+
+globalStyle(`${taskItem}:hover ${edit}`, {
+	display: 'block'
 });

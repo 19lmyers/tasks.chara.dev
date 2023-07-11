@@ -37,10 +37,11 @@
 
 	import { actions, header } from './EditTaskDialog.css';
 
-	export let task: Task | null = null;
+	export let task: Task | null;
 
-	let reminderDate: string | null = null;
-	let dueDate: string | null = null;
+	export let oldListId: string | null = null;
+
+	export let mode: 'create' | 'edit' = 'edit';
 
 	const taskLists = createQuery<TaskList[], Error>({
 		queryKey: ['lists'],
@@ -49,29 +50,26 @@
 
 	$: taskList = ($taskLists.data as TaskList[]).find((list) => list.id === task?.listId);
 
-	export let mode: 'create' | 'edit' = 'edit';
-
 	function cancel() {
 		task = null;
-
-		reminderDate = null;
-		dueDate = null;
 	}
 
 	const queryClient = useQueryClient();
 
-	const updateTask = createMutation<string, Error, Task>({
+	const updateTask = createMutation<undefined, Error, Task>({
 		mutationFn: async (task: Task) => {
 			if (mode === 'create') {
 				await api().createTask(task);
+			} else if (oldListId && oldListId != task.listId) {
+				await api().moveTask(oldListId, task.listId, task.id, new Date());
+				await api().updateTask(task);
 			} else {
 				await api().updateTask(task);
 			}
-			return task.listId;
 		},
-		onSuccess: (listId: string) => {
+		onSuccess: () => {
 			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', { listId: listId }]);
+			queryClient.invalidateQueries(['tasks']);
 		}
 	});
 
@@ -82,24 +80,25 @@
 			}
 			task.lastModified = new Date();
 
-			if (reminderDate) {
-				task.reminderDate = dayjs(reminderDate).utc().toDate();
-			} else {
-				task.reminderDate = undefined;
-			}
-
-			if (dueDate) {
-				task.dueDate = dayjs(dueDate).utc().toDate();
-			} else {
-				task.dueDate = undefined;
-			}
-
 			$updateTask.mutate(task);
 
 			task = null;
+		}
+	}
 
-			reminderDate = null;
-			dueDate = null;
+	function dateFromString(date?: string) {
+		if (date) {
+			return dayjs(date).utc().toDate();
+		} else {
+			return undefined;
+		}
+	}
+
+	function dateToString(format: string, date?: Date) {
+		if (date) {
+			return dayjs(date).format(format);
+		} else {
+			return undefined;
 		}
 	}
 
@@ -166,11 +165,21 @@
 					</label>
 					<label>
 						Remind me
-						<input type="datetime-local" bind:value={reminderDate} min={minDateTime()} />
+						<input
+							type="datetime-local"
+							value={dateToString('YYYY-MM-DDTHH:mm', task.reminderDate)}
+							on:input={(value) => (task.reminderDate = dateFromString(value))}
+							min={minDateTime()}
+						/>
 					</label>
 					<label>
 						Set due date
-						<input type="date" bind:value={dueDate} min={minDate()} />
+						<input
+							type="date"
+							value={dateToString('YYYY-MM-DD', task.dueDate)}
+							on:input={(value) => (task.dueDate = dateFromString(value))}
+							min={minDate()}
+						/>
 					</label>
 				</svelte:fragment>
 				<div slot="actions" class={actions}>

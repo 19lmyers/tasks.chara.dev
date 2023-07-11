@@ -103,6 +103,13 @@ export const api = () => ({
 	updateTask: async (task: Task) => {
 		const response = await apiClient.put(`/lists/${task.listId}/tasks/${task.id}`, task);
 		return response.status == HttpStatusCode.Ok;
+	},
+	moveTask: async (oldListId: string, newListId: string, taskId: string, lastModified: Date) => {
+		const response = await apiClient.post(`/lists/${oldListId}/tasks/${taskId}/move`, {
+			newListId: newListId,
+			lastModified: lastModified
+		});
+		return response.status == HttpStatusCode.Ok;
 	}
 });
 

@@ -31,15 +31,16 @@
 		ButtonStyle,
 		Card,
 		Dialog,
-		EditTaskDialog,
 		Icon,
 		IconStyle
 	} from '$lib/component';
 	import type { Task } from '$lib/type';
 
-	import { checkbox, details, label, spacer, taskItem, text } from './TaskItem.css';
+	import { checkbox, details, edit, label, spacer, taskItem, text } from './TaskItem.css';
 
 	export let task: Task;
+
+	export let onEditClicked: (() => void) | null = null;
 
 	const queryClient = useQueryClient();
 
@@ -52,8 +53,6 @@
 			queryClient.invalidateQueries(['tasks', { listId: listId }]);
 		}
 	});
-
-	let taskToEdit: Task | null = null;
 </script>
 
 {#if $updateTask.error}
@@ -70,8 +69,6 @@
 		</Card>
 	</Dialog>
 {/if}
-
-<EditTaskDialog bind:task={taskToEdit} />
 
 <li class={taskItem}>
 	<input
@@ -95,6 +92,11 @@
 		{/if}
 	</div>
 	<span class={spacer} />
+	<span class={edit}>
+		<Button style={ButtonStyle.Icon} onClick={() => (onEditClicked(task))}>
+			<Icon>edit</Icon>
+		</Button>
+	</span>
 	<Button
 		style={ButtonStyle.Icon}
 		onClick={() => {
@@ -111,7 +113,4 @@
 			<Icon style={IconStyle.Outlined}>star</Icon>
 		{/if}
 	</Button>
-	<!--<Button onClick={() => taskToEdit = clone(task)}>
-		<Icon>edit</Icon>
-	</Button>-->
 </li>

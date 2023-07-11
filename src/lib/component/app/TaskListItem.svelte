@@ -33,6 +33,7 @@
 		Card,
 		Dialog,
 		EditListDialog,
+		EditTaskDialog,
 		Icon,
 		SortModeDialog,
 		TaskItem
@@ -59,7 +60,6 @@
 		sort,
 		title
 	} from './TaskListItem.css';
-	import EditTaskDialog from '$lib/component/dialog/EditTaskDialog.svelte';
 
 	export let taskList: TaskList;
 

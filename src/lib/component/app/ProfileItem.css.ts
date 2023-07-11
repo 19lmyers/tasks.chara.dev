@@ -22,27 +22,39 @@
  * SOFTWARE.
  */
 
-// Types
-export * from './base/types';
+import { style } from '@vanilla-extract/css';
+import { themeContract } from '$lib/theme';
 
-// Base
-export { default as Button } from './base/Button.svelte';
-export { default as Card } from './base/Card.svelte';
-export { default as Dialog } from './base/Dialog.svelte';
-export { default as Dropdown } from './base/Dropdown.svelte';
-export { default as Icon } from './base/Icon.svelte';
+export const profileCard = style({
+	padding: 12,
+	borderRadius: '1.5em',
+	display: 'flex',
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
+			color: themeContract.colorSchemes.light.onSurface
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			color: themeContract.colorSchemes.dark.onSurface
+		}
+	}
+});
 
-// Layout
-export { default as CenterLayout } from './layout/CenterLayout.svelte';
+export const profilePhoto = style({
+	width: 48,
+	height: 48,
+	borderRadius: '1.5rem',
+	marginRight: 16
+});
 
-// App
-export { default as MobileBanner } from './app/MobileBanner.svelte';
-export { default as ProfileItem } from './app/ProfileItem.svelte';
-export { default as SiteHeader } from './app/SiteHeader.svelte';
-export { default as TaskItem } from './app/TaskItem.svelte';
-export { default as TaskListItem } from './app/TaskListItem.svelte';
+export const profileText = style({
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center'
+});
 
-// Dialog
-export { default as EditListDialog } from './dialog/EditListDialog.svelte';
-export { default as EditTaskDialog } from './dialog/EditTaskDialog.svelte';
-export { default as SortModeDialog } from './dialog/SortModeDialog.svelte';
+export const email = style({
+	opacity: 0.7,
+	fontSize: '0.9rem'
+});

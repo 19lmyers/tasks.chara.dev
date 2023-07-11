@@ -45,6 +45,10 @@ export const api = () => ({
 		const response = await apiClient.get('/profile');
 		return (await response.data) as Profile;
 	},
+	updateUserProfile: async (profile: Profile) => {
+		const response = await apiClient.post('/profile', profile);
+		return response.status == HttpStatusCode.Ok;
+	},
 
 	createUser: async (email: string, displayName: string, password: string) => {
 		const response = await apiClient.post('/auth/register', {

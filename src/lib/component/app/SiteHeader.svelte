@@ -27,7 +27,7 @@
 	import { auth, profile } from '$lib/stores';
 	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 
-	import { header, headerRight, icon, profileButton, profilePhoto } from './Header.css';
+	import { header, headerRight, icon, profileButton, profilePhoto } from './SiteHeader.css';
 
 	export let onCreateClicked: (() => void) | null = null;
 

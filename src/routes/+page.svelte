@@ -9,9 +9,9 @@
 		Card,
 		CenterLayout,
 		EditListDialog,
-		Header,
 		Icon,
 		MobileBanner,
+		SiteHeader,
 		TaskListItem
 	} from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
@@ -48,7 +48,7 @@
 {#if $isAuthenticated}
 	<EditListDialog mode="create" bind:taskList={listToCreate} />
 
-	<Header onCreateClicked={showCreate} />
+	<SiteHeader onCreateClicked={showCreate} />
 	<MobileBanner />
 	<main class={main}>
 		{#if $taskLists.status === 'loading'}

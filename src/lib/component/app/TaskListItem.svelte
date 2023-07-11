@@ -187,7 +187,7 @@
 	{:else}
 		<ul class={bullet}>
 			{#each $tasks.data.current as task (task.id)}
-				<TaskItem {task} onEditClicked={() => taskToEdit = clone(task)}/>
+				<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
 			{/each}
 			{#if $tasks.data.completed.length > 0}
 				{#if showCompletedTasks}
@@ -196,7 +196,7 @@
 						<Icon>expand_less</Icon>
 					</button>
 					{#each $tasks.data.completed as task (task.id)}
-						<TaskItem {task} onEditClicked={() => taskToEdit = clone(task)}/>
+						<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
 					{/each}
 				{:else}
 					<button class={divider} on:click={toggleShowCompleted}>

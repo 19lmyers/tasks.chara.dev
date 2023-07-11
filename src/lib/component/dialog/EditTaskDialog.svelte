@@ -168,7 +168,11 @@
 						<input
 							type="datetime-local"
 							value={dateToString('YYYY-MM-DDTHH:mm', task.reminderDate)}
-							on:input={(value) => (task.reminderDate = dateFromString(value))}
+							on:input={(event) => {
+								if (task) {
+									return (task.reminderDate = dateFromString(event.currentTarget.value));
+								}
+							}}
 							min={minDateTime()}
 						/>
 					</label>
@@ -177,7 +181,11 @@
 						<input
 							type="date"
 							value={dateToString('YYYY-MM-DD', task.dueDate)}
-							on:input={(value) => (task.dueDate = dateFromString(value))}
+							on:input={(event) => {
+								if (task) {
+									return (task.dueDate = dateFromString(event.currentTarget.value));
+								}
+							}}
 							min={minDate()}
 						/>
 					</label>

@@ -26,14 +26,7 @@
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 
 	import { api } from '$lib/api';
-	import {
-		Button,
-		ButtonStyle,
-		Card,
-		Dialog,
-		Icon,
-		IconStyle
-	} from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog, Icon, IconStyle } from '$lib/component';
 	import type { Task } from '$lib/type';
 
 	import { checkbox, details, edit, label, spacer, taskItem, text } from './TaskItem.css';
@@ -93,7 +86,7 @@
 	</div>
 	<span class={spacer} />
 	<span class={edit}>
-		<Button style={ButtonStyle.Icon} onClick={() => (onEditClicked(task))}>
+		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
 			<Icon>edit</Icon>
 		</Button>
 	</span>

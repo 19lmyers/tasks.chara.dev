@@ -46,7 +46,18 @@ export const api = () => ({
 		return (await response.data) as Profile;
 	},
 	updateUserProfile: async (profile: Profile) => {
-		const response = await apiClient.post('/profile', profile);
+		const response = await apiClient.put('/profile', profile);
+		return response.status == HttpStatusCode.Ok;
+	},
+	uploadProfilePhoto: async (file: File) => {
+		const data = new FormData();
+		data.append('file', file);
+
+		const response = await apiClient.post('/profile/photo', data, {
+			headers: {
+				'content-type': 'multipart/form-data'
+			}
+		});
 		return response.status == HttpStatusCode.Ok;
 	},
 

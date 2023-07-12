@@ -31,7 +31,15 @@
 	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Icon, ProfileItem } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		Card,
+		CenterLayout,
+		Dialog,
+		Icon,
+		ProfileItem
+	} from '$lib/component';
 	import { isAuthenticated, profile } from '$lib/stores';
 	import type { Profile } from '$lib/type';
 
@@ -50,6 +58,47 @@
 		}
 	});
 
+	let profilePhotoInput: HTMLInputElement | null = null;
+	let profilePhotoFiles: FileList | null = null;
+
+	let photoUploadSuccess = false;
+
+	$: if (profilePhotoFiles) {
+		uploadProfilePhoto(profilePhotoFiles[0]);
+		profilePhotoFiles = null;
+	}
+
+	async function uploadProfilePhoto(file: File) {
+		isPending = true;
+
+		try {
+			const result = await api().uploadProfilePhoto(file);
+			if (result) {
+				const userProfile = await api().getUserProfile();
+				profile.set(userProfile);
+				profileToEdit = clone(userProfile);
+
+				isPending = false;
+				photoUploadSuccess = true;
+			}
+		} catch (error) {
+			if (isAxiosError(error) && error.response) {
+				errorMessage = error.response.data;
+			} else if (error instanceof Error) {
+				errorMessage = error.message;
+			}
+
+			isPending = false;
+		}
+	}
+
+	async function removeProfilePhoto() {
+		if (profileToEdit) {
+			profileToEdit.profilePhotoUri = undefined;
+			photoUploadSuccess = await save();
+		}
+	}
+
 	async function save() {
 		if (profileToEdit?.displayName) {
 			isPending = true;
@@ -61,6 +110,7 @@
 					profile.set(userProfile);
 
 					isPending = false;
+					return true;
 				}
 			} catch (error) {
 				if (isAxiosError(error) && error.response) {
@@ -70,14 +120,39 @@
 				}
 
 				isPending = false;
+				return false;
 			}
 		}
+		return false;
 	}
 </script>
 
 <svelte:head>
-	<title>Profile</title>
+	<title>Edit profile</title>
 </svelte:head>
+
+<input
+	type="file"
+	bind:this={profilePhotoInput}
+	bind:files={profilePhotoFiles}
+	accept="image/*"
+	style="display:none"
+/>
+
+{#if photoUploadSuccess}
+	<Dialog>
+		<Card>
+			<svelte:fragment slot="content">
+				<h1>Profile photo changed</h1>
+				<p>Changes may require a refresh to take effect.</p>
+			</svelte:fragment>
+			<svelte:fragment slot="actions">
+				<span />
+				<Button style={ButtonStyle.Text} onClick={() => (photoUploadSuccess = false)}>OK</Button>
+			</svelte:fragment>
+		</Card>
+	</Dialog>
+{/if}
 
 <CenterLayout>
 	<form on:submit|preventDefault={save}>
@@ -95,15 +170,34 @@
 						Display Name
 						<input type="text" bind:value={profileToEdit.displayName} />
 					</label>
-					<Button style={ButtonStyle.Text} disabled>
-						<Icon>add_circle</Icon>
-						Add profile picture
-					</Button>
+					{#if profileToEdit.profilePhotoUri}
+						<Button
+							style={ButtonStyle.Text}
+							onClick={() => profilePhotoInput?.click()}
+							disabled={isPending}
+						>
+							<Icon>add_circle</Icon>
+							Change profile picture
+						</Button>
+						<Button style={ButtonStyle.Text} onClick={removeProfilePhoto} disabled={isPending}>
+							<Icon>remove_circle</Icon>
+							Remove profile picture
+						</Button>
+					{:else}
+						<Button
+							style={ButtonStyle.Text}
+							onClick={() => profilePhotoInput?.click()}
+							disabled={isPending}
+						>
+							<Icon>add_circle</Icon>
+							Add profile picture
+						</Button>
+					{/if}
 					<Button style={ButtonStyle.Text} disabled>
 						<Icon>alternate_email</Icon>
 						Change email
 					</Button>
-					<Button style={ButtonStyle.Text} href="/profile/password">
+					<Button style={ButtonStyle.Text} href="/profile/password" disabled={isPending}>
 						<Icon>password</Icon>
 						Change password
 					</Button>

@@ -95,6 +95,9 @@
 						Display Name
 						<input type='text' bind:value={profileToEdit.displayName} />
 					</label>
+					<Button disabled style={ButtonStyle.Text}><Icon>add_circle</Icon> Add profile picture</Button>
+					<Button disabled style={ButtonStyle.Text}><Icon>alternate_email</Icon>Change email</Button>
+					<Button disabled style={ButtonStyle.Text}><Icon>password</Icon>Change password</Button>
 				{/if}
 				{#if errorMessage}
 					<p class={error}>{errorMessage}</p>

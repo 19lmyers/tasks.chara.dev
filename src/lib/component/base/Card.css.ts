@@ -46,5 +46,6 @@ export const cardContent = style({
 
 export const actions = style({
 	marginTop: '0.75rem',
-	display: 'flex'
+	display: 'flex',
+	justifyContent: 'space-between'
 });

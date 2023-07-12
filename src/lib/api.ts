@@ -69,7 +69,13 @@ export const api = () => ({
 		const response = await refreshClient.post('/auth/refresh', refreshToken);
 		return (await response.data) as TokenPair;
 	},
-	// TODO change password
+	changePassword: async (currentPassword: string, newPassword: string) => {
+		const response = await apiClient.post('/auth/password', {
+			currentPassword: currentPassword,
+			newPassword: newPassword
+		});
+		return response.status === HttpStatusCode.Ok;
+	},
 	requestPasswordResetEmail: async (email: string) => {
 		const response = await apiClient.post('/auth/forgot', email);
 		return response.status === HttpStatusCode.Accepted;

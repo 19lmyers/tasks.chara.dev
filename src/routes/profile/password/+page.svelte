@@ -28,38 +28,28 @@
 	import { goto } from '$app/navigation';
 
 	import { isAxiosError } from 'axios';
-	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, CenterLayout, Icon, ProfileItem } from '$lib/component';
-	import { isAuthenticated, profile } from '$lib/stores';
-	import type { Profile } from '$lib/type';
+	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
+	import { isAuthenticated } from '$lib/stores';
 
 	import { error, navHeader } from '$lib/styles.css';
 
-	let profileToEdit: Profile | null = null;
-	profileToEdit = clone($profile);
+	let currentPassword = '';
+	let newPassword = '';
 
 	let isPending = false;
+	let isSuccess = false;
 
 	let errorMessage: string | null = null;
 
-	onMount(async () => {
-		if (!get(isAuthenticated)) {
-			await goto('/');
-		}
-	});
-
-	async function save() {
-		if (profileToEdit?.displayName) {
+	async function change() {
+		if (currentPassword && newPassword) {
 			isPending = true;
-
 			try {
-				const result = await api().updateUserProfile(profileToEdit);
+				const result = await api().changePassword(currentPassword, newPassword);
 				if (result) {
-					const userProfile = await api().getUserProfile();
-					profile.set(userProfile);
-
+					isSuccess = true;
 					isPending = false;
 				}
 			} catch (error) {
@@ -69,45 +59,74 @@
 					errorMessage = error.message;
 				}
 
+				currentPassword = '';
+				newPassword = '';
+
 				isPending = false;
 			}
 		}
 	}
+
+	onMount(async () => {
+		if (!get(isAuthenticated)) {
+			await goto('/');
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>Profile</title>
+	<title>Change Password</title>
 </svelte:head>
 
+{#if isSuccess}
+	<Dialog>
+		<Card>
+			<svelte:fragment slot="content">
+				<h1>Password changed</h1>
+			</svelte:fragment>
+			<svelte:fragment slot="actions">
+				<span />
+				<Button style={ButtonStyle.Text} onClick={() => history.back()}>OK</Button>
+			</svelte:fragment>
+		</Card>
+	</Dialog>
+{/if}
+
 <CenterLayout>
-	<form on:submit|preventDefault={save}>
+	<form on:submit|preventDefault={change}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1 class={navHeader}>
 					<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
-						<Icon>close</Icon>
+						<Icon>arrow_back</Icon>
 					</Button>
-					<span>Edit profile</span>
+					<span>Change password</span>
 				</h1>
-				{#if profileToEdit}
-					<ProfileItem profile={profileToEdit} />
-					<label>
-						Display Name
-						<input type="text" bind:value={profileToEdit.displayName} />
-					</label>
-					<Button style={ButtonStyle.Text} disabled>
-						<Icon>add_circle</Icon>
-						Add profile picture
-					</Button>
-					<Button style={ButtonStyle.Text} disabled>
-						<Icon>alternate_email</Icon>
-						Change email
-					</Button>
-					<Button style={ButtonStyle.Text} href="/profile/password">
-						<Icon>password</Icon>
-						Change password
-					</Button>
+				{#if isPending}
+					<progress />
 				{/if}
+				<label>
+					Current Password
+					<input
+						name="current-password"
+						type="password"
+						bind:value={currentPassword}
+						autocomplete="current-password"
+						disabled={isPending}
+						required
+					/>
+				</label>
+				<label>
+					New Password
+					<input
+						name="new-password"
+						type="password"
+						bind:value={newPassword}
+						autocomplete="new-password"
+						disabled={isPending}
+						required
+					/>
+				</label>
 				{#if errorMessage}
 					<p class={error}>{errorMessage}</p>
 				{/if}
@@ -115,13 +134,14 @@
 			<svelte:fragment slot="actions">
 				<span />
 				<Button
-					style={ButtonStyle.Filled}
+					style={ButtonStyle.Tonal}
 					type="submit"
 					disabled={isPending ||
-						!profileToEdit ||
-						profileToEdit.displayName.trim().length === 0 ||
-						profileToEdit.displayName.localeCompare($profile?.displayName ?? '') === 0}
-					>Save
+						currentPassword.trim().length === 0 ||
+						newPassword.trim().length === 0 ||
+						currentPassword.localeCompare(newPassword) === 0}
+				>
+					Change
 				</Button>
 			</svelte:fragment>
 		</Card>

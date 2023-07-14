@@ -35,7 +35,7 @@
 	import { themeFromListColor } from '$lib/theme';
 	import type { Task, TaskList } from '$lib/type';
 
-	import { actions, header } from './EditTaskDialog.css';
+	import { actions, header } from './base.css';
 
 	export let task: Task | null;
 

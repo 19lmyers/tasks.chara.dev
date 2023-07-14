@@ -25,12 +25,20 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { Button, ButtonStyle, Dropdown, Icon } from '$lib/component';
+	import {
+		Button,
+		ButtonStyle,
+		DeleteCompletedTasksDialog,
+		DeleteListDialog,
+		Dropdown,
+		Icon
+	} from '$lib/component';
 	import { auth, profile } from '$lib/stores';
 	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 	import type { TaskList } from '$lib/type';
 
 	import {
+		description,
 		header,
 		headerFill,
 		headerFlex,
@@ -40,8 +48,6 @@
 		profileButton,
 		profilePhoto
 	} from './ListHeader.css';
-	import DeleteListDialog from '$lib/component/dialog/DeleteListDialog.svelte';
-	import DeleteCompletedTasksDialog from '$lib/component/dialog/DeleteCompletedTasksDialog.svelte';
 
 	export let taskList: TaskList;
 
@@ -66,9 +72,14 @@
 			<Button style={ButtonStyle.Icon} onClick={() => goto('/')}>
 				<Icon>arrow_back</Icon>
 			</Button>
-			<h1 class={headerFill}>
-				{taskList.title}
-			</h1>
+			<div class={headerFill}>
+				<h1>
+					{taskList.title}
+				</h1>
+				{#if taskList.description}
+					<p class={description}>{taskList.description}</p>
+				{/if}
+			</div>
 		</div>
 		<div class="{headerFlex} {headerRight} {headerFill} {headerWrap}">
 			<div class={headerFlex}>

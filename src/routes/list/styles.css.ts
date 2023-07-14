@@ -42,24 +42,37 @@ export const listPage = style({
 	}
 });
 
+export const paneLayout = style({
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'space-between',
+	'@media': {
+		'screen and (min-width: 640px)': {
+			flexWrap: 'wrap'
+		}
+	},
+	height: '100%'
+});
+
+export const completedTasks = style({
+	padding: 16,
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'flex-start'
+});
+
 export const tasksContainer = style({
-	padding: 16
+	padding: 16,
+	height: '100%',
+	display: 'flex'
 });
 
 export const tasksGroup = style({
-	display: 'grid',
-	gap: '0 0.5rem',
-	'@media': {
-		'screen and (min-width: 640px)': {
-			gridTemplateColumns: 'repeat(2, 1fr)'
-		},
-		'screen and (min-width: 860px)': {
-			gridTemplateColumns: 'repeat(3, 1fr)'
-		},
-		'screen and (min-width: 1280px)': {
-			gridTemplateColumns: 'repeat(4, 1fr)'
-		}
-	}
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'flex-start',
+	columnGap: 8,
+	width: '100%'
 });
 
 export const divider = style({
@@ -70,9 +83,10 @@ export const divider = style({
 	background: 'inherit',
 	font: 'inherit',
 	cursor: 'pointer',
-	width: '100%',
 
-	padding: '12px',
+	padding: 12,
+	marginLeft: 12,
+	marginRight: 12,
 	borderRadius: '2em',
 	display: 'flex',
 	alignItems: 'center',
@@ -94,8 +108,10 @@ export const divider = style({
 	}
 });
 
-export const placeholder = style({
-	textAlign: 'center'
+export const dividerPlaceholder = style({
+	padding: 12,
+	marginLeft: 12,
+	marginRight: 12
 });
 
 export const sort = style({

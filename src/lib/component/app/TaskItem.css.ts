@@ -26,12 +26,26 @@ import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
 
+export const taskContainer = style({
+	flex: '0 1',
+	display: 'flex',
+	alignItems: 'center',
+	height: '100%',
+	paddingTop: 4,
+	paddingBottom: 4
+});
+
+export const ordinal = style({
+	paddingRight: 12,
+	fontSize: '1.25rem'
+});
+
 export const taskItem = style({
+	height: '100%',
+	flexGrow: 1,
 	display: 'flex',
 	flexDirection: 'column',
 	borderRadius: '1.5rem',
-	marginTop: '4px',
-	marginBottom: '4px',
 	padding: '8px',
 	'@media': {
 		'(prefers-color-scheme: light)': {
@@ -88,11 +102,11 @@ export const details = style({
 	WebkitBoxOrient: 'vertical'
 });
 
-export const edit = style({
+export const hoverAction = style({
 	display: 'none'
 });
 
-globalStyle(`${taskItem}:hover ${edit}`, {
+globalStyle(`${taskItem}:hover ${hoverAction}`, {
 	display: 'block'
 });
 

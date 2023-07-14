@@ -35,9 +35,11 @@
 		chip,
 		chips,
 		details,
-		edit,
+		hoverAction,
 		label,
+		ordinal,
 		spacer,
+		taskContainer,
 		taskContents,
 		taskItem,
 		text
@@ -47,6 +49,11 @@
 	export let task: Task;
 
 	export let onEditClicked: (() => void) | null = null;
+	export let onDeleteClicked: (() => void) | null = null;
+
+	export let indexNumber: number | null = null;
+
+	export let showPersistentActions = false;
 
 	const queryClient = useQueryClient();
 
@@ -78,77 +85,92 @@
 	</Dialog>
 {/if}
 
-<li class={taskItem}>
-	<div class={taskContents}>
-		<input
-			class={checkbox}
-			type="checkbox"
-			checked={task.isCompleted}
-			on:click={(e) => {
-				let editedTask = clone(task);
-				editedTask.isCompleted = !editedTask.isCompleted;
-				editedTask.lastModified = new Date();
+<li class={taskContainer}>
+	{#if indexNumber}
+		<p class={ordinal}>{indexNumber}</p>
+	{/if}
 
-				$updateTask.mutate(editedTask);
+	<div class={taskItem}>
+		<div class={taskContents}>
+			<input
+				class={checkbox}
+				type="checkbox"
+				checked={task.isCompleted}
+				on:click={(e) => {
+					let editedTask = clone(task);
+					editedTask.isCompleted = !editedTask.isCompleted;
+					editedTask.lastModified = new Date();
 
-				e.preventDefault();
-			}}
-		/>
-		<div class={text}>
-			<p class={label}>{task.label}</p>
-			{#if task.details}
-				<p class={details}>{task.details}</p>
+					$updateTask.mutate(editedTask);
+
+					e.preventDefault();
+				}}
+			/>
+			<div class={text}>
+				<p class={label}>{task.label}</p>
+				{#if task.details}
+					<p class={details}>{task.details}</p>
+				{/if}
+			</div>
+			<span class={spacer} />
+			{#if showPersistentActions}
+				<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
+					<Icon>edit</Icon>
+				</Button>
+				<Button style={ButtonStyle.Icon} onClick={onDeleteClicked}>
+					<Icon>delete</Icon>
+				</Button>
+			{:else}
+				<span class={hoverAction}>
+					<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
+						<Icon>edit</Icon>
+					</Button>
+				</span>
+			{/if}
+			<Button
+				style={ButtonStyle.Icon}
+				onClick={() => {
+					let editedTask = clone(task);
+					editedTask.isStarred = !editedTask.isStarred;
+					editedTask.lastModified = new Date();
+
+					$updateTask.mutate(editedTask);
+				}}
+			>
+				{#if task.isStarred}
+					<Icon>star</Icon>
+				{:else}
+					<Icon style={IconStyle.Outlined}>star</Icon>
+				{/if}
+			</Button>
+		</div>
+		<div class={chips}>
+			{#if task.reminderDate}
+				{#if isReminderDatePassed}
+					<p class="{chip} {error}">
+						<Icon>notifications</Icon>
+						{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
+					</p>
+				{:else}
+					<p class={chip}>
+						<Icon>notifications</Icon>
+						{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
+					</p>
+				{/if}
+			{/if}
+			{#if task.dueDate}
+				{#if isDueDatePassed}
+					<p class="{chip} {error}">
+						<Icon>event</Icon>
+						{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
+					</p>
+				{:else}
+					<p class={chip}>
+						<Icon>event</Icon>
+						{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
+					</p>
+				{/if}
 			{/if}
 		</div>
-		<span class={spacer} />
-		<span class={edit}>
-			<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
-				<Icon>edit</Icon>
-			</Button>
-		</span>
-		<Button
-			style={ButtonStyle.Icon}
-			onClick={() => {
-				let editedTask = clone(task);
-				editedTask.isStarred = !editedTask.isStarred;
-				editedTask.lastModified = new Date();
-
-				$updateTask.mutate(editedTask);
-			}}
-		>
-			{#if task.isStarred}
-				<Icon>star</Icon>
-			{:else}
-				<Icon style={IconStyle.Outlined}>star</Icon>
-			{/if}
-		</Button>
-	</div>
-	<div class={chips}>
-		{#if task.reminderDate}
-			{#if isReminderDatePassed}
-				<p class="{chip} {error}">
-					<Icon>notifications</Icon>
-					{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
-				</p>
-			{:else}
-				<p class={chip}>
-					<Icon>notifications</Icon>
-					{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
-				</p>
-			{/if}
-		{/if}
-		{#if task.dueDate}
-			{#if isDueDatePassed}
-				<p class="{chip} {error}">
-					<Icon>event</Icon>
-					{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
-				</p>
-			{:else}
-				<p class={chip}>
-					<Icon>event</Icon>
-					{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
-				</p>
-			{/if}
-		{/if}
 	</div>
 </li>

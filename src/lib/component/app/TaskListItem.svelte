@@ -182,8 +182,16 @@
 		{:else}
 			{#if $tasks.data.current.length > 0}
 				<ul class={bullet}>
-					{#each $tasks.data.current as task (task.id)}
-						<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
+					{#each $tasks.data.current as task, index (task.id)}
+						{#if taskList.showIndexNumbers}
+							<TaskItem
+								{task}
+								indexNumber={index + 1}
+								onEditClicked={() => (taskToEdit = clone(task))}
+							/>
+						{:else}
+							<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
+						{/if}
 					{/each}
 				</ul>
 			{:else}

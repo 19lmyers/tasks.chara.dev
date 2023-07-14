@@ -29,7 +29,7 @@
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 
-	import { actions, header, icon } from './DeleteListDialog.css';
+	import { actions, header, icon } from './base.css';
 
 	export let listId: string | null = null;
 

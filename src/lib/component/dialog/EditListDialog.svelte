@@ -31,7 +31,7 @@
 	import { ListColor, ListIcon } from '$lib/type';
 	import type { TaskList } from '$lib/type';
 
-	import { actions, header, listIcon } from './EditListDialog.css';
+	import { actions, header, icon } from './base.css';
 	import { iconFromListIcon } from '$lib/util';
 
 	export let taskList: TaskList | null = null;
@@ -92,7 +92,7 @@
 			<Card>
 				<svelte:fragment slot="content">
 					<h1 class={header}>
-						<Icon className={listIcon}>{iconFromListIcon(taskList.icon)}</Icon>
+						<Icon className={icon}>{iconFromListIcon(taskList.icon)}</Icon>
 						{#if mode === 'create'}
 							New list
 						{:else}

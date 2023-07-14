@@ -73,6 +73,17 @@ export const icon = style({
 	}
 });
 
+export const description = style({
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			color: themeContract.colorSchemes.light.onBackground
+		},
+		'(prefers-color-scheme: dark)': {
+			color: themeContract.colorSchemes.dark.onBackground
+		}
+	}
+});
+
 export const profileButton = style({
 	backgroundColor: 'inherit',
 	border: 'none',

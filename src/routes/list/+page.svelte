@@ -35,6 +35,7 @@
 		ButtonStyle,
 		Card,
 		CenterLayout,
+		DeleteTaskDialog,
 		EditListDialog,
 		EditTaskDialog,
 		Icon,
@@ -54,7 +55,17 @@
 		sortTasks
 	} from '$lib/util';
 
-	import { tasksContainer, listPage, placeholder, sort, divider, tasksGroup } from './styles.css';
+	import {
+		tasksContainer,
+		listPage,
+		sort,
+		divider,
+		tasksGroup,
+		paneLayout,
+		completedTasks,
+		dividerPlaceholder
+	} from './styles.css';
+
 	import { navHeader } from '../styles.css';
 
 	const listId: string = $page.url.searchParams.get('id') ?? '';
@@ -110,6 +121,8 @@
 
 	let taskToCreate: Task | null = null;
 	let taskToEdit: Task | null = null;
+
+	let taskToDelete: Task | null = null;
 
 	function showCreate() {
 		taskToCreate = {
@@ -183,48 +196,77 @@
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
 	<main class="{themeFromListColor(taskList.color)} {listPage}">
-		<div>
-			<ListHeader
-				{taskList}
-				onEditClicked={() => (listToEdit = clone(taskList))}
-				onCreateClicked={showCreate}
-			/>
-			{#if $tasks.status === 'loading'}
-				<progress />
-			{:else if $tasks.status === 'error'}
-				<span>Error: {$tasks.error.message}</span>
-			{:else}
+		<DeleteTaskDialog bind:task={taskToDelete} />
+
+		<ListHeader
+			{taskList}
+			onEditClicked={() => (listToEdit = clone(taskList))}
+			onCreateClicked={showCreate}
+		/>
+		{#if $tasks.status === 'loading'}
+			<progress />
+		{:else if $tasks.status === 'error'}
+			<span>Error: {$tasks.error.message}</span>
+		{:else}
+			<div class={paneLayout}>
 				<section class={tasksContainer}>
 					{#if $tasks.data.current.length > 0}
 						<ul class={tasksGroup}>
-							{#each $tasks.data.current as task (task.id)}
-								<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
+							{#each $tasks.data.current as task, index (task.id)}
+								{#if taskList.showIndexNumbers}
+									<TaskItem
+										{task}
+										indexNumber={index + 1}
+										showPersistentActions={true}
+										onEditClicked={() => (taskToEdit = clone(task))}
+										onDeleteClicked={() => (taskToDelete = clone(task))}
+									/>
+								{:else}
+									<TaskItem
+										{task}
+										showPersistentActions={true}
+										onEditClicked={() => (taskToEdit = clone(task))}
+										onDeleteClicked={() => (taskToDelete = clone(task))}
+									/>
+								{/if}
 							{/each}
 						</ul>
-					{/if}
-					{#if $tasks.data.completed.length > 0}
-						{#if showCompletedTasks}
-							<button class={divider} on:click={() => (showCompletedTasks = false)}>
-								<span>Completed ({$tasks.data.completed.length})</span>
-								<Icon>expand_less</Icon>
-							</button>
-							<ul class={tasksGroup}>
-								{#each $tasks.data.completed as task (task.id)}
-									<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
-								{/each}
-							</ul>
-						{:else}
-							<button class={divider} on:click={() => (showCompletedTasks = true)}>
-								<span>Completed ({$tasks.data.completed.length})</span>
-								<Icon>expand_more</Icon>
-							</button>
-						{/if}
+					{:else}
+						<p class={dividerPlaceholder}>
+							<span>All tasks complete!</span>
+						</p>
 					{/if}
 				</section>
-			{/if}
-		</div>
-		{#if $tasks.status === 'success' && $tasks.data.current.length === 0 && $tasks.data.completed.length === 0}
-			<p class={placeholder}>All tasks complete!</p>
+				<div class={completedTasks}>
+					{#if $tasks.data.completed.length === 0}
+						<p class={dividerPlaceholder}>
+							<span>No completed tasks</span>
+						</p>
+					{:else if showCompletedTasks}
+						<button class={divider} on:click={() => (showCompletedTasks = false)}>
+							<span>Completed ({$tasks.data.completed.length})</span>
+							<Icon>expand_less</Icon>
+						</button>
+						<section class={tasksContainer}>
+							<ul class={tasksGroup}>
+								{#each $tasks.data.completed as task (task.id)}
+									<TaskItem
+										{task}
+										showPersistentActions={true}
+										onEditClicked={() => (taskToEdit = clone(task))}
+										onDeleteClicked={() => (taskToDelete = clone(task))}
+									/>
+								{/each}
+							</ul>
+						</section>
+					{:else}
+						<button class={divider} on:click={() => (showCompletedTasks = true)}>
+							<span>Completed ({$tasks.data.completed.length})</span>
+							<Icon>expand_more</Icon>
+						</button>
+					{/if}
+				</div>
+			</div>
 		{/if}
 		<div class={sort}>
 			<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>

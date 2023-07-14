@@ -27,21 +27,27 @@
 
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
+	import type { Task } from '$lib/type';
 
 	import { actions, header, icon } from './base.css';
 
-	export let listId: string | null = null;
+	export let task: Task | null = null;
 
 	function cancel() {
-		listId = null;
+		task = null;
 	}
 
 	const queryClient = useQueryClient();
 
-	const clearList = createMutation<string, Error, string>({
-		mutationFn: async (listId: string) => {
-			await api().clearCompletedTasks(listId);
-			return listId;
+	interface DeleteTaskArgs {
+		listId: string;
+		taskId: string;
+	}
+
+	const deleteTask = createMutation<string, Error, DeleteTaskArgs>({
+		mutationFn: async (args: DeleteTaskArgs) => {
+			await api().deleteTask(args.listId, args.taskId);
+			return args.listId;
 		},
 		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries(['tasks', { listId: listId }]);
@@ -49,48 +55,51 @@
 	});
 
 	async function confirm() {
-		if (listId) {
-			$clearList.mutate(listId);
+		if (task) {
+			$deleteTask.mutate({
+				listId: task.listId,
+				taskId: task.id
+			});
 
-			listId = null;
+			task = null;
 		}
 	}
 </script>
 
-{#if $clearList.error}
-	<Dialog dismiss={$clearList.reset}>
+{#if $deleteTask.error}
+	<Dialog dismiss={$deleteTask.reset}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
-				<p>{$clearList.error.message}</p>
+				<p>{$deleteTask.error.message}</p>
 			</svelte:fragment>
 			<svelte:fragment slot="actions">
 				<span />
-				<Button style={ButtonStyle.Text} onClick={$clearList.reset}>OK</Button>
+				<Button style={ButtonStyle.Text} onClick={$deleteTask.reset}>OK</Button>
 			</svelte:fragment>
 		</Card>
 	</Dialog>
 {/if}
 
-{#if listId}
+{#if task}
 	<Dialog dismiss={cancel}>
 		<form on:submit|preventDefault={confirm}>
 			<Card>
 				<svelte:fragment slot="content">
 					<h1 class={header}>
-						<Icon className={icon}>check_circle</Icon>
-						Delete all completed tasks?
+						<Icon className={icon}>delete</Icon>
+						Delete task?
 					</h1>
-					<p>Completed tasks will be permanently deleted from this list</p>
-					{#if $clearList.isLoading}
+					<p>This task will be permanently deleted</p>
+					{#if $deleteTask.isLoading}
 						<progress />
 					{/if}
 				</svelte:fragment>
 				<div slot="actions" class={actions}>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$clearList.isLoading}>
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$deleteTask.isLoading}>
 						Cancel
 					</Button>
-					<Button style={ButtonStyle.Tonal} type="submit" disabled={$clearList.isLoading}>
+					<Button style={ButtonStyle.Tonal} type="submit" disabled={$deleteTask.isLoading}>
 						Delete
 					</Button>
 				</div>

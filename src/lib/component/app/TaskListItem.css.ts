@@ -74,7 +74,8 @@ export const title = style({
 
 export const description = style({
 	overflowWrap: 'anywhere',
-	whiteSpace: 'pre-wrap'
+	whiteSpace: 'pre-wrap',
+	marginBottom: 8
 });
 
 export const progress = style({

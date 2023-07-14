@@ -132,6 +132,10 @@ export const api = () => ({
 		const response = await apiClient.put(`/lists/${task.listId}/tasks/${task.id}`, task);
 		return response.status == HttpStatusCode.Ok;
 	},
+	deleteTask: async (listId: string, taskId: string) => {
+		const response = await apiClient.delete(`/lists/${listId}/tasks/${taskId}`);
+		return response.status == HttpStatusCode.Accepted;
+	},
 	moveTask: async (oldListId: string, newListId: string, taskId: string, lastModified: Date) => {
 		const response = await apiClient.post(`/lists/${oldListId}/tasks/${taskId}/move`, {
 			newListId: newListId,
@@ -139,6 +143,7 @@ export const api = () => ({
 		});
 		return response.status == HttpStatusCode.Ok;
 	},
+	// reorder?
 	clearCompletedTasks: async (listId: string) => {
 		const response = await apiClient.post(`/lists/${listId}/tasks/clear`);
 		return response.status == HttpStatusCode.Ok;

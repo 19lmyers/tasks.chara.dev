@@ -32,7 +32,7 @@
 	import type { TaskList } from '$lib/type';
 	import { iconFromSortType, labelFromSortType } from '$lib/util';
 
-	import { header, listIcon } from './SortModeDialog.css';
+	import { header, icon } from './base.css';
 
 	const queryClient = useQueryClient();
 
@@ -82,7 +82,7 @@
 			<svelte:fragment slot="content">
 				<h1 class={header}>
 					<Button style={ButtonStyle.Icon} onClick={() => (taskList = null)}>
-						<Icon className={listIcon}>close</Icon>
+						<Icon className={icon}>close</Icon>
 					</Button>
 					Sort by
 				</h1>

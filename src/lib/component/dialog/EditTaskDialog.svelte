@@ -31,11 +31,11 @@
 	dayjs.extend(utc);
 
 	import { api } from '$lib/api';
-	import { Button, ButtonStyle, Card, Dialog } from '$lib/component';
+	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 	import { themeFromListColor } from '$lib/theme';
 	import type { Task, TaskList } from '$lib/type';
 
-	import { actions, header } from './base.css';
+	import { actions, header, icon } from './base.css';
 
 	export let task: Task | null;
 
@@ -146,8 +146,10 @@
 				<svelte:fragment slot="content">
 					<h1 class={header}>
 						{#if mode === 'create'}
+							<Icon className={icon}>add</Icon>
 							New task
 						{:else}
+							<Icon className={icon}>edit</Icon>
 							Edit task
 						{/if}
 					</h1>

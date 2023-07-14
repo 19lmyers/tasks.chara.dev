@@ -39,6 +39,7 @@
 		EditTaskDialog,
 		Icon,
 		ListHeader,
+		PageTitle,
 		SortModeDialog,
 		TaskItem
 	} from '$lib/component';
@@ -55,7 +56,6 @@
 
 	import { tasksContainer, listPage, placeholder, sort, divider, tasksGroup } from './styles.css';
 	import { navHeader } from '../styles.css';
-	import PageTitle from '$lib/component/base/PageTitle.svelte';
 
 	const listId: string = $page.url.searchParams.get('id') ?? '';
 

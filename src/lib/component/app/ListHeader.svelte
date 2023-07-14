@@ -40,20 +40,25 @@
 		profileButton,
 		profilePhoto
 	} from './ListHeader.css';
+	import DeleteListDialog from '$lib/component/dialog/DeleteListDialog.svelte';
+	import DeleteCompletedTasksDialog from '$lib/component/dialog/DeleteCompletedTasksDialog.svelte';
 
 	export let taskList: TaskList;
 
 	export let onEditClicked: (() => void) | null = null;
 	export let onCreateClicked: (() => void) | null = null;
 
-	export let onDeleteCompletedTasksClicked: (() => void) | null = null;
-	export let onDeleteListClicked: (() => void) | null = null;
-
 	function logout() {
 		profile.set(null);
 		auth.set(null);
 	}
+
+	let idToClear: string | null = null;
+	let idToDelete: string | null = null;
 </script>
+
+<DeleteCompletedTasksDialog bind:listId={idToClear} />
+<DeleteListDialog bind:listId={idToDelete} />
 
 <header class={header}>
 	<div class="{headerFlex} {headerFill} {headerWrap}">
@@ -77,11 +82,11 @@
 				</Button>
 			</div>
 			<div class={headerFlex}>
-				<Button style={ButtonStyle.Tonal} onClick={onDeleteCompletedTasksClicked}>
+				<Button style={ButtonStyle.Tonal} onClick={() => (idToClear = taskList.id)}>
 					<Icon>check_circle</Icon>
 					Delete completed tasks
 				</Button>
-				<Button style={ButtonStyle.Tonal} onClick={onDeleteListClicked}>
+				<Button style={ButtonStyle.Tonal} onClick={() => (idToDelete = taskList.id)}>
 					<Icon>delete</Icon>
 					Delete list
 				</Button>

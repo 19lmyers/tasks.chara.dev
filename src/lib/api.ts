@@ -115,7 +115,10 @@ export const api = () => ({
 		const response = await apiClient.put(`/lists/${taskList.id}`, taskList);
 		return response.status == HttpStatusCode.Ok;
 	},
-	// TODO delete list
+	deleteList: async (listId: string) => {
+		const response = await apiClient.delete(`/lists/${listId}`);
+		return response.status == HttpStatusCode.Accepted;
+	},
 
 	getTasks: async (listId: string) => {
 		const response = await apiClient.get(`/lists/${listId}/tasks`);
@@ -134,6 +137,10 @@ export const api = () => ({
 			newListId: newListId,
 			lastModified: lastModified
 		});
+		return response.status == HttpStatusCode.Ok;
+	},
+	clearCompletedTasks: async (listId: string) => {
+		const response = await apiClient.post(`/lists/${listId}/tasks/clear`);
 		return response.status == HttpStatusCode.Ok;
 	}
 });

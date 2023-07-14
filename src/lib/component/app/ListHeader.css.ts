@@ -29,7 +29,7 @@ export const header = style({
 	padding: 16,
 	display: 'flex',
 	justifyContent: 'space-between',
-	alignItems: 'center',
+	gap: 8,
 	position: 'sticky',
 	top: 0,
 	zIndex: 100,
@@ -43,15 +43,26 @@ export const header = style({
 	}
 });
 
-export const headerRight = style({
+export const headerFlex = style({
 	display: 'flex',
-	height: '100%',
-	justifyContent: 'flex-end',
-	gap: 8,
-	alignItems: 'center'
+	alignItems: 'center',
+	gap: 8
+});
+
+export const headerRight = style({
+	justifyContent: 'flex-end'
+});
+
+export const headerWrap = style({
+	flexWrap: 'wrap'
+});
+
+export const headerFill = style({
+	flexGrow: 1
 });
 
 export const icon = style({
+	display: 'flex',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			color: themeContract.colorSchemes.light.primary

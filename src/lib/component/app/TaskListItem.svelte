@@ -32,7 +32,6 @@
 		ButtonStyle,
 		Card,
 		Dialog,
-		EditListDialog,
 		EditTaskDialog,
 		Icon,
 		SortModeDialog,
@@ -53,30 +52,26 @@
 	import {
 		bullet,
 		header,
-		divider,
 		taskListItem,
 		progress,
 		description,
 		sort,
-		title
+		title,
+		headerText,
+		placeholder,
+		divider
 	} from './TaskListItem.css';
 
 	export let taskList: TaskList;
 
 	const queryClient = useQueryClient();
 
-	let showCompletedTasks = false;
-
-	function toggleShowCompleted() {
-		showCompletedTasks = !showCompletedTasks;
-	}
-
 	interface TasksResult {
 		current: Task[];
 		completed: Task[];
 	}
 
-	const tasks = createQuery<TasksResult, Error>({
+	const tasks = createQuery<TasksResult, Error, TasksResult>({
 		queryKey: ['tasks', { listId: taskList.id }],
 		queryFn: async () => {
 			const tasks = await api().getTasks(taskList.id);
@@ -94,17 +89,6 @@
 			};
 		}
 	});
-
-	async function toggleSortDirection() {
-		if (taskList.sortDirection != SortDirection.DESCENDING) {
-			taskList.sortDirection = SortDirection.DESCENDING;
-		} else {
-			taskList.sortDirection = SortDirection.ASCENDING;
-		}
-		taskList.lastModified = new Date();
-
-		$updateList.mutate(taskList);
-	}
 
 	const updateList = createMutation<string, Error, TaskList>({
 		mutationFn: async (taskList: TaskList) => {
@@ -124,7 +108,18 @@
 		}
 	});
 
-	let listToEdit: TaskList | null = null;
+	async function toggleSortDirection() {
+		if (taskList.sortDirection != SortDirection.DESCENDING) {
+			taskList.sortDirection = SortDirection.DESCENDING;
+		} else {
+			taskList.sortDirection = SortDirection.ASCENDING;
+		}
+		taskList.lastModified = new Date();
+
+		$updateList.mutate(taskList);
+		await $tasks.refetch({ throwOnError: true });
+	}
+
 	let listToSort: TaskList | null = null;
 
 	let taskToCreate: Task | null = null;
@@ -144,7 +139,6 @@
 	}
 </script>
 
-<EditListDialog bind:taskList={listToEdit} />
 <SortModeDialog bind:taskList={listToSort} />
 
 <EditTaskDialog mode="create" bind:task={taskToCreate} />
@@ -166,61 +160,57 @@
 {/if}
 
 <section class="{taskListItem} {themeFromListColor(taskList.color)}">
-	<div class={header}>
-		<Button style={ButtonStyle.Icon} onClick={() => (listToEdit = clone(taskList))}>
-			<Icon>{iconFromListIcon(taskList.icon)}</Icon>
-		</Button>
-		<div>
-			<h2 class={title}>{taskList.title}</h2>
-			{#if taskList.description}
-				<p class={description}>{taskList.description}</p>
-			{/if}
+	<div>
+		<div class={header}>
+			<Button style={ButtonStyle.Icon} href="/list?id={taskList.id}">
+				<Icon>{iconFromListIcon(taskList.icon)}</Icon>
+			</Button>
+			<div class={headerText}>
+				<h2 class={title}>{taskList.title}</h2>
+				{#if taskList.description}
+					<p class={description}>{taskList.description}</p>
+				{/if}
+			</div>
+			<Button style={ButtonStyle.Icon} onClick={showCreate}>
+				<Icon>add</Icon>
+			</Button>
 		</div>
-		<Button style={ButtonStyle.Icon} onClick={showCreate}>
-			<Icon>add</Icon>
-		</Button>
-	</div>
-	{#if $tasks.status === 'loading'}
-		<progress class={progress} />
-	{:else if $tasks.status === 'error'}
-		<span>Error: {$tasks.error.message}</span>
-	{:else}
-		<ul class={bullet}>
-			{#each $tasks.data.current as task (task.id)}
-				<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
-			{/each}
-			{#if $tasks.data.completed.length > 0}
-				{#if showCompletedTasks}
-					<button class={divider} on:click={toggleShowCompleted}>
-						<span>Completed ({$tasks.data.completed.length})</span>
-						<Icon>expand_less</Icon>
-					</button>
-					{#each $tasks.data.completed as task (task.id)}
+		{#if $tasks.status === 'loading'}
+			<progress class={progress} />
+		{:else if $tasks.status === 'error'}
+			<span>Error: {$tasks.error.message}</span>
+		{:else}
+			{#if $tasks.data.current.length > 0}
+				<ul class={bullet}>
+					{#each $tasks.data.current as task (task.id)}
 						<TaskItem {task} onEditClicked={() => (taskToEdit = clone(task))} />
 					{/each}
-				{:else}
-					<button class={divider} on:click={toggleShowCompleted}>
-						<span>Completed ({$tasks.data.completed.length})</span>
-						<Icon>expand_more</Icon>
-					</button>
-				{/if}
+				</ul>
+			{:else}
+				<p class={placeholder}>All tasks complete!</p>
 			{/if}
-		</ul>
-		<div class={sort}>
-			<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
-				<Icon>{iconFromSortType(taskList.sortType)}</Icon>
-				{labelFromSortType(taskList.sortType)}
+			{#if $tasks.data.completed.length > 0}
+				<a class={divider} href="/list?id={taskList.id}">
+					<span>Completed ({$tasks.data.completed.length})</span>
+					<Icon>open_in_new</Icon>
+				</a>
+			{/if}
+		{/if}
+	</div>
+	<div class={sort}>
+		<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
+			<Icon>{iconFromSortType(taskList.sortType)}</Icon>
+			{labelFromSortType(taskList.sortType)}
+		</Button>
+		{#if taskList.sortType !== SortType.ORDINAL}
+			<Button
+				style={ButtonStyle.Text}
+				onClick={toggleSortDirection}
+				disabled={$updateList.isLoading}
+			>
+				<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
+				{labelFromSortDirection(taskList.sortDirection)}
 			</Button>
-			{#if taskList.sortType !== SortType.ORDINAL}
-				<Button
-					style={ButtonStyle.Text}
-					onClick={toggleSortDirection}
-					disabled={$updateList.isLoading}
-				>
-					<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
-					{labelFromSortDirection(taskList.sortDirection)}
-				</Button>
-			{/if}
-		</div>
-	{/if}
+		{/if}
+	</div>
 </section>

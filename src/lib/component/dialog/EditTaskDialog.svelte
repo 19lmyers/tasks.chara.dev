@@ -43,12 +43,25 @@
 
 	export let mode: 'create' | 'edit' = 'edit';
 
-	const taskLists = createQuery<TaskList[], Error>({
+	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
 		queryFn: async () => api().getLists()
 	});
 
-	$: taskList = ($taskLists.data as TaskList[]).find((list) => list.id === task?.listId);
+	let currentListId = '';
+
+	const currentList = createQuery<TaskList, Error, TaskList>({
+		queryKey: ['lists', { listId: currentListId }],
+		queryFn: async () => api().getList(currentListId),
+		enabled: false
+	});
+
+	$: {
+		if (task) {
+			currentListId = task.listId;
+			$currentList.refetch({ throwOnError: true });
+		}
+	}
 
 	function cancel() {
 		task = null;
@@ -126,8 +139,8 @@
 	</Dialog>
 {/if}
 
-{#if task}
-	<Dialog className={themeFromListColor(taskList?.color)} dismiss={cancel}>
+{#if task && $currentList.isSuccess}
+	<Dialog className={themeFromListColor($currentList.data.color)} dismiss={cancel}>
 		<form on:submit|preventDefault={save}>
 			<Card>
 				<svelte:fragment slot="content">

@@ -36,6 +36,7 @@ export { default as Icon } from './base/Icon.svelte';
 export { default as CenterLayout } from './layout/CenterLayout.svelte';
 
 // App
+export { default as ListHeader } from './app/ListHeader.svelte';
 export { default as MobileBanner } from './app/MobileBanner.svelte';
 export { default as ProfileItem } from './app/ProfileItem.svelte';
 export { default as SiteHeader } from './app/SiteHeader.svelte';

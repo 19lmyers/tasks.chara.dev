@@ -32,7 +32,7 @@
 	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 	import { auth, isAuthenticated, profile } from '$lib/stores';
 
-	import { error, navHeader } from '$lib/styles.css';
+	import { error, navHeader } from '../styles.css';
 
 	let email: string | null = null;
 	let password: string | null = null;

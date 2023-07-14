@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
-	import { MasonryLayout } from 'svelte-masonry-layout';
 
 	import { api } from '$lib/api';
 	import {
@@ -17,10 +16,10 @@
 	import { isAuthenticated } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
-	import { error, main, navHeader } from '$lib/styles.css';
+	import { error, main, masonry, navHeader } from './styles.css';
 	import { SortDirection, SortType } from '$lib/type';
 
-	const taskLists = createQuery<TaskList[], Error>({
+	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
 		queryFn: async () => api().getLists()
 	});
@@ -56,11 +55,11 @@
 		{:else if $taskLists.status === 'error'}
 			<span>Error: {$taskLists.error.message}</span>
 		{:else}
-			<MasonryLayout items={$taskLists.data}>
+			<div class={masonry}>
 				{#each $taskLists.data as taskList (taskList.id)}
 					<TaskListItem {taskList} />
 				{/each}
-			</MasonryLayout>
+			</div>
 		{/if}
 	</main>
 {:else}

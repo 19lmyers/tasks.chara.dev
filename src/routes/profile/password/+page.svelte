@@ -33,7 +33,7 @@
 	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
 	import { isAuthenticated } from '$lib/stores';
 
-	import { error, navHeader } from '$lib/styles.css';
+	import { error, navHeader } from '../../styles.css';
 
 	let currentPassword = '';
 	let newPassword = '';

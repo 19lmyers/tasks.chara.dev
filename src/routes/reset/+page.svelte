@@ -34,7 +34,7 @@
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
 
-	import { error, navHeader } from '$lib/styles.css';
+	import { error, navHeader } from '../styles.css';
 	import { isAuthenticated } from '$lib/stores';
 
 	const resetToken = $page.url.searchParams.get('token');

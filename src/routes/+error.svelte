@@ -25,7 +25,7 @@
 <script lang="ts">
 	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 
-	import { navHeader } from '$lib/styles.css';
+	import { navHeader } from './styles.css';
 </script>
 
 <svelte:head>

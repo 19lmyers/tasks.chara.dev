@@ -4,7 +4,7 @@
 
 	import { baseTheme } from '$lib/theme';
 
-	import '$lib/styles.css';
+	import './styles.css';
 	export let data: PageData;
 </script>
 

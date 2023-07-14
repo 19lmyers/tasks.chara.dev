@@ -28,7 +28,7 @@
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 
-	import { error, navHeader } from '$lib/styles.css';
+	import { error, navHeader } from '../styles.css';
 	import { auth, isAuthenticated, profile } from '$lib/stores';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';

@@ -43,7 +43,7 @@
 	import { isAuthenticated, profile } from '$lib/stores';
 	import type { Profile } from '$lib/type';
 
-	import { error, navHeader } from '$lib/styles.css';
+	import { error, navHeader } from '../styles.css';
 
 	let profileToEdit: Profile | null = null;
 	profileToEdit = clone($profile);

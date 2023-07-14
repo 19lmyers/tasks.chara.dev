@@ -24,7 +24,7 @@
 
 import { globalStyle, style } from '@vanilla-extract/css';
 
-import { themeContract } from './theme';
+import { themeContract } from '$lib/theme';
 
 export const error = style({
 	'@media': {
@@ -50,6 +50,22 @@ export const navHeader = style({
 		},
 		'(prefers-color-scheme: dark)': {
 			color: themeContract.colorSchemes.dark.primary
+		}
+	}
+});
+
+export const masonry = style({
+	display: 'grid',
+	gap: '1rem',
+	'@media': {
+		'screen and (min-width: 640px)': {
+			gridTemplateColumns: 'repeat(2, 1fr)'
+		},
+		'screen and (min-width: 860px)': {
+			gridTemplateColumns: 'repeat(3, 1fr)'
+		},
+		'screen and (min-width: 1280px)': {
+			gridTemplateColumns: 'repeat(4, 1fr)'
 		}
 	}
 });
@@ -90,7 +106,12 @@ globalStyle('#base', {
 	fontFamily: themeContract.typography.body.family,
 	fontWeight: themeContract.typography.body.weight,
 	lineHeight: 1.5,
-	flexGrow: 1
+	flexGrow: 1,
+	display: 'flex',
+	flexFlow: 'column',
+	height: 'fit-content',
+	margin: 0,
+	padding: 0
 });
 
 globalStyle('::selection', {

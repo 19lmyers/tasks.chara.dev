@@ -22,84 +22,58 @@
  * SOFTWARE.
  */
 
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { themeContract } from '$lib/theme';
-import { icon } from '$lib/component/base/Icon.css';
 
-export const taskListItem = style({
+export const listPage = style({
 	display: 'flex',
 	flexDirection: 'column',
 	justifyContent: 'space-between',
-	width: '100%',
-	padding: 16,
-	borderRadius: '1.5em',
+	flexGrow: 1,
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
-			color: themeContract.colorSchemes.light.onSurface
+			backgroundColor: themeContract.colorSchemes.light.background,
+			color: themeContract.colorSchemes.light.onBackground
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
-			color: themeContract.colorSchemes.dark.onSurface
+			backgroundColor: themeContract.colorSchemes.dark.background,
+			color: themeContract.colorSchemes.dark.onBackground
 		}
 	}
 });
 
-export const header = style({
-	display: 'flex',
-	justifyContent: 'space-between',
-	alignItems: 'center',
-	textOverflow: 'ellipsis',
-	overflowWrap: 'anywhere'
+export const tasksContainer = style({
+	padding: 16
 });
 
-export const headerText = style({
-	flex: 1
-});
-
-export const title = style({
+export const tasksGroup = style({
+	display: 'grid',
+	gap: '0 0.5rem',
 	'@media': {
-		'(prefers-color-scheme: light)': {
-			color: themeContract.colorSchemes.light.primary
+		'screen and (min-width: 640px)': {
+			gridTemplateColumns: 'repeat(2, 1fr)'
 		},
-		'(prefers-color-scheme: dark)': {
-			color: themeContract.colorSchemes.dark.primary
+		'screen and (min-width: 860px)': {
+			gridTemplateColumns: 'repeat(3, 1fr)'
+		},
+		'screen and (min-width: 1280px)': {
+			gridTemplateColumns: 'repeat(4, 1fr)'
 		}
 	}
-});
-
-export const description = style({
-	overflowWrap: 'anywhere',
-	whiteSpace: 'pre-wrap'
-});
-
-export const progress = style({
-	width: '100%',
-	'@media': {
-		'(prefers-color-scheme: light)': {
-			accentColor: themeContract.colorSchemes.light.primary
-		},
-		'(prefers-color-scheme: dark)': {
-			accentColor: themeContract.colorSchemes.dark.primary
-		}
-	}
-});
-
-export const bullet = style({
-	listStyleType: 'none'
-});
-
-export const placeholder = style({
-	padding: 16,
-	textAlign: 'center'
 });
 
 export const divider = style({
 	appearance: 'none',
 	textDecoration: 'none',
 
+	border: 'unset',
+	background: 'inherit',
+	font: 'inherit',
+	cursor: 'pointer',
+	width: '100%',
+
 	padding: '12px',
-	borderRadius: '1.5em',
+	borderRadius: '2em',
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
@@ -120,11 +94,28 @@ export const divider = style({
 	}
 });
 
-export const sort = style({
-	display: 'flex',
-	justifyContent: 'space-between'
+export const placeholder = style({
+	textAlign: 'center'
 });
 
-globalStyle(`${divider} ${icon}`, {
-	padding: 0
+export const sort = style({
+	padding: 16,
+	display: 'flex',
+	justifyContent: 'space-between',
+	position: 'sticky',
+	bottom: 0,
+	zIndex: 100,
+	'@media': {
+		'(min-width: 640px)': {
+			justifyContent: 'flex-start'
+		},
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
+			color: themeContract.colorSchemes.light.onSurface
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
+			color: themeContract.colorSchemes.dark.onSurface
+		}
+	}
 });

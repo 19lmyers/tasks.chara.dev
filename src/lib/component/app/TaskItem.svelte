@@ -37,13 +37,12 @@
 
 	const queryClient = useQueryClient();
 
-	const updateTask = createMutation<string, Error, Task>({
+	const updateTask = createMutation<undefined, Error, Task>({
 		mutationFn: async (task: Task) => {
 			await api().updateTask(task);
-			return task.listId;
 		},
-		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['tasks', { listId: listId }]);
+		onSuccess: () => {
+			queryClient.invalidateQueries(['tasks']);
 		}
 	});
 </script>

@@ -27,7 +27,7 @@
 	import { mobileBannerDismissed } from '$lib/stores';
 
 	import { aside, buttons, buttonsRight, description, title } from './MobileBanner.css';
-	import { error } from '$lib/styles.css';
+	import { error } from '../../../routes/styles.css';
 </script>
 
 {#if !$mobileBannerDismissed}

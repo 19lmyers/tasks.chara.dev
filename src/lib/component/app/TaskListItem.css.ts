@@ -58,6 +58,10 @@ export const headerText = style({
 });
 
 export const title = style({
+	textDecoration: 'none',
+	':hover': {
+		textDecoration: 'underline'
+	},
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			color: themeContract.colorSchemes.light.primary

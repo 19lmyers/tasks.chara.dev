@@ -166,7 +166,7 @@
 				<Icon>{iconFromListIcon(taskList.icon)}</Icon>
 			</Button>
 			<div class={headerText}>
-				<h2 class={title}>{taskList.title}</h2>
+				<h2><a class={title} href="/list?id={taskList.id}">{taskList.title}</a></h2>
 				{#if taskList.description}
 					<p class={description}>{taskList.description}</p>
 				{/if}

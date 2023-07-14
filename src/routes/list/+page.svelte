@@ -22,7 +22,8 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
+<script lang='ts'>
+	import { error } from '@sveltejs/kit';
 	import { page } from '$app/stores';
 
 	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
@@ -31,7 +32,7 @@
 	import { api } from '$lib/api';
 	import {
 		Button,
-		ButtonStyle,
+		ButtonStyle, Card, CenterLayout,
 		EditListDialog,
 		EditTaskDialog,
 		Icon,
@@ -51,6 +52,8 @@
 	} from '$lib/util';
 
 	import { tasksContainer, listPage, placeholder, sort, divider, tasksGroup } from './styles.css';
+	import { navHeader } from '../styles.css';
+	import PageTitle from '$lib/component/base/PageTitle.svelte';
 
 	const listId: string = $page.url.searchParams.get('id') ?? '';
 
@@ -59,8 +62,12 @@
 	const taskListQuery = createQuery<TaskList, Error, TaskList>({
 		queryKey: ['lists', { listId: listId }],
 		queryFn: async () => {
-			return await api().getList(listId);
-		}
+			return await api().getList(listId)
+				.catch(() => {
+					throw error(404, { message: 'No list with ID' });
+				});
+		},
+		retry: false
 	});
 
 	let taskList: TaskList;
@@ -150,15 +157,30 @@
 {#if $taskListQuery.status === 'loading'}
 	<progress />
 {:else if $taskListQuery.status === 'error'}
-	<span>Error: {$taskListQuery.error.message}</span>
+	<PageTitle title='Not Found' />
+	<CenterLayout>
+		<Card>
+			<svelte:fragment slot="content">
+				<h1 class={navHeader}>
+					<Button onClick={() => history.back()} style={ButtonStyle.Icon}>
+						<Icon>arrow_back</Icon>
+					</Button>
+					<span>Not Found</span>
+				</h1>
+				<p>No list could be found with that ID.</p>
+			</svelte:fragment>
+		</Card>
+	</CenterLayout>
 {:else}
+	<PageTitle title={taskList.title} />
+
 	<EditListDialog bind:taskList={listToEdit} />
 	<SortModeDialog bind:taskList={listToSort} />
 
-	<EditTaskDialog mode="create" bind:task={taskToCreate} />
+	<EditTaskDialog mode='create' bind:task={taskToCreate} />
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
-	<main class="{themeFromListColor(taskList.color)} {listPage}">
+	<main class='{themeFromListColor(taskList.color)} {listPage}'>
 		<div>
 			<ListHeader
 				{taskList}

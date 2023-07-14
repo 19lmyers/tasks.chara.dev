@@ -31,6 +31,7 @@ export { default as Card } from './base/Card.svelte';
 export { default as Dialog } from './base/Dialog.svelte';
 export { default as Dropdown } from './base/Dropdown.svelte';
 export { default as Icon } from './base/Icon.svelte';
+export { default as PageTitle } from './base/PageTitle.svelte';
 
 // Layout
 export { default as CenterLayout } from './layout/CenterLayout.svelte';

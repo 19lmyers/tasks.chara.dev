@@ -69,8 +69,7 @@
 				.catch(() => {
 					throw error(404, { message: 'No list with ID' });
 				});
-		},
-		retry: false
+		}
 	});
 
 	let taskList: TaskList;

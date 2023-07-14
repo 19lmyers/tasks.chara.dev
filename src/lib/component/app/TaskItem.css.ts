@@ -28,6 +28,7 @@ import { themeContract } from '$lib/theme';
 
 export const taskItem = style({
 	display: 'flex',
+	flexDirection: 'column',
 	borderRadius: '1.5rem',
 	marginTop: '4px',
 	marginBottom: '4px',
@@ -42,6 +43,10 @@ export const taskItem = style({
 			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}
+});
+
+export const taskContents = style({
+	display: 'flex'
 });
 
 export const checkbox = style({
@@ -73,7 +78,14 @@ export const spacer = style({
 
 export const details = style({
 	fontSize: '0.8rem',
-	opacity: '85%'
+	opacity: '85%',
+	whiteSpace: 'pre-wrap',
+	height: '2.4rem',
+	textOverflow: 'ellipsis',
+	overflow: 'hidden',
+	display: '-webkit-inline-box',
+	WebkitLineClamp: 2,
+	WebkitBoxOrient: 'vertical'
 });
 
 export const edit = style({
@@ -82,4 +94,22 @@ export const edit = style({
 
 globalStyle(`${taskItem}:hover ${edit}`, {
 	display: 'block'
+});
+
+export const chips = style({
+	display: 'flex',
+	flexWrap: 'wrap'
+});
+
+export const chip = style({
+	borderRadius: '0.75rem',
+	border: `1px solid ${themeContract.colorSchemes.dark.outline}`,
+	fontSize: '0.75rem',
+	width: 'fit-content',
+	display: 'flex',
+	alignItems: 'center',
+	alignContent: 'space-between',
+	paddingRight: 12,
+	marginTop: 4,
+	marginBottom: 4
 });

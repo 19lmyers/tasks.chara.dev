@@ -165,6 +165,10 @@
 						/>
 					</label>
 					<label>
+						Details
+						<textarea name="details" bind:value={task.details} disabled={$updateTask.isLoading} />
+					</label>
+					<label>
 						List
 						<select name="taskList" bind:value={task.listId}>
 							{#if $taskLists.isSuccess}

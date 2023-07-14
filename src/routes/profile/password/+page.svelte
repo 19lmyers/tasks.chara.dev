@@ -75,7 +75,7 @@
 </script>
 
 <svelte:head>
-	<title>Change Password</title>
+	<title>Change password</title>
 </svelte:head>
 
 {#if isSuccess}

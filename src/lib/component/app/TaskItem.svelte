@@ -24,12 +24,25 @@
 <script lang="ts">
 	import { clone } from 'lodash';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
+	import dayjs from 'dayjs';
 
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, Dialog, Icon, IconStyle } from '$lib/component';
 	import type { Task } from '$lib/type';
 
-	import { checkbox, details, edit, label, spacer, taskItem, text } from './TaskItem.css';
+	import {
+		checkbox,
+		chip,
+		chips,
+		details,
+		edit,
+		label,
+		spacer,
+		taskContents,
+		taskItem,
+		text
+	} from './TaskItem.css';
+	import { error } from '../../../routes/styles.css';
 
 	export let task: Task;
 
@@ -45,6 +58,9 @@
 			queryClient.invalidateQueries(['tasks']);
 		}
 	});
+
+	$: isReminderDatePassed = dayjs(task.reminderDate ?? dayjs()).isBefore(dayjs());
+	$: isDueDatePassed = dayjs(task.dueDate ?? dayjs()).isBefore(dayjs().startOf('day'));
 </script>
 
 {#if $updateTask.error}
@@ -63,46 +79,76 @@
 {/if}
 
 <li class={taskItem}>
-	<input
-		class={checkbox}
-		type="checkbox"
-		checked={task.isCompleted}
-		on:click={(e) => {
-			let editedTask = clone(task);
-			editedTask.isCompleted = !editedTask.isCompleted;
-			editedTask.lastModified = new Date();
+	<div class={taskContents}>
+		<input
+			class={checkbox}
+			type="checkbox"
+			checked={task.isCompleted}
+			on:click={(e) => {
+				let editedTask = clone(task);
+				editedTask.isCompleted = !editedTask.isCompleted;
+				editedTask.lastModified = new Date();
 
-			$updateTask.mutate(editedTask);
+				$updateTask.mutate(editedTask);
 
-			e.preventDefault();
-		}}
-	/>
-	<div class={text}>
-		<p class={label}>{task.label}</p>
-		{#if task.details}
-			<p class={details}>{task.details}</p>
+				e.preventDefault();
+			}}
+		/>
+		<div class={text}>
+			<p class={label}>{task.label}</p>
+			{#if task.details}
+				<p class={details}>{task.details}</p>
+			{/if}
+		</div>
+		<span class={spacer} />
+		<span class={edit}>
+			<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
+				<Icon>edit</Icon>
+			</Button>
+		</span>
+		<Button
+			style={ButtonStyle.Icon}
+			onClick={() => {
+				let editedTask = clone(task);
+				editedTask.isStarred = !editedTask.isStarred;
+				editedTask.lastModified = new Date();
+
+				$updateTask.mutate(editedTask);
+			}}
+		>
+			{#if task.isStarred}
+				<Icon>star</Icon>
+			{:else}
+				<Icon style={IconStyle.Outlined}>star</Icon>
+			{/if}
+		</Button>
+	</div>
+	<div class={chips}>
+		{#if task.reminderDate}
+			{#if isReminderDatePassed}
+				<p class="{chip} {error}">
+					<Icon>notifications</Icon>
+					{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
+				</p>
+			{:else}
+				<p class={chip}>
+					<Icon>notifications</Icon>
+					{dayjs(task.reminderDate).format('ddd, MMM DD, YYYY, h:mm A')}
+				</p>
+			{/if}
+		{/if}
+		{#if task.dueDate}
+			{#if isDueDatePassed}
+				<p class="{chip} {error}">
+					<Icon>event</Icon>
+					{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
+				</p>
+			{:else}
+				<p class={chip}>
+					<Icon>event</Icon>
+					{dayjs(task.dueDate).format('ddd, MMM DD, YYYY')}
+				</p>
+			{/if}
 		{/if}
 	</div>
-	<span class={spacer} />
-	<span class={edit}>
-		<Button style={ButtonStyle.Icon} onClick={onEditClicked}>
-			<Icon>edit</Icon>
-		</Button>
-	</span>
-	<Button
-		style={ButtonStyle.Icon}
-		onClick={() => {
-			let editedTask = clone(task);
-			editedTask.isStarred = !editedTask.isStarred;
-			editedTask.lastModified = new Date();
-
-			$updateTask.mutate(editedTask);
-		}}
-	>
-		{#if task.isStarred}
-			<Icon>star</Icon>
-		{:else}
-			<Icon style={IconStyle.Outlined}>star</Icon>
-		{/if}
-	</Button>
 </li>

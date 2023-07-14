@@ -1,3 +1,7 @@
+<script>
+	export let title = 'Tasks (chara.dev)';
+</script>
+
 <!--
   - MIT License
   -
@@ -25,7 +29,3 @@
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-
-<script>
-	export let title = "Tasks (chara.dev)"
-</script>

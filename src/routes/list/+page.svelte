@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { error } from '@sveltejs/kit';
 	import { page } from '$app/stores';
 
@@ -32,7 +32,9 @@
 	import { api } from '$lib/api';
 	import {
 		Button,
-		ButtonStyle, Card, CenterLayout,
+		ButtonStyle,
+		Card,
+		CenterLayout,
 		EditListDialog,
 		EditTaskDialog,
 		Icon,
@@ -62,7 +64,8 @@
 	const taskListQuery = createQuery<TaskList, Error, TaskList>({
 		queryKey: ['lists', { listId: listId }],
 		queryFn: async () => {
-			return await api().getList(listId)
+			return await api()
+				.getList(listId)
 				.catch(() => {
 					throw error(404, { message: 'No list with ID' });
 				});
@@ -157,7 +160,7 @@
 {#if $taskListQuery.status === 'loading'}
 	<progress />
 {:else if $taskListQuery.status === 'error'}
-	<PageTitle title='Not Found' />
+	<PageTitle title="Not Found" />
 	<CenterLayout>
 		<Card>
 			<svelte:fragment slot="content">
@@ -177,10 +180,10 @@
 	<EditListDialog bind:taskList={listToEdit} />
 	<SortModeDialog bind:taskList={listToSort} />
 
-	<EditTaskDialog mode='create' bind:task={taskToCreate} />
+	<EditTaskDialog mode="create" bind:task={taskToCreate} />
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
-	<main class='{themeFromListColor(taskList.color)} {listPage}'>
+	<main class="{themeFromListColor(taskList.color)} {listPage}">
 		<div>
 			<ListHeader
 				{taskList}

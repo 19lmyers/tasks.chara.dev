@@ -85,8 +85,6 @@ export const divider = style({
 	cursor: 'pointer',
 
 	padding: 12,
-	marginLeft: 12,
-	marginRight: 12,
 	borderRadius: '2em',
 	display: 'flex',
 	alignItems: 'center',

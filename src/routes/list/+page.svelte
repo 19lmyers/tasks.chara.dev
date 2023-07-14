@@ -247,18 +247,16 @@
 							<span>Completed ({$tasks.data.completed.length})</span>
 							<Icon>expand_less</Icon>
 						</button>
-						<section class={tasksContainer}>
-							<ul class={tasksGroup}>
-								{#each $tasks.data.completed as task (task.id)}
-									<TaskItem
-										{task}
-										showPersistentActions={true}
-										onEditClicked={() => (taskToEdit = clone(task))}
-										onDeleteClicked={() => (taskToDelete = clone(task))}
-									/>
-								{/each}
-							</ul>
-						</section>
+						<ul class={tasksGroup}>
+							{#each $tasks.data.completed as task (task.id)}
+								<TaskItem
+									{task}
+									showPersistentActions={true}
+									onEditClicked={() => (taskToEdit = clone(task))}
+									onDeleteClicked={() => (taskToDelete = clone(task))}
+								/>
+							{/each}
+						</ul>
 					{:else}
 						<button class={divider} on:click={() => (showCompletedTasks = true)}>
 							<span>Completed ({$tasks.data.completed.length})</span>

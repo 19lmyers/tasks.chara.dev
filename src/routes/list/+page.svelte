@@ -57,7 +57,6 @@
 
 	import {
 		tasksContainer,
-		listPage,
 		sort,
 		divider,
 		tasksGroup,
@@ -66,7 +65,8 @@
 		dividerPlaceholder
 	} from './styles.css';
 
-	import { navHeader } from '../styles.css';
+	import { navHeader, themeBox } from '../styles.css';
+	import { themeVariant } from '$lib/stores';
 
 	const listId: string = $page.url.searchParams.get('id') ?? '';
 
@@ -195,7 +195,7 @@
 	<EditTaskDialog mode="create" bind:task={taskToCreate} />
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
-	<main class="{themeFromListColor(taskList.color)} {listPage}">
+	<div style={themeFromListColor(taskList.color, $themeVariant)} class={themeBox}>
 		<DeleteTaskDialog bind:task={taskToDelete} />
 
 		<ListHeader
@@ -208,7 +208,7 @@
 		{:else if $tasks.status === 'error'}
 			<span>Error: {$tasks.error.message}</span>
 		{:else}
-			<div class={paneLayout}>
+			<main class={paneLayout}>
 				<section class={tasksContainer}>
 					{#if $tasks.data.current.length > 0}
 						<ul class={tasksGroup}>
@@ -264,7 +264,7 @@
 						</button>
 					{/if}
 				</div>
-			</div>
+			</main>
 		{/if}
 		<div class={sort}>
 			<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
@@ -282,5 +282,5 @@
 				</Button>
 			{/if}
 		</div>
-	</main>
+	</div>
 {/if}

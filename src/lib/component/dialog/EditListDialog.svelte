@@ -33,6 +33,7 @@
 
 	import { actions, header, icon } from './base.css';
 	import { iconFromListIcon } from '$lib/util';
+	import { themeVariant } from '$lib/stores';
 
 	export let taskList: TaskList | null = null;
 
@@ -87,7 +88,7 @@
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)} dismiss={cancel}>
+	<Dialog style={themeFromListColor(taskList.color, $themeVariant)} dismiss={cancel}>
 		<form on:submit|preventDefault={save}>
 			<Card>
 				<svelte:fragment slot="content">

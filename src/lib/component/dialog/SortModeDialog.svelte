@@ -33,6 +33,7 @@
 	import { iconFromSortType, labelFromSortType } from '$lib/util';
 
 	import { header, icon } from './base.css';
+	import { themeVariant } from '$lib/stores';
 
 	const queryClient = useQueryClient();
 
@@ -77,7 +78,10 @@
 {/if}
 
 {#if taskList}
-	<Dialog className={themeFromListColor(taskList.color)} dismiss={() => (taskList = null)}>
+	<Dialog
+		style={themeFromListColor(taskList.color, $themeVariant)}
+		dismiss={() => (taskList = null)}
+	>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1 class={header}>

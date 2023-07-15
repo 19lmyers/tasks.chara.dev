@@ -23,10 +23,13 @@
   -->
 
 <script lang="ts">
+	import { themeVariant } from '$lib/stores';
+	import { themeFromVariant } from '$lib/theme';
+
 	import { content, container } from './CenterLayout.css';
 </script>
 
-<main class={container}>
+<main class={container} style={themeFromVariant($themeVariant)}>
 	<div class={content}>
 		<slot />
 	</div>

@@ -13,11 +13,12 @@
 		SiteHeader,
 		TaskListItem
 	} from '$lib/component';
-	import { isAuthenticated } from '$lib/stores';
+	import { isAuthenticated, themeVariant } from '$lib/stores';
 	import type { TaskList } from '$lib/type';
 
-	import { error, main, masonry, navHeader } from './styles.css';
+	import { error, main, masonry, navHeader, themeBox } from './styles.css';
 	import { SortDirection, SortType } from '$lib/type';
+	import { themeFromVariant } from '$lib/theme';
 
 	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
@@ -45,23 +46,25 @@
 </svelte:head>
 
 {#if $isAuthenticated}
-	<EditListDialog mode="create" bind:taskList={listToCreate} />
+	<div class={themeBox} style={themeFromVariant($themeVariant)}>
+		<EditListDialog mode="create" bind:taskList={listToCreate} />
 
-	<SiteHeader onCreateClicked={showCreate} />
-	<MobileBanner />
-	<main class={main}>
-		{#if $taskLists.status === 'loading'}
-			<progress />
-		{:else if $taskLists.status === 'error'}
-			<span>Error: {$taskLists.error.message}</span>
-		{:else}
-			<div class={masonry}>
-				{#each $taskLists.data as taskList (taskList.id)}
-					<TaskListItem {taskList} />
-				{/each}
-			</div>
-		{/if}
-	</main>
+		<SiteHeader onCreateClicked={showCreate} />
+		<MobileBanner />
+		<main class={main}>
+			{#if $taskLists.status === 'loading'}
+				<progress />
+			{:else if $taskLists.status === 'error'}
+				<span>Error: {$taskLists.error.message}</span>
+			{:else}
+				<div class={masonry}>
+					{#each $taskLists.data as taskList (taskList.id)}
+						<TaskListItem {taskList} />
+					{/each}
+				</div>
+			{/if}
+		</main>
+	</div>
 {:else}
 	<CenterLayout>
 		<Card>

@@ -25,4 +25,5 @@
 export * from './Profile';
 export * from './TaskList';
 export * from './Task';
+export * from './ThemeVariant';
 export * from './TokenPair';

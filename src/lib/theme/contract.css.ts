@@ -62,7 +62,7 @@ const tokens = {
 			surfaceContainerHighest: '',
 			surfaceContainerLow: '',
 			surfaceContainerLowest: '',
-			surfaceTint: ''
+			surfaceDim: ''
 		},
 		dark: {
 			primary: '',
@@ -100,7 +100,7 @@ const tokens = {
 			surfaceContainerHighest: '',
 			surfaceContainerLow: '',
 			surfaceContainerLowest: '',
-			surfaceTint: ''
+			surfaceDim: ''
 		}
 	},
 	shapes: {

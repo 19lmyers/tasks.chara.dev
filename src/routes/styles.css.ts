@@ -26,6 +26,23 @@ import { globalStyle, style } from '@vanilla-extract/css';
 
 import { themeContract } from '$lib/theme';
 
+export const themeBox = style({
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'space-between',
+	flexGrow: 1,
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.background,
+			color: themeContract.colorSchemes.light.onBackground
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.background,
+			color: themeContract.colorSchemes.dark.onBackground
+		}
+	}
+});
+
 export const error = style({
 	'@media': {
 		'(prefers-color-scheme: light)': {

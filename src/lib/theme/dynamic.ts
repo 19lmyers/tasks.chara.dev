@@ -24,10 +24,12 @@
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
+import type { ThemeVariant } from '$lib/type';
+
 import { themeTokensFromHex } from './tokens';
 import { themeContract } from './contract.css';
 
-export function dynamicColorTheme(hexColor: string) {
-	const tokens = themeTokensFromHex(hexColor);
+export function dynamicColorTheme(hexColor: string, variant?: ThemeVariant) {
+	const tokens = themeTokensFromHex(hexColor, variant);
 	return assignInlineVars(themeContract, tokens).toString();
 }

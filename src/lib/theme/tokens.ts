@@ -22,94 +22,162 @@
  * SOFTWARE.
  */
 
-import { argbFromHex, hexFromArgb } from '@material/material-color-utilities';
+import {
+	argbFromHex,
+	DynamicScheme,
+	Hct,
+	hexFromArgb,
+	MaterialDynamicColors,
+	SchemeExpressive,
+	SchemeMonochrome,
+	SchemeNeutral,
+	SchemeTonalSpot,
+	SchemeVibrant
+} from '@material/material-color-utilities';
 
-import type { Theme } from 'mcu-extra';
-import { themeFromSourceColor } from 'mcu-extra';
+import { ThemeVariant } from '$lib/type';
 
-export function themeTokensFromHex(hexColor: string) {
-	const theme = themeFromSourceColor(argbFromHex(hexColor));
-	return createThemeTokens(theme);
+function schemeFromThemeVariant(
+	seed: Hct,
+	darkTheme: boolean,
+	variant: ThemeVariant = ThemeVariant.TONAL_SPOT,
+	contrastLevel = 0
+) {
+	switch (variant) {
+		case ThemeVariant.MONOCHROME:
+			return new SchemeMonochrome(seed, darkTheme, contrastLevel);
+		case ThemeVariant.NEUTRAL:
+			return new SchemeNeutral(seed, darkTheme, contrastLevel);
+		case ThemeVariant.TONAL_SPOT:
+			return new SchemeTonalSpot(seed, darkTheme, contrastLevel);
+		case ThemeVariant.VIBRANT:
+			return new SchemeVibrant(seed, darkTheme, contrastLevel);
+		case ThemeVariant.EXPRESSIVE:
+			return new SchemeExpressive(seed, darkTheme, contrastLevel);
+		default:
+			return new SchemeTonalSpot(seed, darkTheme, contrastLevel);
+	}
 }
 
-function createThemeTokens(theme: Theme) {
+export function themeTokensFromHex(hexColor: string, variant?: ThemeVariant) {
+	const schemeLight = schemeFromThemeVariant(Hct.fromInt(argbFromHex(hexColor)), false, variant);
+	const schemeDark = schemeFromThemeVariant(Hct.fromInt(argbFromHex(hexColor)), true, variant);
+
+	return createThemeTokens(schemeLight, schemeDark);
+}
+
+function createThemeTokens(schemeLight: DynamicScheme, schemeDark: DynamicScheme) {
 	return {
 		colorSchemes: {
 			light: {
-				primary: hexFromArgb(theme.schemes.light.primary),
-				onPrimary: hexFromArgb(theme.schemes.light.onPrimary),
-				primaryContainer: hexFromArgb(theme.schemes.light.primaryContainer),
-				onPrimaryContainer: hexFromArgb(theme.schemes.light.onPrimaryContainer),
-				secondary: hexFromArgb(theme.schemes.light.secondary),
-				onSecondary: hexFromArgb(theme.schemes.light.onSecondary),
-				secondaryContainer: hexFromArgb(theme.schemes.light.secondaryContainer),
-				onSecondaryContainer: hexFromArgb(theme.schemes.light.onSecondaryContainer),
-				tertiary: hexFromArgb(theme.schemes.light.tertiary),
-				onTertiary: hexFromArgb(theme.schemes.light.onTertiary),
-				tertiaryContainer: hexFromArgb(theme.schemes.light.tertiaryContainer),
-				onTertiaryContainer: hexFromArgb(theme.schemes.light.onTertiaryContainer),
-				error: hexFromArgb(theme.schemes.light.error),
-				onError: hexFromArgb(theme.schemes.light.onError),
-				errorContainer: hexFromArgb(theme.schemes.light.errorContainer),
-				onErrorContainer: hexFromArgb(theme.schemes.light.onErrorContainer),
-				background: hexFromArgb(theme.schemes.light.background),
-				onBackground: hexFromArgb(theme.schemes.light.onBackground),
-				surface: hexFromArgb(theme.schemes.light.surface),
-				onSurface: hexFromArgb(theme.schemes.light.onSurface),
-				surfaceVariant: hexFromArgb(theme.schemes.light.surfaceVariant),
-				onSurfaceVariant: hexFromArgb(theme.schemes.light.onSurfaceVariant),
-				outline: hexFromArgb(theme.schemes.light.outline),
-				outlineVariant: hexFromArgb(theme.schemes.light.outlineVariant),
-				shadow: hexFromArgb(theme.schemes.light.shadow),
-				scrim: hexFromArgb(theme.schemes.light.scrim),
-				inverseSurface: hexFromArgb(theme.schemes.light.inverseSurface),
-				inverseOnSurface: hexFromArgb(theme.schemes.light.inverseOnSurface),
-				inversePrimary: hexFromArgb(theme.schemes.light.inversePrimary),
-				surfaceBright: hexFromArgb(theme.schemes.light.surfaceBright),
-				surfaceContainer: hexFromArgb(theme.schemes.light.surfaceContainer),
-				surfaceContainerHigh: hexFromArgb(theme.schemes.light.surfaceContainerHigh),
-				surfaceContainerHighest: hexFromArgb(theme.schemes.light.surfaceContainerHighest),
-				surfaceContainerLow: hexFromArgb(theme.schemes.light.surfaceContainerLow),
-				surfaceContainerLowest: hexFromArgb(theme.schemes.light.surfaceContainerLowest),
-				surfaceTint: hexFromArgb(theme.schemes.light.surfaceTint)
+				primary: hexFromArgb(MaterialDynamicColors.primary.getArgb(schemeLight)),
+				onPrimary: hexFromArgb(MaterialDynamicColors.onPrimary.getArgb(schemeLight)),
+				primaryContainer: hexFromArgb(MaterialDynamicColors.primaryContainer.getArgb(schemeLight)),
+				onPrimaryContainer: hexFromArgb(
+					MaterialDynamicColors.onPrimaryContainer.getArgb(schemeLight)
+				),
+				secondary: hexFromArgb(MaterialDynamicColors.secondary.getArgb(schemeLight)),
+				onSecondary: hexFromArgb(MaterialDynamicColors.onSecondary.getArgb(schemeLight)),
+				secondaryContainer: hexFromArgb(
+					MaterialDynamicColors.secondaryContainer.getArgb(schemeLight)
+				),
+				onSecondaryContainer: hexFromArgb(
+					MaterialDynamicColors.onSecondaryContainer.getArgb(schemeLight)
+				),
+				tertiary: hexFromArgb(MaterialDynamicColors.tertiary.getArgb(schemeLight)),
+				onTertiary: hexFromArgb(MaterialDynamicColors.onTertiary.getArgb(schemeLight)),
+				tertiaryContainer: hexFromArgb(
+					MaterialDynamicColors.tertiaryContainer.getArgb(schemeLight)
+				),
+				onTertiaryContainer: hexFromArgb(
+					MaterialDynamicColors.onTertiaryContainer.getArgb(schemeLight)
+				),
+				error: hexFromArgb(MaterialDynamicColors.error.getArgb(schemeLight)),
+				onError: hexFromArgb(MaterialDynamicColors.onError.getArgb(schemeLight)),
+				errorContainer: hexFromArgb(MaterialDynamicColors.errorContainer.getArgb(schemeLight)),
+				onErrorContainer: hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(schemeLight)),
+				background: hexFromArgb(MaterialDynamicColors.background.getArgb(schemeLight)),
+				onBackground: hexFromArgb(MaterialDynamicColors.onBackground.getArgb(schemeLight)),
+				surface: hexFromArgb(MaterialDynamicColors.surface.getArgb(schemeLight)),
+				onSurface: hexFromArgb(MaterialDynamicColors.onSurface.getArgb(schemeLight)),
+				surfaceVariant: hexFromArgb(MaterialDynamicColors.surfaceVariant.getArgb(schemeLight)),
+				onSurfaceVariant: hexFromArgb(MaterialDynamicColors.onSurfaceVariant.getArgb(schemeLight)),
+				outline: hexFromArgb(MaterialDynamicColors.outline.getArgb(schemeLight)),
+				outlineVariant: hexFromArgb(MaterialDynamicColors.outlineVariant.getArgb(schemeLight)),
+				shadow: hexFromArgb(MaterialDynamicColors.shadow.getArgb(schemeLight)),
+				scrim: hexFromArgb(MaterialDynamicColors.scrim.getArgb(schemeLight)),
+				inverseSurface: hexFromArgb(MaterialDynamicColors.inverseSurface.getArgb(schemeLight)),
+				inverseOnSurface: hexFromArgb(MaterialDynamicColors.inverseOnSurface.getArgb(schemeLight)),
+				inversePrimary: hexFromArgb(MaterialDynamicColors.inversePrimary.getArgb(schemeLight)),
+				surfaceBright: hexFromArgb(MaterialDynamicColors.surfaceBright.getArgb(schemeLight)),
+				surfaceContainer: hexFromArgb(MaterialDynamicColors.surfaceContainer.getArgb(schemeLight)),
+				surfaceContainerHigh: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerHigh.getArgb(schemeLight)
+				),
+				surfaceContainerHighest: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerHighest.getArgb(schemeLight)
+				),
+				surfaceContainerLow: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerLow.getArgb(schemeLight)
+				),
+				surfaceContainerLowest: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerLowest.getArgb(schemeLight)
+				),
+				surfaceDim: hexFromArgb(MaterialDynamicColors.surfaceDim.getArgb(schemeLight))
 			},
 			dark: {
-				primary: hexFromArgb(theme.schemes.dark.primary),
-				onPrimary: hexFromArgb(theme.schemes.dark.onPrimary),
-				primaryContainer: hexFromArgb(theme.schemes.dark.primaryContainer),
-				onPrimaryContainer: hexFromArgb(theme.schemes.dark.onPrimaryContainer),
-				secondary: hexFromArgb(theme.schemes.dark.secondary),
-				onSecondary: hexFromArgb(theme.schemes.dark.onSecondary),
-				secondaryContainer: hexFromArgb(theme.schemes.dark.secondaryContainer),
-				onSecondaryContainer: hexFromArgb(theme.schemes.dark.onSecondaryContainer),
-				tertiary: hexFromArgb(theme.schemes.dark.tertiary),
-				onTertiary: hexFromArgb(theme.schemes.dark.onTertiary),
-				tertiaryContainer: hexFromArgb(theme.schemes.dark.tertiaryContainer),
-				onTertiaryContainer: hexFromArgb(theme.schemes.dark.onTertiaryContainer),
-				error: hexFromArgb(theme.schemes.dark.error),
-				onError: hexFromArgb(theme.schemes.dark.onError),
-				errorContainer: hexFromArgb(theme.schemes.dark.errorContainer),
-				onErrorContainer: hexFromArgb(theme.schemes.dark.onErrorContainer),
-				background: hexFromArgb(theme.schemes.dark.background),
-				onBackground: hexFromArgb(theme.schemes.dark.onBackground),
-				surface: hexFromArgb(theme.schemes.dark.surface),
-				onSurface: hexFromArgb(theme.schemes.dark.onSurface),
-				surfaceVariant: hexFromArgb(theme.schemes.dark.surfaceVariant),
-				onSurfaceVariant: hexFromArgb(theme.schemes.dark.onSurfaceVariant),
-				outline: hexFromArgb(theme.schemes.dark.outline),
-				outlineVariant: hexFromArgb(theme.schemes.dark.outlineVariant),
-				shadow: hexFromArgb(theme.schemes.dark.shadow),
-				scrim: hexFromArgb(theme.schemes.dark.scrim),
-				inverseSurface: hexFromArgb(theme.schemes.dark.inverseSurface),
-				inverseOnSurface: hexFromArgb(theme.schemes.dark.inverseOnSurface),
-				inversePrimary: hexFromArgb(theme.schemes.dark.inversePrimary),
-				surfaceBright: hexFromArgb(theme.schemes.dark.surfaceBright),
-				surfaceContainer: hexFromArgb(theme.schemes.dark.surfaceContainer),
-				surfaceContainerHigh: hexFromArgb(theme.schemes.dark.surfaceContainerHigh),
-				surfaceContainerHighest: hexFromArgb(theme.schemes.dark.surfaceContainerHighest),
-				surfaceContainerLow: hexFromArgb(theme.schemes.dark.surfaceContainerLow),
-				surfaceContainerLowest: hexFromArgb(theme.schemes.dark.surfaceContainerLowest),
-				surfaceTint: hexFromArgb(theme.schemes.dark.surfaceTint)
+				primary: hexFromArgb(MaterialDynamicColors.primary.getArgb(schemeDark)),
+				onPrimary: hexFromArgb(MaterialDynamicColors.onPrimary.getArgb(schemeDark)),
+				primaryContainer: hexFromArgb(MaterialDynamicColors.primaryContainer.getArgb(schemeDark)),
+				onPrimaryContainer: hexFromArgb(
+					MaterialDynamicColors.onPrimaryContainer.getArgb(schemeDark)
+				),
+				secondary: hexFromArgb(MaterialDynamicColors.secondary.getArgb(schemeDark)),
+				onSecondary: hexFromArgb(MaterialDynamicColors.onSecondary.getArgb(schemeDark)),
+				secondaryContainer: hexFromArgb(
+					MaterialDynamicColors.secondaryContainer.getArgb(schemeDark)
+				),
+				onSecondaryContainer: hexFromArgb(
+					MaterialDynamicColors.onSecondaryContainer.getArgb(schemeDark)
+				),
+				tertiary: hexFromArgb(MaterialDynamicColors.tertiary.getArgb(schemeDark)),
+				onTertiary: hexFromArgb(MaterialDynamicColors.onTertiary.getArgb(schemeDark)),
+				tertiaryContainer: hexFromArgb(MaterialDynamicColors.tertiaryContainer.getArgb(schemeDark)),
+				onTertiaryContainer: hexFromArgb(
+					MaterialDynamicColors.onTertiaryContainer.getArgb(schemeDark)
+				),
+				error: hexFromArgb(MaterialDynamicColors.error.getArgb(schemeDark)),
+				onError: hexFromArgb(MaterialDynamicColors.onError.getArgb(schemeDark)),
+				errorContainer: hexFromArgb(MaterialDynamicColors.errorContainer.getArgb(schemeDark)),
+				onErrorContainer: hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(schemeDark)),
+				background: hexFromArgb(MaterialDynamicColors.background.getArgb(schemeDark)),
+				onBackground: hexFromArgb(MaterialDynamicColors.onBackground.getArgb(schemeDark)),
+				surface: hexFromArgb(MaterialDynamicColors.surface.getArgb(schemeDark)),
+				onSurface: hexFromArgb(MaterialDynamicColors.onSurface.getArgb(schemeDark)),
+				surfaceVariant: hexFromArgb(MaterialDynamicColors.surfaceVariant.getArgb(schemeDark)),
+				onSurfaceVariant: hexFromArgb(MaterialDynamicColors.onSurfaceVariant.getArgb(schemeDark)),
+				outline: hexFromArgb(MaterialDynamicColors.outline.getArgb(schemeDark)),
+				outlineVariant: hexFromArgb(MaterialDynamicColors.outlineVariant.getArgb(schemeDark)),
+				shadow: hexFromArgb(MaterialDynamicColors.shadow.getArgb(schemeDark)),
+				scrim: hexFromArgb(MaterialDynamicColors.scrim.getArgb(schemeDark)),
+				inverseSurface: hexFromArgb(MaterialDynamicColors.inverseSurface.getArgb(schemeDark)),
+				inverseOnSurface: hexFromArgb(MaterialDynamicColors.inverseOnSurface.getArgb(schemeDark)),
+				inversePrimary: hexFromArgb(MaterialDynamicColors.inversePrimary.getArgb(schemeDark)),
+				surfaceBright: hexFromArgb(MaterialDynamicColors.surfaceBright.getArgb(schemeDark)),
+				surfaceContainer: hexFromArgb(MaterialDynamicColors.surfaceContainer.getArgb(schemeDark)),
+				surfaceContainerHigh: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerHigh.getArgb(schemeDark)
+				),
+				surfaceContainerHighest: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerHighest.getArgb(schemeDark)
+				),
+				surfaceContainerLow: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerLow.getArgb(schemeDark)
+				),
+				surfaceContainerLowest: hexFromArgb(
+					MaterialDynamicColors.surfaceContainerLowest.getArgb(schemeDark)
+				),
+				surfaceDim: hexFromArgb(MaterialDynamicColors.surfaceDim.getArgb(schemeDark))
 			}
 		},
 		shapes: {

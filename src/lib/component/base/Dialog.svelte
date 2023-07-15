@@ -29,7 +29,7 @@
 
 	export let dismiss: (() => void) | null = null;
 
-	export let className: string | null = null;
+	export let style: string | null = null;
 
 	let htmlDialog: HTMLDialogElement;
 
@@ -39,9 +39,9 @@
 	});
 </script>
 
-{#if className}
+{#if style}
 	<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
-	<dialog class="{dialog} {className}" bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
+	<dialog class="{dialog} {style}" bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
 		<div class={content}>
 			<slot />
 		</div>

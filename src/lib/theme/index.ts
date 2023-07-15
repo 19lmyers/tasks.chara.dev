@@ -26,6 +26,4 @@ export { themeContract } from './contract.css';
 
 export { baseTheme } from './base.css';
 
-export { themeFromListColor } from './colors';
-
-export { dynamicColorTheme } from './dynamic';
+export { themeFromVariant, themeFromListColor } from './colors';

@@ -61,6 +61,7 @@
 		placeholder,
 		divider
 	} from './TaskListItem.css';
+	import { themeVariant } from '$lib/stores';
 
 	export let taskList: TaskList;
 
@@ -159,7 +160,7 @@
 	</Dialog>
 {/if}
 
-<section class="{taskListItem} {themeFromListColor(taskList.color)}">
+<section class={taskListItem} style={themeFromListColor(taskList.color, $themeVariant)}>
 	<div>
 		<div class={header}>
 			<Button style={ButtonStyle.Icon} href="/list?id={taskList.id}">

@@ -22,44 +22,10 @@
  * SOFTWARE.
  */
 
-import { ListColor, ThemeVariant } from '$lib/type';
-
-import { dynamicColorTheme } from '$lib/theme/dynamic';
-
-const base = '#6750A4';
-
-const red = '#AC322C';
-const orange = '#974800';
-const yellow = '#7C5800';
-const green = '#356A22';
-const blue = '#00639D';
-const purple = '#6750A4';
-const pink = '#95416E';
-
-export function themeFromVariant(variant: ThemeVariant = ThemeVariant.TONAL_SPOT) {
-	return dynamicColorTheme(base, variant);
-}
-
-export function themeFromListColor(
-	color: ListColor | undefined,
-	variant: ThemeVariant = ThemeVariant.TONAL_SPOT
-) {
-	switch (color) {
-		case ListColor.RED:
-			return dynamicColorTheme(red, variant);
-		case ListColor.ORANGE:
-			return dynamicColorTheme(orange, variant);
-		case ListColor.YELLOW:
-			return dynamicColorTheme(yellow, variant);
-		case ListColor.GREEN:
-			return dynamicColorTheme(green, variant);
-		case ListColor.BLUE:
-			return dynamicColorTheme(blue, variant);
-		case ListColor.PURPLE:
-			return dynamicColorTheme(purple, variant);
-		case ListColor.PINK:
-			return dynamicColorTheme(pink, variant);
-		default:
-			return dynamicColorTheme(base, variant);
-	}
+export enum ThemeVariant {
+	MONOCHROME = 'MONOCHROME',
+	NEUTRAL = 'NEUTRAL',
+	TONAL_SPOT = 'TONAL_SPOT',
+	VIBRANT = 'VIBRANT',
+	EXPRESSIVE = 'EXPRESSIVE'
 }

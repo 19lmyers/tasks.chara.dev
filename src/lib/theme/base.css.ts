@@ -29,20 +29,4 @@ import { themeTokensFromHex } from './tokens';
 
 const base = themeTokensFromHex('#6750A4');
 
-const red = themeTokensFromHex('#AC322C');
-const orange = themeTokensFromHex('#974800');
-const yellow = themeTokensFromHex('#7C5800');
-const green = themeTokensFromHex('#356A22');
-const blue = themeTokensFromHex('#00639D');
-const purple = themeTokensFromHex('#6750A4');
-const pink = themeTokensFromHex('#95416E');
-
 export const baseTheme = createTheme(themeContract, base);
-
-export const redTheme = createTheme(themeContract, red);
-export const orangeTheme = createTheme(themeContract, orange);
-export const yellowTheme = createTheme(themeContract, yellow);
-export const greenTheme = createTheme(themeContract, green);
-export const blueTheme = createTheme(themeContract, blue);
-export const purpleTheme = createTheme(themeContract, purple);
-export const pinkTheme = createTheme(themeContract, pink);

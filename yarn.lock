@@ -2822,15 +2822,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mcu-extra@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "mcu-extra@npm:0.0.5"
-  peerDependencies:
-    "@material/material-color-utilities": ^0.2.6
-  checksum: a025cfdff9550b4da2c0613b7bdf1012605b97dac59f2a9659c57329d2979169165c83c84fb2a1196ecfcd4aaedde8be95bf7c9331aefe4dadf1f9162c06e45a
-  languageName: node
-  linkType: hard
-
 "md5-hex@npm:^4.0.0":
   version: 4.0.0
   resolution: "md5-hex@npm:4.0.0"
@@ -3973,7 +3964,6 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-svelte: ^2.30.0
     lodash: ^4.17.21
-    mcu-extra: ^0.0.5
     md5-hex: ^4.0.0
     prettier: ^2.8.0
     prettier-plugin-svelte: ^2.10.1

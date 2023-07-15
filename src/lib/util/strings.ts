@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { SortDirection, SortType } from '$lib/type';
+import { SortDirection, SortType, ThemeVariant } from '$lib/type';
 
 export function labelFromSortType(type: SortType) {
 	switch (type) {
@@ -44,5 +44,20 @@ export function labelFromSortDirection(direction: SortDirection) {
 		return 'DESC';
 	} else {
 		return 'ASC';
+	}
+}
+
+export function labelFromThemeVariant(variant: ThemeVariant) {
+	switch (variant) {
+		case ThemeVariant.MONOCHROME:
+			return 'Monochrome';
+		case ThemeVariant.NEUTRAL:
+			return 'Neutral';
+		case ThemeVariant.VIBRANT:
+			return 'Vibrant';
+		case ThemeVariant.EXPRESSIVE:
+			return 'Expressive';
+		default:
+			return 'Tonal spot (default)';
 	}
 }

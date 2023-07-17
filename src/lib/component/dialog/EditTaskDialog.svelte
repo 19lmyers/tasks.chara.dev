@@ -40,7 +40,7 @@
 
 	export let task: Task | null;
 
-	export let oldListId: string | null = null;
+	export let oldListId: string;
 
 	export let mode: 'create' | 'edit' = 'edit';
 
@@ -49,7 +49,7 @@
 		queryFn: async () => api().getLists()
 	});
 
-	let currentListId = oldListId;
+	let currentListId: string = oldListId;
 
 	const currentList = createQuery<TaskList, Error, TaskList>({
 		queryKey: ['lists', { listId: currentListId }],

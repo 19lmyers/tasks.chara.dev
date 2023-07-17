@@ -142,7 +142,7 @@
 
 <SortModeDialog bind:taskList={listToSort} />
 
-<EditTaskDialog mode="create" bind:task={taskToCreate} oldListId={taskList.id}  />
+<EditTaskDialog mode="create" bind:task={taskToCreate} oldListId={taskList.id} />
 <EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
 {#if $updateList.error}

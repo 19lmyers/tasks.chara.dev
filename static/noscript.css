@@ -50,13 +50,17 @@ p {
 
 @media screen and (prefers-color-scheme: light) {
 	body {
-		background-color: #6750a4;
+		background-color: #e7e0eb;
 		color: #ffffff;
 	}
 
 	.card {
-		background-color: #fffbff;
+		background-color: #f2ecf4;
 		color: #1c1b1e;
+	}
+
+	h1 {
+		color: #65558f;
 	}
 
 	::selection {
@@ -67,13 +71,17 @@ p {
 
 @media screen and (prefers-color-scheme: dark) {
 	body {
-		background-color: #1c1b1e;
+		background-color: #141218;
 		color: #e6e1e6;
 	}
 
 	.card {
-		background-color: #49454e;
-		color: #cac4cf;
+		background-color: #211f24;
+		color: #e6e0e9;
+	}
+
+	h1 {
+		color: #cfbdfe;
 	}
 
 	::selection {

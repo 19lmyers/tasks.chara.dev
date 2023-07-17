@@ -192,7 +192,7 @@
 	<EditListDialog bind:taskList={listToEdit} />
 	<SortModeDialog bind:taskList={listToSort} />
 
-	<EditTaskDialog mode="create" bind:task={taskToCreate} />
+	<EditTaskDialog mode="create" bind:task={taskToCreate} oldListId={taskList.id} />
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
 
 	<div style={themeFromListColor(taskList.color, $themeVariant)} class={themeBox}>

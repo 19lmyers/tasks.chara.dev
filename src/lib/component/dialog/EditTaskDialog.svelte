@@ -49,7 +49,7 @@
 		queryFn: async () => api().getLists()
 	});
 
-	let currentListId = '';
+	let currentListId = oldListId;
 
 	const currentList = createQuery<TaskList, Error, TaskList>({
 		queryKey: ['lists', { listId: currentListId }],

@@ -41,7 +41,7 @@
 
 {#if style}
 	<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
-	<dialog class="{dialog} {style}" bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
+	<dialog class={dialog} {style} bind:this={htmlDialog} on:click|self={() => dismiss?.()}>
 		<div class={content}>
 			<slot />
 		</div>

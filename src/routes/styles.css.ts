@@ -29,7 +29,7 @@ import { themeContract } from '$lib/theme';
 export const themeBox = style({
 	display: 'flex',
 	flexDirection: 'column',
-	justifyContent: 'space-between',
+	justifyContent: 'flex-start',
 	flexGrow: 1,
 	'@media': {
 		'(prefers-color-scheme: light)': {

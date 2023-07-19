@@ -52,7 +52,7 @@
 	let currentListId: string = oldListId;
 
 	const currentList = createQuery<TaskList, Error, TaskList>({
-		queryKey: ['lists', { listId: currentListId }],
+		queryKey: ['lists', { listId: currentListId, mode: 'edit' }],
 		queryFn: async () => api().getList(currentListId),
 		enabled: false
 	});

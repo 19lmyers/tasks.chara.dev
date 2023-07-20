@@ -28,7 +28,8 @@ import axios, { HttpStatusCode } from 'axios';
 import type { Profile, Task, TaskList, TokenPair } from '$lib/type';
 import { auth, profile } from '$lib/stores';
 
-const endpointUrl = 'https://tasks-api.chara.dev';
+//const endpointUrl = 'https://tasks-api.chara.dev';
+const endpointUrl = 'http://localhost:8123';
 
 const apiClient = axios.create({
 	baseURL: endpointUrl,
@@ -80,6 +81,14 @@ export const api = () => ({
 		const response = await refreshClient.post('/auth/refresh', refreshToken);
 		return (await response.data) as TokenPair;
 	},
+	changeEmail: async (newEmail: string) => {
+		const response = await apiClient.post('/auth/email', newEmail);
+		return response.status == HttpStatusCode.Ok;
+	},
+	requestVerifyEmailResend: async () => {
+		const response = await apiClient.post('/auth/email/resend');
+		return response.status == HttpStatusCode.Ok;
+	},
 	changePassword: async (currentPassword: string, newPassword: string) => {
 		const response = await apiClient.post('/auth/password', {
 			currentPassword: currentPassword,
@@ -90,6 +99,13 @@ export const api = () => ({
 	requestPasswordResetEmail: async (email: string) => {
 		const response = await apiClient.post('/auth/forgot', email);
 		return response.status === HttpStatusCode.Accepted;
+	},
+	verifyEmail: async (verifyToken: string, email: string) => {
+		const response = await apiClient.post('/auth/verify', {
+			verifyToken: verifyToken,
+			email: email
+		});
+		return response.status === HttpStatusCode.Ok;
 	},
 	resetPassword: async (resetToken: string, newPassword: string) => {
 		const response = await apiClient.post('/auth/reset', {

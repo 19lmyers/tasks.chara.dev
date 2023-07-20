@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 
-export interface Profile {
-	id: string;
-	email: string;
-	emailVerified: boolean;
-	displayName: string;
-	profilePhotoUri?: string;
-}
+import { style } from '@vanilla-extract/css';
+
+export const listItem = style({
+	textAlign: 'start'
+});
+
+export const headline = style({
+	marginBottom: '0.25rem'
+});
+
+export const supporting = style({
+	fontSize: '0.75rem',
+	fontWeight: 'normal',
+	opacity: 0.8
+});

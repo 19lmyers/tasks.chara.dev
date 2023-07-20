@@ -44,6 +44,7 @@
 	import type { Profile } from '$lib/type';
 
 	import { error, navHeader } from '../styles.css';
+	import { headline, listItem, supporting } from './styles.css';
 
 	let profileToEdit: Profile | null = null;
 	profileToEdit = clone($profile);
@@ -193,14 +194,27 @@
 							Add profile picture
 						</Button>
 					{/if}
-					<Button style={ButtonStyle.Text} disabled>
+					<Button
+						style={ButtonStyle.Text}
+						href={profileToEdit.emailVerified ? '/profile/email' : null}
+						disabled={!profileToEdit.emailVerified}
+					>
 						<Icon>alternate_email</Icon>
-						Change email
+						<div class={listItem}>
+							<p class={headline}>{profileToEdit.email}</p>
+							{#if profileToEdit.emailVerified}
+								<p class={supporting}>Tap to change</p>
+							{:else}
+								<p class={supporting}>Unverified</p>
+							{/if}
+						</div>
 					</Button>
-					<Button style={ButtonStyle.Text} href="/profile/password" disabled={isPending}>
-						<Icon>password</Icon>
-						Change password
-					</Button>
+					{#if profileToEdit.emailVerified}
+						<Button style={ButtonStyle.Text} href="/profile/password" disabled={isPending}>
+							<Icon>password</Icon>
+							Change password
+						</Button>
+					{/if}
 				{/if}
 				{#if errorMessage}
 					<p class={error}>{errorMessage}</p>

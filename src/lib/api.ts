@@ -28,8 +28,8 @@ import axios, { HttpStatusCode } from 'axios';
 import type { Profile, Task, TaskList, TokenPair } from '$lib/type';
 import { auth, profile } from '$lib/stores';
 
-//const endpointUrl = 'https://tasks-api.chara.dev';
-const endpointUrl = 'http://localhost:8123';
+const endpointUrl = 'https://tasks-api.chara.dev';
+//const endpointUrl = 'http://localhost:8123';
 
 const apiClient = axios.create({
 	baseURL: endpointUrl,

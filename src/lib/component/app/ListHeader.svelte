@@ -30,11 +30,8 @@
 		ButtonStyle,
 		DeleteCompletedTasksDialog,
 		DeleteListDialog,
-		Dropdown,
 		Icon
 	} from '$lib/component';
-	import { auth, profile } from '$lib/stores';
-	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 	import type { TaskList } from '$lib/type';
 
 	import {
@@ -44,20 +41,13 @@
 		headerFlex,
 		headerRight,
 		headerWrap,
-		icon,
-		profileButton,
-		profilePhoto
+		icon
 	} from './ListHeader.css';
 
 	export let taskList: TaskList;
 
 	export let onEditClicked: (() => void) | null = null;
 	export let onCreateClicked: (() => void) | null = null;
-
-	function logout() {
-		profile.set(null);
-		auth.set(null);
-	}
 
 	let idToClear: string | null = null;
 	let idToDelete: string | null = null;
@@ -104,29 +94,4 @@
 			</div>
 		</div>
 	</div>
-	<Dropdown>
-		<button slot="label" class={profileButton}>
-			<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
-		</button>
-		<ul slot="content">
-			<li>
-				<Button href="./profile" style={ButtonStyle.Text}>
-					<Icon>person</Icon>
-					<p>Edit profile</p>
-				</Button>
-			</li>
-			<li>
-				<Button href="./settings" style={ButtonStyle.Text}>
-					<Icon>settings</Icon>
-					<p>Settings</p>
-				</Button>
-			</li>
-			<li>
-				<Button onClick={logout} style={ButtonStyle.Text}>
-					<Icon>logout</Icon>
-					<p>Sign out</p>
-				</Button>
-			</li>
-		</ul>
-	</Dropdown>
 </header>

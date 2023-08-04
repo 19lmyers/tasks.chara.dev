@@ -138,6 +138,8 @@
 			ordinal: 0
 		};
 	}
+
+	const TOP_TASK_COUNT = 3;
 </script>
 
 <SortModeDialog bind:taskList={listToSort} />
@@ -183,7 +185,7 @@
 		{:else}
 			{#if $tasks.data.current.length > 0}
 				<ul class={bullet}>
-					{#each $tasks.data.current as task, index (task.id)}
+					{#each $tasks.data.current.slice(0, TOP_TASK_COUNT) as task, index (task.id)}
 						{#if taskList.showIndexNumbers}
 							<TaskItem
 								{task}
@@ -195,14 +197,19 @@
 						{/if}
 					{/each}
 				</ul>
-			{:else}
-				<p class={placeholder}>All tasks complete!</p>
 			{/if}
-			{#if $tasks.data.completed.length > 0}
+			{#if $tasks.data.current.length - TOP_TASK_COUNT > 0}
+				<a class={divider} href="/list?id={taskList.id}">
+					<span>View {$tasks.data.current.length - TOP_TASK_COUNT} more</span>
+					<Icon>open_in_new</Icon>
+				</a>
+			{:else if $tasks.data.completed.length > 0}
 				<a class={divider} href="/list?id={taskList.id}">
 					<span>Completed ({$tasks.data.completed.length})</span>
 					<Icon>open_in_new</Icon>
 				</a>
+			{:else if $tasks.data.current.length === 0}
+				<p class={placeholder}>All tasks complete!</p>
 			{/if}
 		{/if}
 	</div>

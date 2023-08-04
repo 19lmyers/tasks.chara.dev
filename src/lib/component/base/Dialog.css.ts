@@ -31,22 +31,23 @@ export const dialog = style({
 	margin: 'auto',
 	zIndex: 10,
 	borderRadius: '1.5em',
-	border: 'none',
+	border: 'solid',
 	opacity: '100%',
 	maxWidth: 500,
 	padding: 0,
-	boxShadow: themeContract.elevation.level2,
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
 			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest,
 			'::backdrop': {
 				background: 'rgba(0, 0, 0, 0.25)'
 			}
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
 			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
 			'::backdrop': {
 				background: 'rgba(0, 0, 0, 0.25)'
 			}
@@ -59,11 +60,11 @@ export const content = style({});
 globalStyle(`${dialog} ${card}`, {
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
 			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}

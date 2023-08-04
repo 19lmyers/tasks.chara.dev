@@ -29,14 +29,17 @@ export const profileCard = style({
 	padding: 12,
 	borderRadius: '1.5em',
 	display: 'flex',
+	border: 'solid',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
-			color: themeContract.colorSchemes.light.onSurface
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
+			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
-			color: themeContract.colorSchemes.dark.onSurface
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
+			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
 		}
 	}
 });

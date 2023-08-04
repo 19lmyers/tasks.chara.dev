@@ -36,8 +36,8 @@ export const container = style({
 	justifyContent: 'center',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceVariant,
-			color: themeContract.colorSchemes.light.surfaceVariant
+			backgroundColor: themeContract.colorSchemes.light.surface,
+			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
 			backgroundColor: themeContract.colorSchemes.dark.surface,
@@ -58,11 +58,11 @@ export const content = style({
 			height: '60%'
 		},
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surface,
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
 			color: themeContract.colorSchemes.light.onSurface
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceVariant,
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
 			color: themeContract.colorSchemes.dark.onSurface
 		}
 	}

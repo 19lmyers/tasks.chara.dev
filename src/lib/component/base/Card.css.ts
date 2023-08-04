@@ -28,14 +28,17 @@ import { themeContract } from '$lib/theme';
 export const card = style({
 	padding: '16px',
 	borderRadius: '1.5em',
+	border: 'solid',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
-			color: themeContract.colorSchemes.light.onSurface
+			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
 		},
 		'(prefers-color-scheme: dark)': {
 			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
-			color: themeContract.colorSchemes.dark.onSurface
+			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
 		}
 	}
 });

@@ -168,14 +168,14 @@
 			</Button>
 			<div class={headerText}>
 				<h2><a class={title} href="/list?id={taskList.id}">{taskList.title}</a></h2>
-				{#if taskList.description}
-					<p class={description}>{taskList.description}</p>
-				{/if}
 			</div>
 			<Button style={ButtonStyle.Icon} onClick={showCreate}>
 				<Icon>add</Icon>
 			</Button>
 		</div>
+		{#if taskList.description}
+			<p class={description}>{taskList.description}</p>
+		{/if}
 		{#if $tasks.status === 'loading'}
 			<progress class={progress} />
 		{:else if $tasks.status === 'error'}

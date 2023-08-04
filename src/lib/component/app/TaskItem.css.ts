@@ -46,15 +46,18 @@ export const taskItem = style({
 	display: 'flex',
 	flexDirection: 'column',
 	borderRadius: '1.5rem',
+	border: 'solid',
 	padding: '8px',
 	'@media': {
 		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHighest,
-			color: themeContract.colorSchemes.light.onSurface
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
+			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
 		},
 		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
-			color: themeContract.colorSchemes.dark.onSurface
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
+			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
 		}
 	}
 });

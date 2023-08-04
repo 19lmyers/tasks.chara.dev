@@ -33,14 +33,17 @@ export const taskListItem = style({
 	width: '100%',
 	padding: 16,
 	borderRadius: '1.5em',
+	border: 'solid',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.surfaceContainer,
-			color: themeContract.colorSchemes.light.onSurface
+			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
 		},
 		'(prefers-color-scheme: dark)': {
 			backgroundColor: themeContract.colorSchemes.dark.surfaceContainer,
-			color: themeContract.colorSchemes.dark.onSurface
+			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
 		}
 	}
 });
@@ -75,7 +78,9 @@ export const title = style({
 export const description = style({
 	overflowWrap: 'anywhere',
 	whiteSpace: 'pre-wrap',
-	marginBottom: 8
+	marginBottom: 8,
+	marginLeft: 48,
+	marginRight: 48
 });
 
 export const progress = style({

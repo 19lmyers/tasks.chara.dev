@@ -89,6 +89,9 @@ export const masonry = style({
 
 globalStyle('*,*:before,*:after', {
 	boxSizing: 'border-box',
+	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+	transitionDuration: '0.25s',
+	transitionProperty: 'border-radius',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			accentColor: themeContract.colorSchemes.light.primary

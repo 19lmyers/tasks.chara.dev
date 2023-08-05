@@ -31,7 +31,6 @@ export interface TaskList {
 	icon?: ListIcon;
 	description?: string;
 
-	isPinned: boolean;
 	showIndexNumbers: boolean;
 
 	sortType: SortType;

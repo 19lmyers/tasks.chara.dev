@@ -31,7 +31,6 @@
 		listToCreate = {
 			id: '',
 			title: '',
-			isPinned: false,
 			showIndexNumbers: false,
 			sortType: SortType.ORDINAL,
 			sortDirection: SortDirection.ASCENDING,

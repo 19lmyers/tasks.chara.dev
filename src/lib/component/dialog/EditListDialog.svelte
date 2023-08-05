@@ -144,15 +144,6 @@
 						/>
 					</label>
 					<label>
-						Pin to dashboard
-						<input
-							name="pin-to-dashboard"
-							type="checkbox"
-							bind:checked={taskList.isPinned}
-							disabled={$updateList.isLoading}
-						/>
-					</label>
-					<label>
 						Show list numbers
 						<input
 							name="show-list-numbers"

@@ -10,6 +10,11 @@
                   "comment": "Reset password screen"
                },
                {
+                 "/": "/verify",
+                 "?": { "token": "*" },
+                 "comment": "Verify email screen"
+              },
+               {
                   "/": "/list",
                   "?": { "id": "*" },
                   "comment": "List details screen"

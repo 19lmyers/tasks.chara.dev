@@ -11,3 +11,14 @@ After my work with server-side SvelteKit on my portfolio website, I decided to c
 my tasks app.
 
 Note that this project is still a work in progress.
+
+## For developers
+
+
+For code linting before each commit, change the project's git hooks directory with this command:
+
+```shell
+git config core.hooksPath hooks/
+```
+
+You can also copy the contents of /hooks to your project's git hooks folder.

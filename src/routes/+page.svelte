@@ -22,7 +22,10 @@
 
 	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
-		queryFn: async () => api().getLists()
+		queryFn: async () => {
+			const lists = await api().getLists()
+			return lists.sort((a, b) => a.ordinal < b.ordinal ? -1 : 1);
+		}
 	});
 
 	let listToCreate: TaskList | null = null;
@@ -35,7 +38,8 @@
 			sortType: SortType.ORDINAL,
 			sortDirection: SortDirection.ASCENDING,
 			dateCreated: new Date(),
-			lastModified: new Date()
+			lastModified: new Date(),
+			ordinal: 0,
 		};
 	}
 </script>

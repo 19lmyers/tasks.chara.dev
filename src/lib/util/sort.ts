@@ -26,21 +26,21 @@ import { SortDirection, SortType } from '$lib/type';
 import type { Task } from '$lib/type';
 
 export function sortTasks(tasks: Task[], type: SortType, direction: SortDirection): Task[] {
-	switch (type) {
+	switch (String(type)) {
 		case SortType.LABEL:
-			tasks.sort((a: Task, b: Task) => a.label.localeCompare(b.label));
+			tasks.sort((a: Task, b: Task) => (a.label < b.label ? -1 : 1));
 			break;
 		case SortType.DATE_CREATED:
 			tasks.sort((a: Task, b: Task) => (a.dateCreated < b.dateCreated ? -1 : 1));
 			break;
 		case SortType.UPCOMING:
 			tasks.sort((a: Task, b: Task) => {
-				const distantFuture = new Date('9999-12-31 23:59:59');
+				const distantFuture = '9999-12-31 23:59:59';
 
-				const dateA = a.reminderDate || a.dueDate || distantFuture;
-				const dateB = b.reminderDate || b.dueDate || distantFuture;
+				const dateA = new Date(a.reminderDate || a.dueDate || distantFuture);
+				const dateB = new Date(b.reminderDate || b.dueDate || distantFuture);
 
-				if (dateA !== dateB) {
+				if (+dateA !== +dateB) {
 					return dateA < dateB ? -1 : 1;
 				} else {
 					return a.lastModified < b.lastModified ? -1 : 1;

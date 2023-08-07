@@ -131,6 +131,7 @@ export const api = () => ({
 		const response = await apiClient.put(`/lists/${taskList.id}`, taskList);
 		return response.status == HttpStatusCode.Ok;
 	},
+	// reorder?
 	deleteList: async (listId: string) => {
 		const response = await apiClient.delete(`/lists/${listId}`);
 		return response.status == HttpStatusCode.Accepted;

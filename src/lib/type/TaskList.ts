@@ -38,6 +38,8 @@ export interface TaskList {
 
 	dateCreated: Date;
 	lastModified: Date;
+
+	ordinal: number;
 }
 
 export enum ListColor {

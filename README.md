@@ -14,7 +14,6 @@ Note that this project is still a work in progress.
 
 ## For developers
 
-
 For code linting before each commit, change the project's git hooks directory with this command:
 
 ```shell

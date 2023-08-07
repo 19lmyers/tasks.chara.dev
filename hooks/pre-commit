@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+set -eo pipefail
 yarn lint
 yarn check

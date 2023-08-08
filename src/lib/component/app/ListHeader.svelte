@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
+<script lang='ts'>
 	import { goto } from '$app/navigation';
 
 	import {
@@ -30,6 +30,7 @@
 		ButtonStyle,
 		DeleteCompletedTasksDialog,
 		DeleteListDialog,
+		Dropdown,
 		Icon
 	} from '$lib/component';
 	import type { TaskList } from '$lib/type';
@@ -43,6 +44,8 @@
 		headerWrap,
 		icon
 	} from './ListHeader.css';
+	import { profileButton, profilePhoto } from '$lib/component/app/SiteHeader.css';
+	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 
 	export let taskList: TaskList;
 
@@ -57,7 +60,7 @@
 <DeleteListDialog bind:listId={idToDelete} />
 
 <header class={header}>
-	<div class="{headerFlex} {headerFill} {headerWrap}">
+	<div class='{headerFlex} {headerFill} {headerWrap}'>
 		<div class={icon}>
 			<Button style={ButtonStyle.Icon} onClick={() => goto('/')}>
 				<Icon>arrow_back</Icon>
@@ -71,27 +74,34 @@
 				{/if}
 			</div>
 		</div>
-		<div class="{headerFlex} {headerRight} {headerFill} {headerWrap}">
-			<div class={headerFlex}>
-				<Button style={ButtonStyle.Tonal} onClick={onEditClicked}>
-					<Icon>edit</Icon>
-					Edit list
+		<div class='{headerFlex} {headerRight} {headerFill} {headerWrap}'>
+			<Button style={ButtonStyle.Tonal} onClick={onEditClicked}>
+				<Icon>edit</Icon>
+				Edit list
+			</Button>
+			<Button style={ButtonStyle.Tonal} onClick={onCreateClicked}>
+				<Icon>add</Icon>
+				New task
+			</Button>
+			<Dropdown>
+				<Button slot='label' style={ButtonStyle.Icon}>
+					<Icon>more_vert</Icon>
 				</Button>
-				<Button style={ButtonStyle.Tonal} onClick={onCreateClicked}>
-					<Icon>add</Icon>
-					New task
-				</Button>
-			</div>
-			<div class={headerFlex}>
-				<Button style={ButtonStyle.Tonal} onClick={() => (idToClear = taskList.id)}>
-					<Icon>check_circle</Icon>
-					Delete completed tasks
-				</Button>
-				<Button style={ButtonStyle.Tonal} onClick={() => (idToDelete = taskList.id)}>
-					<Icon>delete</Icon>
-					Delete list
-				</Button>
-			</div>
+				<ul slot='content'>
+					<li>
+						<Button style={ButtonStyle.Text} onClick={() => (idToClear = taskList.id)}>
+							<Icon>check_circle</Icon>
+							Delete completed tasks
+						</Button>
+					</li>
+					<li>
+						<Button style={ButtonStyle.Text} onClick={() => (idToDelete = taskList.id)}>
+							<Icon>delete</Icon>
+							Delete list
+						</Button>
+					</li>
+				</ul>
+			</Dropdown>
 		</div>
 	</div>
 </header>

@@ -92,20 +92,22 @@
 
 	<div class={taskItem}>
 		<div class={taskContents}>
-			<input
-				class={checkbox}
-				type="checkbox"
-				checked={task.isCompleted}
-				on:click={(e) => {
+			<Button
+				style={ButtonStyle.Icon}
+				onClick={() => {
 					let editedTask = clone(task);
 					editedTask.isCompleted = !editedTask.isCompleted;
 					editedTask.lastModified = new Date();
 
 					$updateTask.mutate(editedTask);
-
-					e.preventDefault();
 				}}
-			/>
+			>
+				{#if task.isCompleted}
+					<Icon>check_box</Icon>
+				{:else}
+					<Icon style={IconStyle.Outlined}>check_box_outline_blank</Icon>
+				{/if}
+			</Button>
 			<div class={text}>
 				<p class={label}>{task.label}</p>
 				{#if task.details}

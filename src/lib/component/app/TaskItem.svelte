@@ -31,7 +31,6 @@
 	import type { Task } from '$lib/type';
 
 	import {
-		checkbox,
 		chip,
 		chips,
 		details,
@@ -62,7 +61,7 @@
 			await api().updateTask(task);
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(['tasks']);
+			queryClient.invalidateQueries({ queryKey: ['tasks'] });
 		}
 	});
 

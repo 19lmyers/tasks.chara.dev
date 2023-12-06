@@ -22,7 +22,7 @@
   - SOFTWARE.
   -->
 
-<script lang='ts'>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 
 	import {
@@ -44,8 +44,6 @@
 		headerWrap,
 		icon
 	} from './ListHeader.css';
-	import { profileButton, profilePhoto } from '$lib/component/app/SiteHeader.css';
-	import { getDisplayName, getProfilePhoto } from '$lib/profile';
 
 	export let taskList: TaskList;
 
@@ -60,7 +58,7 @@
 <DeleteListDialog bind:listId={idToDelete} />
 
 <header class={header}>
-	<div class='{headerFlex} {headerFill} {headerWrap}'>
+	<div class="{headerFlex} {headerFill} {headerWrap}">
 		<div class={icon}>
 			<Button style={ButtonStyle.Icon} onClick={() => goto('/')}>
 				<Icon>arrow_back</Icon>
@@ -74,7 +72,7 @@
 				{/if}
 			</div>
 		</div>
-		<div class='{headerFlex} {headerRight} {headerFill} {headerWrap}'>
+		<div class="{headerFlex} {headerRight} {headerFill} {headerWrap}">
 			<Button style={ButtonStyle.Tonal} onClick={onEditClicked}>
 				<Icon>edit</Icon>
 				Edit list
@@ -84,10 +82,10 @@
 				New task
 			</Button>
 			<Dropdown>
-				<Button slot='label' style={ButtonStyle.Icon}>
+				<Button slot="label" style={ButtonStyle.Icon}>
 					<Icon>more_vert</Icon>
 				</Button>
-				<ul slot='content'>
+				<ul slot="content">
 					<li>
 						<Button style={ButtonStyle.Text} onClick={() => (idToClear = taskList.id)}>
 							<Icon>check_circle</Icon>

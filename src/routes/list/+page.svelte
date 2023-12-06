@@ -154,8 +154,8 @@
 			return taskList.id;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', { listId: listId }]);
+			queryClient.invalidateQueries({ queryKey: ['lists'] });
+			queryClient.invalidateQueries({ queryKey: ['tasks', { listId: listId }] });
 		},
 		onError: () => {
 			if (taskList.sortDirection != SortDirection.DESCENDING) {
@@ -169,7 +169,7 @@
 	let showCompletedTasks = false;
 </script>
 
-{#if $taskListQuery.status === 'loading'}
+{#if $taskListQuery.status === 'pending'}
 	<progress />
 {:else if $taskListQuery.status === 'error'}
 	<PageTitle title="Not Found" />
@@ -203,7 +203,7 @@
 			onEditClicked={() => (listToEdit = clone(taskList))}
 			onCreateClicked={showCreate}
 		/>
-		{#if $tasks.status === 'loading'}
+		{#if $tasks.status === 'pending'}
 			<progress />
 		{:else if $tasks.status === 'error'}
 			<span>Error: {$tasks.error.message}</span>
@@ -275,7 +275,7 @@
 				<Button
 					style={ButtonStyle.Text}
 					onClick={toggleSortDirection}
-					disabled={$updateList.isLoading}
+					disabled={$updateList.isPending}
 				>
 					<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
 					{labelFromSortDirection(taskList.sortDirection)}

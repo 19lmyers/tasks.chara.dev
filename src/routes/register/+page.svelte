@@ -23,8 +23,6 @@
   -->
 
 <script lang="ts">
-	import { isAxiosError } from 'axios';
-
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, CenterLayout, Icon } from '$lib/component';
 
@@ -63,9 +61,7 @@
 					}
 				}
 			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
+				if (error instanceof Error) {
 					errorMessage = error.message;
 				}
 

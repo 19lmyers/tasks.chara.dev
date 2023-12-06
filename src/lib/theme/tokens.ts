@@ -24,7 +24,6 @@
 
 import {
 	argbFromHex,
-	DynamicScheme,
 	Hct,
 	hexFromArgb,
 	MaterialDynamicColors,
@@ -34,6 +33,8 @@ import {
 	SchemeTonalSpot,
 	SchemeVibrant
 } from '@material/material-color-utilities';
+
+import type { DynamicScheme } from '@material/material-color-utilities';
 
 import { ThemeVariant } from '$lib/type';
 

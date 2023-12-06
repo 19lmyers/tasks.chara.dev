@@ -54,7 +54,7 @@
 			}
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(['lists']);
+			queryClient.invalidateQueries({ queryKey: ['lists'] });
 		}
 	});
 
@@ -100,7 +100,7 @@
 							Edit list
 						{/if}
 					</h1>
-					{#if $updateList.isLoading}
+					{#if $updateList.isPending}
 						<progress />
 					{/if}
 					<label>
@@ -109,7 +109,7 @@
 							name="title"
 							type="text"
 							bind:value={taskList.title}
-							disabled={$updateList.isLoading}
+							disabled={$updateList.isPending}
 							required
 						/>
 					</label>
@@ -140,7 +140,7 @@
 						<textarea
 							name="description"
 							bind:value={taskList.description}
-							disabled={$updateList.isLoading}
+							disabled={$updateList.isPending}
 						/>
 					</label>
 					<label>
@@ -149,18 +149,18 @@
 							name="show-list-numbers"
 							type="checkbox"
 							bind:checked={taskList.showIndexNumbers}
-							disabled={$updateList.isLoading}
+							disabled={$updateList.isPending}
 						/>
 					</label>
 				</svelte:fragment>
 				<div slot="actions" class={actions}>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isLoading}>
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateList.isPending}>
 						Cancel
 					</Button>
 					<Button
 						style={ButtonStyle.Tonal}
 						type="submit"
-						disabled={$updateList.isLoading ||
+						disabled={$updateList.isPending ||
 							taskList.title === undefined ||
 							taskList.title.trim().length === 0}
 					>

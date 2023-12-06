@@ -45,8 +45,8 @@
 			return taskList.id;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', { listId: listId }]);
+			queryClient.invalidateQueries({ queryKey: ['lists'] });
+			queryClient.invalidateQueries({ queryKey: ['tasks', { listId: listId }] });
 		}
 	});
 
@@ -90,7 +90,7 @@
 					</Button>
 					Sort by
 				</h1>
-				{#if $updateList.isLoading}
+				{#if $updateList.isPending}
 					<progress />
 				{/if}
 				<div>
@@ -98,7 +98,7 @@
 						<Button
 							style={ButtonStyle.Text}
 							onClick={() => setSortType(type)}
-							disabled={$updateList.isLoading}
+							disabled={$updateList.isPending}
 						>
 							<Icon>{iconFromSortType(type)}</Icon>
 							<span>{labelFromSortType(type)}</span>

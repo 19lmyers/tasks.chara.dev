@@ -27,7 +27,6 @@
 	import { get } from 'svelte/store';
 	import { goto } from '$app/navigation';
 
-	import { isAxiosError } from 'axios';
 	import { clone } from 'lodash';
 
 	import { api } from '$lib/api';
@@ -40,11 +39,13 @@
 		Icon,
 		ProfileItem
 	} from '$lib/component';
-	import { isAuthenticated, profile } from '$lib/stores';
+	import { isAuthenticated, profile, themeVariant } from '$lib/stores';
+	import { themeFromVariant } from '$lib/theme';
 	import type { Profile } from '$lib/type';
 
 	import { error, navHeader } from '../styles.css';
 	import { headline, listItem, supporting } from './styles.css';
+	import { header } from '$lib/component/dialog/base.css';
 
 	let profileToEdit: Profile | null = null;
 	profileToEdit = clone($profile);
@@ -83,9 +84,7 @@
 				photoUploadSuccess = true;
 			}
 		} catch (error) {
-			if (isAxiosError(error) && error.response) {
-				errorMessage = error.response.data;
-			} else if (error instanceof Error) {
+			if (error instanceof Error) {
 				errorMessage = error.message;
 			}
 
@@ -114,9 +113,7 @@
 					return true;
 				}
 			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
+				if (error instanceof Error) {
 					errorMessage = error.message;
 				}
 
@@ -141,10 +138,10 @@
 />
 
 {#if photoUploadSuccess}
-	<Dialog>
+	<Dialog style={themeFromVariant($themeVariant)}>
 		<Card>
 			<svelte:fragment slot="content">
-				<h1>Profile photo changed</h1>
+				<h1 class={header}>Profile photo changed</h1>
 				<p>Changes may require a refresh to take effect.</p>
 			</svelte:fragment>
 			<svelte:fragment slot="actions">

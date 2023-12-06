@@ -27,8 +27,6 @@
 	import { get } from 'svelte/store';
 	import { goto } from '$app/navigation';
 
-	import { isAxiosError } from 'axios';
-
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, CenterLayout, Dialog, Icon } from '$lib/component';
 	import { isAuthenticated, profile } from '$lib/stores';
@@ -58,9 +56,7 @@
 					isPending = false;
 				}
 			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
+				if (error instanceof Error) {
 					errorMessage = error.message;
 				}
 

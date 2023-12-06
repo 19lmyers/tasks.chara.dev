@@ -23,8 +23,8 @@
 	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
 		queryFn: async () => {
-			const lists = await api().getLists()
-			return lists.sort((a, b) => a.ordinal < b.ordinal ? -1 : 1);
+			const lists = await api().getLists();
+			return lists.sort((a, b) => (a.ordinal < b.ordinal ? -1 : 1));
 		}
 	});
 
@@ -39,7 +39,7 @@
 			sortDirection: SortDirection.ASCENDING,
 			dateCreated: new Date(),
 			lastModified: new Date(),
-			ordinal: 0,
+			ordinal: 0
 		};
 	}
 </script>
@@ -55,7 +55,7 @@
 		<SiteHeader onCreateClicked={showCreate} />
 		<MobileBanner />
 		<main class={main}>
-			{#if $taskLists.status === 'loading'}
+			{#if $taskLists.status === 'pending'}
 				<progress />
 			{:else if $taskLists.status === 'error'}
 				<span>Error: {$taskLists.error.message}</span>

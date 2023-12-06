@@ -45,8 +45,8 @@
 			return listId;
 		},
 		onSuccess: (listId: string) => {
-			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks', { listId: listId }]);
+			queryClient.invalidateQueries({ queryKey: ['lists'] });
+			queryClient.invalidateQueries({ queryKey: ['tasks', { listId: listId }] });
 		}
 	});
 
@@ -86,15 +86,15 @@
 						Delete list?
 					</h1>
 					<p>All tasks in this list will be permanently deleted</p>
-					{#if $deleteList.isLoading}
+					{#if $deleteList.isPending}
 						<progress />
 					{/if}
 				</svelte:fragment>
 				<div slot="actions" class={actions}>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$deleteList.isLoading}>
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$deleteList.isPending}>
 						Cancel
 					</Button>
-					<Button style={ButtonStyle.Tonal} type="submit" disabled={$deleteList.isLoading}>
+					<Button style={ButtonStyle.Tonal} type="submit" disabled={$deleteList.isPending}>
 						Delete
 					</Button>
 				</div>

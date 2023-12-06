@@ -23,7 +23,6 @@
   -->
 
 <script lang="ts">
-	import { isAxiosError } from 'axios';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
@@ -52,9 +51,7 @@
 					isPending = false;
 				}
 			} catch (error) {
-				if (isAxiosError(error) && error.response) {
-					errorMessage = error.response.data;
-				} else if (error instanceof Error) {
+				if (error instanceof Error) {
 					errorMessage = error.message;
 				}
 

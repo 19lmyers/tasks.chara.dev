@@ -82,8 +82,8 @@
 			}
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(['lists']);
-			queryClient.invalidateQueries(['tasks']);
+			queryClient.invalidateQueries({ queryKey: ['lists'] });
+			queryClient.invalidateQueries({ queryKey: ['tasks'] });
 		}
 	});
 
@@ -154,7 +154,7 @@
 							Edit task
 						{/if}
 					</h1>
-					{#if $updateTask.isLoading}
+					{#if $updateTask.isPending}
 						<progress />
 					{/if}
 					<label>
@@ -163,13 +163,13 @@
 							name="label"
 							type="text"
 							bind:value={task.label}
-							disabled={$updateTask.isLoading}
+							disabled={$updateTask.isPending}
 							required
 						/>
 					</label>
 					<label>
 						Details
-						<textarea name="details" bind:value={task.details} disabled={$updateTask.isLoading} />
+						<textarea name="details" bind:value={task.details} disabled={$updateTask.isPending} />
 					</label>
 					<label>
 						List
@@ -211,13 +211,13 @@
 					</label>
 				</svelte:fragment>
 				<div slot="actions" class={actions}>
-					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateTask.isLoading}
+					<Button style={ButtonStyle.Text} onClick={cancel} disabled={$updateTask.isPending}
 						>Cancel
 					</Button>
 					<Button
 						style={ButtonStyle.Tonal}
 						type="submit"
-						disabled={$updateTask.isLoading ||
+						disabled={$updateTask.isPending ||
 							task.label === undefined ||
 							task.label.trim().length === 0}
 						>Save

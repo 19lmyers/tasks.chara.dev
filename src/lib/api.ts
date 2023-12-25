@@ -28,7 +28,7 @@ import ky from 'ky';
 import type { Profile, Task, TaskList, TokenPair } from '$lib/type';
 import { auth, profile } from '$lib/stores';
 
-const endpointUrl = 'https://tasks-api.chara.dev';
+const endpointUrl = 'https://dominaria.chara.dev:8804';
 //const endpointUrl = 'http://localhost:8123';
 
 const apiClient = ky.create({

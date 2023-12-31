@@ -1,31 +1,48 @@
 {
-  "applinks": {
+   "applinks": {
       "details": [
-           {
-             "appIDs": [ "N2WQ73MLWJ.dev.chara.tasks.ios" ],
-             "components": [
+         {
+            "appIDs": [
+               "N2WQ73MLWJ.dev.chara.tasks.ios"
+            ],
+            "components": [
                {
                   "/": "/reset",
-                  "?": { "token": "*" },
+                  "?": {
+                     "token": "*"
+                  },
                   "comment": "Reset password screen"
                },
                {
-                 "/": "/verify",
-                 "?": { "token": "*" },
-                 "comment": "Verify email screen"
-              },
+                  "/": "/verify",
+                  "?": {
+                     "token": "*"
+                  },
+                  "comment": "Verify email screen"
+               },
+               {
+                  "/": "/join",
+                  "?": {
+                     "token": "*"
+                  },
+                  "comment": "List join screen"
+               },
                {
                   "/": "/list",
-                  "?": { "id": "*" },
+                  "?": {
+                     "id": "*"
+                  },
                   "comment": "List details screen"
                },
                {
                   "/": "/task",
-                  "?": { "id": "*" },
+                  "?": {
+                     "id": "*"
+                  },
                   "comment": "Task details screen"
                }
-             ]
-           }
-       ]
+            ]
+         }
+      ]
    }
 }

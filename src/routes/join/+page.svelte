@@ -156,9 +156,9 @@
 								<p class={listDescription}>{$joinInfoQuery.data.list.description}</p>
 							{/if}
 						</div>
-
-						<ProfileItem profile={$joinInfoQuery.data.owner} />
 					</div>
+
+					<ProfileItem profile={$joinInfoQuery.data.owner} />
 
 					{#if errorMessage}
 						<p class={error}>{errorMessage}</p>

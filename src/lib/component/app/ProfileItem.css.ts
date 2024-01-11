@@ -30,25 +30,25 @@ export const profileBox = style({
 	borderRadius: '1.5em',
 	display: 'flex',
 	border: 'none',
-	justifyContent: 'space-between',
-	'@media': {
-		'(prefers-color-scheme: light)': {
-			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
-			color: themeContract.colorSchemes.light.onSurface,
-			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
-		},
-		'(prefers-color-scheme: dark)': {
-			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
-			color: themeContract.colorSchemes.dark.onSurface,
-			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
-		}
-	}
+	justifyContent: 'space-between'
 });
 
 export const profileCard = style([
 	profileBox,
 	{
-		border: 'solid'
+		border: 'solid',
+		'@media': {
+			'(prefers-color-scheme: light)': {
+				backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
+				color: themeContract.colorSchemes.light.onSurface,
+				borderColor: themeContract.colorSchemes.light.surfaceContainerHighest
+			},
+			'(prefers-color-scheme: dark)': {
+				backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
+				color: themeContract.colorSchemes.dark.onSurface,
+				borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest
+			}
+		}
 	}
 ]);
 

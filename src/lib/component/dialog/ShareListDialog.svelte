@@ -62,6 +62,8 @@
 		}
 	});
 
+	let inviteBtn: HTMLButtonElement;
+
 	let memberToRemove: Profile | null = null;
 </script>
 
@@ -100,9 +102,11 @@
 						<button
 							type="button"
 							class={copyLink}
-							on:click={() => {
-								navigator.clipboard.writeText(
-									"I've shared a list with you! Join at: https://tasks.chara.dev/join?token={$getInviteToken.data}"
+							bind:this={inviteBtn}
+							on:click={async () => {
+								inviteBtn.focus();
+								await navigator.clipboard.writeText(
+									`I've shared a list with you! Join at: https://tasks.chara.dev/join?token=${$getInviteToken.data}`
 								);
 								window.alert('Link copied to clipboard');
 								onDismiss();

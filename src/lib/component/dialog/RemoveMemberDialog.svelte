@@ -81,7 +81,7 @@
 						Cancel
 					</Button>
 					<Button style={ButtonStyle.Tonal} type="submit" disabled={$removeMember.isPending}>
-						Delete
+						Remove
 					</Button>
 				</div>
 			</Card>

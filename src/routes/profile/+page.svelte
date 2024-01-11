@@ -163,7 +163,7 @@
 					<span>Edit profile</span>
 				</h1>
 				{#if profileToEdit}
-					<ProfileItem profile={profileToEdit} />
+					<ProfileItem profile={profileToEdit} border={true} />
 					<label>
 						Display Name
 						<input type="text" bind:value={profileToEdit.displayName} />

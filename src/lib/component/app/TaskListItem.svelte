@@ -37,7 +37,7 @@
 		SortModeDialog,
 		TaskItem
 	} from '$lib/component';
-	import { SortDirection, SortType } from '$lib/type';
+	import { SortDirection, SortType, type TaskListPrefs } from '$lib/type';
 	import type { Task, TaskList } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
 	import {
@@ -68,6 +68,7 @@
 	const queryClient = useQueryClient();
 
 	interface TasksResult {
+		prefs: TaskListPrefs;
 		current: Task[];
 		completed: Task[];
 	}
@@ -75,25 +76,33 @@
 	const tasks = createQuery<TasksResult, Error, TasksResult>({
 		queryKey: ['tasks', { listId: taskList.id }],
 		queryFn: async () => {
+			const prefs = await api().getListPrefs(taskList.id);
 			const tasks = await api().getTasks(taskList.id);
 			return {
+				prefs: prefs,
 				current: sortTasks(
 					tasks.filter((task) => !task.isCompleted),
-					taskList.sortType,
-					taskList.sortDirection
+					prefs.sortType,
+					prefs.sortDirection
 				),
 				completed: sortTasks(
 					tasks.filter((task) => task.isCompleted),
-					taskList.sortType,
-					taskList.sortDirection
+					prefs.sortType,
+					prefs.sortDirection
 				)
 			};
 		}
 	});
 
-	const updateList = createMutation<string, Error, TaskList>({
-		mutationFn: async (taskList: TaskList) => {
-			await api().updateList(taskList);
+	interface TaskListInput {
+		taskList: TaskList;
+		prefs: TaskListPrefs;
+	}
+
+	const updateList = createMutation<string, Error, TaskListInput>({
+		mutationFn: async (input: TaskListInput) => {
+			await api().updateList(input.taskList);
+			await api().updateListPrefs(input.prefs);
 			return taskList.id;
 		},
 		onSuccess: (listId: string) => {
@@ -101,24 +110,42 @@
 			queryClient.invalidateQueries({ queryKey: ['tasks', { listId: listId }] });
 		},
 		onError: () => {
-			if (taskList.sortDirection != SortDirection.DESCENDING) {
-				taskList.sortDirection = SortDirection.DESCENDING;
-			} else {
-				taskList.sortDirection = SortDirection.ASCENDING;
+			if (prefs) {
+				if (prefs.sortDirection != SortDirection.DESCENDING) {
+					prefs.sortDirection = SortDirection.DESCENDING;
+				} else {
+					prefs.sortDirection = SortDirection.ASCENDING;
+				}
 			}
 		}
 	});
 
+	let prefs: TaskListPrefs | null = null;
+
+	$: {
+		if ($tasks.data) {
+			const data = $tasks.data;
+			prefs = data.prefs;
+		}
+	}
+
 	async function toggleSortDirection() {
-		if (taskList.sortDirection != SortDirection.DESCENDING) {
-			taskList.sortDirection = SortDirection.DESCENDING;
+		if (!prefs) {
+			return;
+		}
+
+		if (prefs.sortDirection != SortDirection.DESCENDING) {
+			prefs.sortDirection = SortDirection.DESCENDING;
 		} else {
-			taskList.sortDirection = SortDirection.ASCENDING;
+			prefs.sortDirection = SortDirection.ASCENDING;
 		}
 		taskList.lastModified = new Date();
+		prefs.lastModified = new Date();
 
-		$updateList.mutate(taskList);
-		await $tasks.refetch({ throwOnError: true });
+		$updateList.mutate({
+			taskList: taskList,
+			prefs: prefs
+		});
 	}
 
 	let listToSort: TaskList | null = null;
@@ -142,7 +169,7 @@
 	const TOP_TASK_COUNT = 3;
 </script>
 
-<SortModeDialog bind:taskList={listToSort} />
+<SortModeDialog bind:taskList={listToSort} bind:prefs />
 
 <EditTaskDialog mode="create" bind:task={taskToCreate} oldListId={taskList.id} />
 <EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
@@ -186,7 +213,7 @@
 			{#if $tasks.data.current.length > 0}
 				<ul class={bullet}>
 					{#each $tasks.data.current.slice(0, TOP_TASK_COUNT) as task, index (task.id)}
-						{#if taskList.showIndexNumbers}
+						{#if prefs?.showIndexNumbers}
 							<TaskItem
 								{task}
 								indexNumber={index + 1}
@@ -215,17 +242,17 @@
 	</div>
 	<div class={sort}>
 		<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
-			<Icon>{iconFromSortType(taskList.sortType)}</Icon>
-			{labelFromSortType(taskList.sortType)}
+			<Icon>{iconFromSortType(prefs?.sortType)}</Icon>
+			{labelFromSortType(prefs?.sortType)}
 		</Button>
-		{#if taskList.sortType !== SortType.ORDINAL}
+		{#if prefs?.sortType !== SortType.ORDINAL}
 			<Button
 				style={ButtonStyle.Text}
 				onClick={toggleSortDirection}
 				disabled={$updateList.isPending}
 			>
-				<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
-				{labelFromSortDirection(taskList.sortDirection)}
+				<Icon>{iconFromSortDirection(prefs?.sortDirection)}</Icon>
+				{labelFromSortDirection(prefs?.sortDirection)}
 			</Button>
 		{/if}
 	</div>

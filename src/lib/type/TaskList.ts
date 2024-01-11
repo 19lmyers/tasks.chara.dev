@@ -24,6 +24,7 @@
 
 export interface TaskList {
 	id: string;
+	ownerId: string;
 
 	title: string;
 
@@ -31,15 +32,8 @@ export interface TaskList {
 	icon?: ListIcon;
 	description?: string;
 
-	showIndexNumbers: boolean;
-
-	sortType: SortType;
-	sortDirection: SortDirection;
-
 	dateCreated: Date;
 	lastModified: Date;
-
-	ordinal: number;
 }
 
 export enum ListColor {
@@ -80,17 +74,4 @@ export enum ListIcon {
 	SHOPPING_CART = 'SHOPPING_CART',
 	SMILE = 'SMILE',
 	WORK = 'WORK'
-}
-
-export enum SortType {
-	ORDINAL = 'ORDINAL',
-	LABEL = 'LABEL',
-	DATE_CREATED = 'DATE_CREATED',
-	UPCOMING = 'UPCOMING',
-	STARRED = 'STARRED'
-}
-
-export enum SortDirection {
-	ASCENDING = 'ASCENDING',
-	DESCENDING = 'DESCENDING'
 }

@@ -182,7 +182,7 @@ function createThemeTokens(schemeLight: DynamicScheme, schemeDark: DynamicScheme
 			}
 		},
 		shapes: {
-			// TODO implement shape theming?
+			// implement shape theming?
 		},
 		typography: {
 			heading: { family: 'Lato, sans-serif', weight: '600' },

@@ -24,7 +24,7 @@
 
 import { SortDirection, SortType, ThemeVariant } from '$lib/type';
 
-export function labelFromSortType(type: SortType) {
+export function labelFromSortType(type: SortType | undefined) {
 	switch (type) {
 		case SortType.LABEL:
 			return 'Label';
@@ -39,7 +39,7 @@ export function labelFromSortType(type: SortType) {
 	}
 }
 
-export function labelFromSortDirection(direction: SortDirection) {
+export function labelFromSortDirection(direction: SortDirection | undefined) {
 	if (direction === SortDirection.DESCENDING) {
 		return 'DESC';
 	} else {

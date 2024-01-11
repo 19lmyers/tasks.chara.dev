@@ -27,6 +27,7 @@ import ky from 'ky';
 
 import type { Profile, Task, TaskList, TokenPair } from '$lib/type';
 import { auth, profile } from '$lib/stores';
+import type { TaskListPrefs } from '$lib/type/TaskListPrefs';
 
 const endpointUrl = 'https://dominaria.chara.dev:8804';
 //const endpointUrl = 'http://localhost:8123';
@@ -75,6 +76,10 @@ const refreshClient = ky.create({
 export const api = () => ({
 	getUserProfile: async () => {
 		const response = await apiClient.get('profile');
+		return (await response.json()) as Profile;
+	},
+	getUserProfileFor: async (userId: string) => {
+		const response = await apiClient.get(`profile/${userId}`);
 		return (await response.json()) as Profile;
 	},
 	updateUserProfile: async (profile: Profile) => {
@@ -160,8 +165,13 @@ export const api = () => ({
 		const response = await apiClient.get(`lists/${listId}`);
 		return (await response.json()) as TaskList;
 	},
-	createList: async (taskList: TaskList) => {
-		const response = await apiClient.post(`lists`, { json: taskList });
+	createList: async (taskList: TaskList, prefs: TaskListPrefs) => {
+		const response = await apiClient.post(`lists`, {
+			json: {
+				taskList: taskList,
+				prefs: prefs
+			}
+		});
 		return response.status == 201; // Created;
 	},
 	updateList: async (taskList: TaskList) => {
@@ -172,6 +182,39 @@ export const api = () => ({
 	deleteList: async (listId: string) => {
 		const response = await apiClient.delete(`lists/${listId}`);
 		return response.status == 202; // Accepted
+	},
+
+	getListPrefs: async (listId: string) => {
+		const response = await apiClient.get(`lists/${listId}/prefs`);
+		return (await response.json()) as TaskListPrefs;
+	},
+	updateListPrefs: async (prefs: TaskListPrefs) => {
+		const response = await apiClient.put(`lists/${prefs.listId}/prefs`, { json: prefs });
+		return response.status == 200; // OK
+	},
+	getListMembers: async (listId: string) => {
+		const response = await apiClient.get(`lists/${listId}/members`);
+		return (await response.json()) as Profile[];
+	},
+	requestListInvite: async (listId: string) => {
+		const response = await apiClient.post(`lists/${listId}/invite`);
+		return await response.text();
+	},
+	getListInviteInfo: async (inviteToken: string) => {
+		const response = await apiClient.post(`lists/invite`, { body: inviteToken });
+		return (await response.json()) as TaskList;
+	},
+	requestListJoin: async (inviteToken: string) => {
+		const response = await apiClient.post(`lists/join`, { body: inviteToken });
+		return response.status == 200; // OK
+	},
+	leaveList: async (listId: string) => {
+		const response = await apiClient.post(`lists/${listId}/leave`);
+		return response.status == 200; // OK
+	},
+	removeMemberFromList: async (listId: string, memberId: string) => {
+		const response = await apiClient.post(`lists/${listId}/remove`, { body: memberId });
+		return response.status == 200; // OK
 	},
 
 	getTasks: async (listId: string) => {

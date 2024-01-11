@@ -44,7 +44,7 @@
 		SortModeDialog,
 		TaskItem
 	} from '$lib/component';
-	import type { Task, TaskList } from '$lib/type';
+	import type { Task, TaskList, TaskListPrefs } from '$lib/type';
 	import { SortDirection, SortType } from '$lib/type';
 	import { themeFromListColor } from '$lib/theme';
 	import {
@@ -67,23 +67,35 @@
 
 	import { navHeader, themeBox } from '../styles.css';
 	import { themeVariant } from '$lib/stores';
+	import ShareListDialog from '$lib/component/dialog/ShareListDialog.svelte';
 
 	const listId: string = $page.url.searchParams.get('id') ?? '';
 
 	const queryClient = useQueryClient();
 
-	const taskListQuery = createQuery<TaskList, Error, TaskList>({
+	interface TaskListResult {
+		taskList: TaskList;
+		prefs: TaskListPrefs;
+	}
+
+	const taskListQuery = createQuery<TaskListResult, Error, TaskListResult>({
 		queryKey: ['lists', { listId: listId }],
 		queryFn: async () => {
-			return await api()
+			const list = await api()
 				.getList(listId)
 				.catch(() => {
 					throw error(404, { message: 'No list with ID' });
 				});
+			const prefs = await api().getListPrefs(listId);
+			return {
+				taskList: list,
+				prefs: prefs
+			};
 		}
 	});
 
 	let taskList: TaskList;
+	let prefs: TaskListPrefs;
 
 	interface TasksResult {
 		current: Task[];
@@ -97,13 +109,13 @@
 			return {
 				current: sortTasks(
 					tasks.filter((task) => !task.isCompleted),
-					taskList.sortType,
-					taskList.sortDirection
+					prefs.sortType,
+					prefs.sortDirection
 				),
 				completed: sortTasks(
 					tasks.filter((task) => task.isCompleted),
-					taskList.sortType,
-					taskList.sortDirection
+					prefs.sortType,
+					prefs.sortDirection
 				)
 			};
 		}
@@ -111,18 +123,27 @@
 
 	$: {
 		if ($taskListQuery.data) {
-			taskList = $taskListQuery.data;
+			const data = $taskListQuery.data;
+
+			taskList = data.taskList;
+			prefs = data.prefs;
+
 			$tasks.refetch({ throwOnError: true });
 		}
 	}
 
 	let listToEdit: TaskList | null = null;
+	let prefsToEdit: TaskListPrefs | null = null;
+
 	let listToSort: TaskList | null = null;
+	let prefsToSort: TaskListPrefs | null = null;
 
 	let taskToCreate: Task | null = null;
 	let taskToEdit: Task | null = null;
 
 	let taskToDelete: Task | null = null;
+
+	let showShareDialog: boolean = false;
 
 	function showCreate() {
 		taskToCreate = {
@@ -138,19 +159,28 @@
 	}
 
 	async function toggleSortDirection() {
-		if (taskList.sortDirection != SortDirection.DESCENDING) {
-			taskList.sortDirection = SortDirection.DESCENDING;
+		if (prefs.sortDirection != SortDirection.DESCENDING) {
+			prefs.sortDirection = SortDirection.DESCENDING;
 		} else {
-			taskList.sortDirection = SortDirection.ASCENDING;
+			prefs.sortDirection = SortDirection.ASCENDING;
 		}
 		taskList.lastModified = new Date();
 
-		$updateList.mutate(taskList);
+		$updateList.mutate({
+			taskList: taskList,
+			prefs: prefs
+		});
 	}
 
-	const updateList = createMutation<string, Error, TaskList>({
-		mutationFn: async (taskList: TaskList) => {
-			await api().updateList(taskList);
+	interface TaskListInput {
+		taskList: TaskList;
+		prefs: TaskListPrefs;
+	}
+
+	const updateList = createMutation<string, Error, TaskListInput>({
+		mutationFn: async (input: TaskListInput) => {
+			await api().updateList(input.taskList);
+			await api().updateListPrefs(input.prefs);
 			return taskList.id;
 		},
 		onSuccess: (listId: string) => {
@@ -158,10 +188,12 @@
 			queryClient.invalidateQueries({ queryKey: ['tasks', { listId: listId }] });
 		},
 		onError: () => {
-			if (taskList.sortDirection != SortDirection.DESCENDING) {
-				taskList.sortDirection = SortDirection.DESCENDING;
-			} else {
-				taskList.sortDirection = SortDirection.ASCENDING;
+			if (prefs) {
+				if (prefs.sortDirection != SortDirection.DESCENDING) {
+					prefs.sortDirection = SortDirection.DESCENDING;
+				} else {
+					prefs.sortDirection = SortDirection.ASCENDING;
+				}
 			}
 		}
 	});
@@ -189,8 +221,12 @@
 {:else}
 	<PageTitle title={taskList.title} />
 
-	<EditListDialog bind:taskList={listToEdit} />
-	<SortModeDialog bind:taskList={listToSort} />
+	<EditListDialog bind:taskList={listToEdit} bind:prefs={prefsToEdit} />
+	<SortModeDialog bind:taskList={listToSort} bind:prefs={prefsToSort} />
+
+	{#if showShareDialog}
+		<ShareListDialog bind:taskList onDismiss={() => (showShareDialog = false)} />
+	{/if}
 
 	<EditTaskDialog mode="create" bind:task={taskToCreate} oldListId={taskList.id} />
 	<EditTaskDialog bind:task={taskToEdit} oldListId={taskList.id} />
@@ -200,7 +236,13 @@
 
 		<ListHeader
 			{taskList}
-			onEditClicked={() => (listToEdit = clone(taskList))}
+			onEditClicked={() => {
+				listToEdit = clone(taskList);
+				prefsToEdit = clone(prefs);
+			}}
+			onShareClicked={() => {
+				showShareDialog = true;
+			}}
 			onCreateClicked={showCreate}
 		/>
 		{#if $tasks.status === 'pending'}
@@ -213,7 +255,7 @@
 					{#if $tasks.data.current.length > 0}
 						<ul class={tasksGroup}>
 							{#each $tasks.data.current as task, index (task.id)}
-								{#if taskList.showIndexNumbers}
+								{#if prefs.showIndexNumbers}
 									<TaskItem
 										{task}
 										indexNumber={index + 1}
@@ -267,18 +309,24 @@
 			</main>
 		{/if}
 		<div class={sort}>
-			<Button style={ButtonStyle.Text} onClick={() => (listToSort = clone(taskList))}>
-				<Icon>{iconFromSortType(taskList.sortType)}</Icon>
-				{labelFromSortType(taskList.sortType)}
+			<Button
+				style={ButtonStyle.Text}
+				onClick={() => {
+					listToSort = clone(taskList);
+					prefsToSort = clone(prefs);
+				}}
+			>
+				<Icon>{iconFromSortType(prefs.sortType)}</Icon>
+				{labelFromSortType(prefs.sortType)}
 			</Button>
-			{#if taskList.sortType !== SortType.ORDINAL}
+			{#if prefs.sortType !== SortType.ORDINAL}
 				<Button
 					style={ButtonStyle.Text}
 					onClick={toggleSortDirection}
 					disabled={$updateList.isPending}
 				>
-					<Icon>{iconFromSortDirection(taskList.sortDirection)}</Icon>
-					{labelFromSortDirection(taskList.sortDirection)}
+					<Icon>{iconFromSortDirection(prefs.sortDirection)}</Icon>
+					{labelFromSortDirection(prefs.sortDirection)}
 				</Button>
 			{/if}
 		</div>

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Luke Myers
+ * Copyright (c) 2024 Luke Myers
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,28 @@
  * SOFTWARE.
  */
 
-export * from './Profile';
-export * from './TaskList';
-export * from './TaskListPrefs';
-export * from './Task';
-export * from './ThemeVariant';
-export * from './TokenPair';
+export interface TaskListPrefs {
+	listId: string;
+
+	showIndexNumbers: boolean;
+
+	sortType: SortType;
+	sortDirection: SortDirection;
+
+	ordinal: number;
+
+	lastModified: Date;
+}
+
+export enum SortType {
+	ORDINAL = 'ORDINAL',
+	LABEL = 'LABEL',
+	DATE_CREATED = 'DATE_CREATED',
+	UPCOMING = 'UPCOMING',
+	STARRED = 'STARRED'
+}
+
+export enum SortDirection {
+	ASCENDING = 'ASCENDING',
+	DESCENDING = 'DESCENDING'
+}

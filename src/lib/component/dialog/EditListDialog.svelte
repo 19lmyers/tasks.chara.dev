@@ -28,7 +28,7 @@
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 	import { themeFromListColor } from '$lib/theme';
-	import { ListColor, ListIcon } from '$lib/type';
+	import { ListColor, ListIcon, type TaskListPrefs } from '$lib/type';
 	import type { TaskList } from '$lib/type';
 
 	import { actions, header, icon } from './base.css';
@@ -36,6 +36,7 @@
 	import { themeVariant } from '$lib/stores';
 
 	export let taskList: TaskList | null = null;
+	export let prefs: TaskListPrefs | null = null;
 
 	export let mode: 'create' | 'edit' = 'edit';
 
@@ -45,12 +46,18 @@
 
 	const queryClient = useQueryClient();
 
-	const updateList = createMutation<void, Error, TaskList>({
-		mutationFn: async (taskList: TaskList) => {
+	interface TaskListInput {
+		taskList: TaskList;
+		prefs: TaskListPrefs;
+	}
+
+	const updateList = createMutation<void, Error, TaskListInput>({
+		mutationFn: async (input: TaskListInput) => {
 			if (mode === 'create') {
-				await api().createList(taskList);
+				await api().createList(input.taskList, input.prefs);
 			} else {
-				await api().updateList(taskList);
+				await api().updateList(input.taskList);
+				await api().updateListPrefs(input.prefs);
 			}
 		},
 		onSuccess: () => {
@@ -59,15 +66,20 @@
 	});
 
 	function save() {
-		if (taskList) {
+		if (taskList && prefs) {
 			if (!taskList.dateCreated) {
 				taskList.dateCreated = new Date();
 			}
 			taskList.lastModified = new Date();
+			prefs.lastModified = new Date();
 
-			$updateList.mutate(taskList);
+			$updateList.mutate({
+				taskList,
+				prefs
+			});
 
 			taskList = null;
+			prefs = null;
 		}
 	}
 </script>
@@ -87,7 +99,7 @@
 	</Dialog>
 {/if}
 
-{#if taskList}
+{#if taskList && prefs}
 	<Dialog style={themeFromListColor(taskList.color, $themeVariant)} dismiss={cancel}>
 		<form on:submit|preventDefault={save}>
 			<Card>
@@ -148,7 +160,7 @@
 						<input
 							name="show-list-numbers"
 							type="checkbox"
-							bind:checked={taskList.showIndexNumbers}
+							bind:checked={prefs.showIndexNumbers}
 							disabled={$updateList.isPending}
 						/>
 					</label>

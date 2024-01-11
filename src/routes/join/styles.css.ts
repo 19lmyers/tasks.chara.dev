@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Luke Myers
+ * Copyright (c) 2024 Luke Myers
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,11 @@
 import { style } from '@vanilla-extract/css';
 import { themeContract } from '$lib/theme';
 
-export const profileBox = style({
+export const listCard = style({
 	padding: 12,
 	borderRadius: '1.5em',
 	display: 'flex',
-	border: 'none',
-	justifyContent: 'space-between',
+	border: 'solid',
 	'@media': {
 		'(prefers-color-scheme: light)': {
 			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
@@ -45,31 +44,18 @@ export const profileBox = style({
 	}
 });
 
-export const profileCard = style([
-	profileBox,
-	{
-		border: 'solid'
-	}
-]);
-
-export const innerLayout = style({
-	display: 'flex'
-});
-
-export const profilePhoto = style({
-	width: 48,
-	height: 48,
+export const listIcon = style({
 	borderRadius: '1.5rem',
 	marginRight: 16
 });
 
-export const profileText = style({
+export const listText = style({
 	display: 'flex',
 	flexDirection: 'column',
 	justifyContent: 'center'
 });
 
-export const email = style({
+export const listDescription = style({
 	opacity: 0.7,
 	fontSize: '0.9rem'
 });

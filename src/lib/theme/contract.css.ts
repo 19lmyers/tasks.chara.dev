@@ -104,7 +104,7 @@ const tokens = {
 		}
 	},
 	shapes: {
-		// TODO implement shape theming?
+		// implement shape theming?
 	},
 	typography: {
 		heading: { family: '', weight: '' },

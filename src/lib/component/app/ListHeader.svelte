@@ -30,6 +30,7 @@
 		ButtonStyle,
 		DeleteCompletedTasksDialog,
 		DeleteListDialog,
+		LeaveListDialog,
 		Dropdown,
 		Icon
 	} from '$lib/component';
@@ -44,18 +45,22 @@
 		headerWrap,
 		icon
 	} from './ListHeader.css';
+	import { profile } from '$lib/stores';
 
 	export let taskList: TaskList;
 
 	export let onEditClicked: (() => void) | null = null;
+	export let onShareClicked: (() => void) | null = null;
 	export let onCreateClicked: (() => void) | null = null;
 
 	let idToClear: string | null = null;
 	let idToDelete: string | null = null;
+	let idToLeave: string | null = null;
 </script>
 
 <DeleteCompletedTasksDialog bind:listId={idToClear} />
 <DeleteListDialog bind:listId={idToDelete} />
+<LeaveListDialog bind:listId={idToLeave} />
 
 <header class={header}>
 	<div class="{headerFlex} {headerFill} {headerWrap}">
@@ -77,6 +82,10 @@
 				<Icon>edit</Icon>
 				Edit list
 			</Button>
+			<Button style={ButtonStyle.Tonal} onClick={onShareClicked}>
+				<Icon>share</Icon>
+				Share list
+			</Button>
 			<Button style={ButtonStyle.Tonal} onClick={onCreateClicked}>
 				<Icon>add</Icon>
 				New task
@@ -93,10 +102,17 @@
 						</Button>
 					</li>
 					<li>
-						<Button style={ButtonStyle.Text} onClick={() => (idToDelete = taskList.id)}>
-							<Icon>delete</Icon>
-							Delete list
-						</Button>
+						{#if taskList.ownerId === $profile?.id}
+							<Button style={ButtonStyle.Text} onClick={() => (idToDelete = taskList.id)}>
+								<Icon>delete</Icon>
+								Delete list
+							</Button>
+						{:else}
+							<Button style={ButtonStyle.Text} onClick={() => (idToLeave = taskList.id)}>
+								<Icon>exit_to_app</Icon>
+								Leave list
+							</Button>
+						{/if}
 					</li>
 				</ul>
 			</Dropdown>

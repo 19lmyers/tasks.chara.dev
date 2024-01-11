@@ -25,16 +25,36 @@
 <script lang="ts">
 	import type { Profile } from '$lib/type';
 
-	import { email, profileCard, profilePhoto, profileText } from './ProfileItem.css';
-	import { getDisplayName, getProfilePhoto } from '$lib/profile';
+	import {
+		email,
+		profileBox,
+		profileCard,
+		profilePhoto,
+		profileText,
+		innerLayout
+	} from './ProfileItem.css';
+	import { getProfilePhotoFor } from '$lib/profile';
 
 	export let profile: Profile;
+
+	export let border: boolean = false;
+
+	let className: string = '';
+
+	if (border) {
+		className = profileCard;
+	} else {
+		className = profileBox;
+	}
 </script>
 
-<div class={profileCard}>
-	<img src={getProfilePhoto()} alt={getDisplayName()} class={profilePhoto} />
-	<div class={profileText}>
-		<p>{profile.displayName}</p>
-		<p class={email}>{profile.email}</p>
+<div class={className}>
+	<div class={innerLayout}>
+		<img src={getProfilePhotoFor(profile)} alt={profile.displayName} class={profilePhoto} />
+		<div class={profileText}>
+			<p>{profile.displayName}</p>
+			<p class={email}>{profile.email}</p>
+		</div>
 	</div>
+	<slot />
 </div>

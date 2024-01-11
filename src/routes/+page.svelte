@@ -14,30 +14,35 @@
 		TaskListItem
 	} from '$lib/component';
 	import { isAuthenticated, themeVariant } from '$lib/stores';
-	import type { TaskList } from '$lib/type';
+	import { SortDirection, SortType, type TaskList, type TaskListPrefs } from '$lib/type';
 
 	import { error, main, masonry, navHeader, themeBox } from './styles.css';
-	import { SortDirection, SortType } from '$lib/type';
 	import { themeFromVariant } from '$lib/theme';
 
 	const taskLists = createQuery<TaskList[], Error, TaskList[]>({
 		queryKey: ['lists'],
 		queryFn: async () => {
-			const lists = await api().getLists();
-			return lists.sort((a, b) => (a.ordinal < b.ordinal ? -1 : 1));
+			return await api().getLists();
 		}
 	});
 
 	let listToCreate: TaskList | null = null;
+	let prefsToCreate: TaskListPrefs | null = null;
 
 	function showCreate() {
 		listToCreate = {
 			id: '',
+			ownerId: '',
 			title: '',
+			dateCreated: new Date(),
+			lastModified: new Date()
+		};
+
+		prefsToCreate = {
+			listId: '',
 			showIndexNumbers: false,
 			sortType: SortType.ORDINAL,
 			sortDirection: SortDirection.ASCENDING,
-			dateCreated: new Date(),
 			lastModified: new Date(),
 			ordinal: 0
 		};
@@ -50,7 +55,7 @@
 
 {#if $isAuthenticated}
 	<div class={themeBox} style={themeFromVariant($themeVariant)}>
-		<EditListDialog mode="create" bind:taskList={listToCreate} />
+		<EditListDialog mode="create" bind:taskList={listToCreate} bind:prefs={prefsToCreate} />
 
 		<SiteHeader onCreateClicked={showCreate} />
 		<MobileBanner />

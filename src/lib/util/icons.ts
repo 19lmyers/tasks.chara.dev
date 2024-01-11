@@ -85,7 +85,7 @@ export function iconFromListIcon(icon?: ListIcon) {
 	}
 }
 
-export function iconFromSortType(type: SortType) {
+export function iconFromSortType(type: SortType | undefined) {
 	switch (type) {
 		case SortType.LABEL:
 			return 'sort_by_alpha';
@@ -100,7 +100,7 @@ export function iconFromSortType(type: SortType) {
 	}
 }
 
-export function iconFromSortDirection(direction: SortDirection) {
+export function iconFromSortDirection(direction: SortDirection | undefined) {
 	if (direction === SortDirection.DESCENDING) {
 		return 'arrow_downward';
 	} else {

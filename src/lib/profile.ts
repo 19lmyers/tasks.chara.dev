@@ -26,6 +26,7 @@ import { get } from 'svelte/store';
 import md5Hex from 'md5-hex';
 
 import { profile } from '$lib/stores';
+import type { Profile } from '$lib/type';
 
 export function getDisplayName() {
 	const userProfile = get(profile);
@@ -50,9 +51,17 @@ export function getProfilePhoto() {
 	}
 }
 
-function getGravatarUrl(email: string): string {
+export function getProfilePhotoFor(profile: Profile) {
+	if (profile.profilePhotoUri) {
+		return profile.profilePhotoUri;
+	} else {
+		return getGravatarUrl(profile.email);
+	}
+}
+
+export function getGravatarUrl(email: string): string {
 	const trimmed = email.trim().toLowerCase();
 	const hash = md5Hex(trimmed);
 
-	return `https://www.gravatar.com/avatar/${hash}.png?d=identicon`;
+	return `https://www.gravatar.com/avatar/${hash}.png?d=retro`;
 }

@@ -28,7 +28,7 @@
 	import { api } from '$lib/api';
 	import { Button, ButtonStyle, Card, Dialog, Icon } from '$lib/component';
 	import { themeFromListColor } from '$lib/theme';
-	import { SortType } from '$lib/type';
+	import { SortType, type TaskListPrefs } from '$lib/type';
 	import type { TaskList } from '$lib/type';
 	import { iconFromSortType, labelFromSortType } from '$lib/util';
 
@@ -38,11 +38,12 @@
 	const queryClient = useQueryClient();
 
 	export let taskList: TaskList | null = null;
+	export let prefs: TaskListPrefs | null = null;
 
-	const updateList = createMutation<string, Error, TaskList>({
-		mutationFn: async (taskList: TaskList) => {
-			await api().updateList(taskList);
-			return taskList.id;
+	const updateListPrefs = createMutation<string, Error, TaskListPrefs>({
+		mutationFn: async (prefs: TaskListPrefs) => {
+			await api().updateListPrefs(prefs);
+			return prefs.listId;
 		},
 		onSuccess: (listId: string) => {
 			queryClient.invalidateQueries({ queryKey: ['lists'] });
@@ -51,37 +52,35 @@
 	});
 
 	async function setSortType(type: SortType) {
-		if (taskList) {
-			taskList.sortType = type;
-			taskList.lastModified = new Date();
+		if (prefs) {
+			prefs.sortType = type;
+			prefs.lastModified = new Date();
 
-			$updateList.mutate(taskList);
+			$updateListPrefs.mutate(prefs);
 
 			taskList = null;
+			prefs = null;
 		}
 	}
 </script>
 
-{#if $updateList.error}
-	<Dialog dismiss={$updateList.reset}>
+{#if $updateListPrefs.error}
+	<Dialog dismiss={$updateListPrefs.reset}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1>An error occurred</h1>
-				<p>{$updateList.error.message}</p>
+				<p>{$updateListPrefs.error.message}</p>
 			</svelte:fragment>
 			<svelte:fragment slot="actions">
 				<span />
-				<Button style={ButtonStyle.Text} onClick={$updateList.reset}>OK</Button>
+				<Button style={ButtonStyle.Text} onClick={$updateListPrefs.reset}>OK</Button>
 			</svelte:fragment>
 		</Card>
 	</Dialog>
 {/if}
 
-{#if taskList}
-	<Dialog
-		style={themeFromListColor(taskList.color, $themeVariant)}
-		dismiss={() => (taskList = null)}
-	>
+{#if taskList && prefs}
+	<Dialog style={themeFromListColor(taskList.color, $themeVariant)} dismiss={() => (prefs = null)}>
 		<Card>
 			<svelte:fragment slot="content">
 				<h1 class={header}>
@@ -90,7 +89,7 @@
 					</Button>
 					Sort by
 				</h1>
-				{#if $updateList.isPending}
+				{#if $updateListPrefs.isPending}
 					<progress />
 				{/if}
 				<div>
@@ -98,7 +97,7 @@
 						<Button
 							style={ButtonStyle.Text}
 							onClick={() => setSortType(type)}
-							disabled={$updateList.isPending}
+							disabled={$updateListPrefs.isPending}
 						>
 							<Icon>{iconFromSortType(type)}</Icon>
 							<span>{labelFromSortType(type)}</span>

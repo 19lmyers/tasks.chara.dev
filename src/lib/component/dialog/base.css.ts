@@ -54,3 +54,63 @@ export const actions = style({
 	display: 'flex',
 	justifyContent: 'space-between'
 });
+
+export const copyLink = style({
+	display: 'flex',
+	alignItems: 'center',
+	padding: 12,
+	borderRadius: '1.5em',
+	border: 'solid',
+	position: 'relative',
+	zIndex: 1,
+	'@media': {
+		'(prefers-color-scheme: light)': {
+			backgroundColor: themeContract.colorSchemes.light.surfaceContainerHigh,
+			color: themeContract.colorSchemes.light.onSurface,
+			borderColor: themeContract.colorSchemes.light.surfaceContainerHighest,
+			':hover': {
+				color: themeContract.colorSchemes.light.primary
+			},
+			'::before': {
+				backgroundColor: themeContract.colorSchemes.light.primary
+			}
+		},
+		'(prefers-color-scheme: dark)': {
+			backgroundColor: themeContract.colorSchemes.dark.surfaceContainerHigh,
+			color: themeContract.colorSchemes.dark.onSurface,
+			borderColor: themeContract.colorSchemes.dark.surfaceContainerHighest,
+			':hover': {
+				color: themeContract.colorSchemes.dark.primary
+			},
+			'::before': {
+				backgroundColor: themeContract.colorSchemes.light.primary
+			}
+		}
+	},
+	'::before': {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		height: '100%',
+		width: '100%',
+		zIndex: 0,
+		transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+		transitionDuration: '0.25s',
+		pointerEvents: 'none',
+		borderRadius: '1.5rem'
+	},
+	selectors: {
+		'&:hover:not(:disabled)::before': {
+			content: '',
+			opacity: '8%'
+		},
+		'&:focus:not(:disabled)::before': {
+			content: '',
+			opacity: '12%'
+		},
+		'&:active:not(:disabled)::before': {
+			content: '',
+			opacity: '12%'
+		}
+	}
+});

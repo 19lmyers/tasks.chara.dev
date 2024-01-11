@@ -47,6 +47,7 @@ export { default as TaskListItem } from './app/TaskListItem.svelte';
 // Dialog
 export { default as DeleteCompletedTasksDialog } from './dialog/DeleteCompletedTasksDialog.svelte';
 export { default as DeleteListDialog } from './dialog/DeleteListDialog.svelte';
+export { default as LeaveListDialog } from './dialog/LeaveListDialog.svelte';
 export { default as DeleteTaskDialog } from './dialog/DeleteTaskDialog.svelte';
 export { default as EditListDialog } from './dialog/EditListDialog.svelte';
 export { default as EditTaskDialog } from './dialog/EditTaskDialog.svelte';
